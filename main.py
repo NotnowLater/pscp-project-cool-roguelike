@@ -2,20 +2,27 @@
 
 import tcod
 
-from actions import EscapeAction, MovementAction
+from engine import Engine
+from entity import Entity
 from input_handlers import EventHandler
+from game_map import GameMap
 
 def main() -> None:
     screen_width = 80
     screen_height = 50
 
-    player_x, player_y = 40, 25
+    map_width, map_height = 80, 45
 
     tileset = tcod.tileset.load_tilesheet(
         "dejavu10x10_gs_tc.png", 32, 8, tcod.tileset.CHARMAP_TCOD
     )
 
     event_handler = EventHandler()
+    player = Entity(40, 25, "@", (255, 255, 255))
+    npc = Entity(45, 15, "@", (0, 255, 255))
+    entities = {player, npc}
+    game_map = GameMap(map_width, map_height)
+    game_engine = Engine(entities=entities, event_handler=event_handler, game_map=game_map, player=player)
 
     with tcod.context.new_terminal(
         screen_width,
@@ -27,19 +34,9 @@ def main() -> None:
         root_console = tcod.console.Console(screen_width, screen_height, order="F")
         # main game loop here
         while True:
-            root_console.print(x=player_x, y=player_y, string="@")
-            context.present(root_console)
-            root_console.clear()
-            # main events
-            for event in tcod.event.wait():
-                action = event_handler.dispatch(event)
-                if action is None:
-                    continue
-                if isinstance(action, MovementAction):
-                    player_x += action.dx
-                    player_y += action.dy
-                elif isinstance(action, EscapeAction):
-                    raise SystemExit()
+            game_engine.render(console=root_console, context=context)
+            events = tcod.event.wait()
+            game_engine.handle_events(events)
 
 
 if __name__ == "__main__":
