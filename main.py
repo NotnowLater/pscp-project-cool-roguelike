@@ -9,10 +9,10 @@ from game_map import GameMap
 from dungen import generate_dungeon
 
 def main() -> None:
-    screen_width = 80
-    screen_height = 50
+    screen_width = 100
+    screen_height = 70
 
-    map_width, map_height = 80, 45
+    map_width, map_height = 100, 60
     room_max_size = 10
     room_min_size = 5
     max_rooms = 30
