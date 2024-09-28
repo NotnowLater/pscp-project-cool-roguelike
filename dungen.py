@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Tuple
 from game_map import GameMap
 import tile_types
+import entity_factory
 import random
 import tcod
 from typing import Iterator, Tuple, TYPE_CHECKING, List
@@ -56,12 +57,26 @@ def make_tunnel_between(start: Tuple[int, int], end: Tuple[int, int]) -> Iterato
     for x, y in tcod.los.bresenham((corner_x, corner_y), (x2, y2)).tolist():
         yield x, y
 
+def place_entities(room: RectangularRoom, dungeon: GameMap, maximum_monsters: int,) -> None:
+    number_of_monsters = random.randint(0, maximum_monsters)
+    for i in range(number_of_monsters):
+        x = random.randint(room.x1 + 1, room.x2 - 1)
+        y = random.randint(room.y1 + 1, room.y2 - 1)
+        # Check if the entity is overlapping the existing entity first before placing it.
+        if not any(entity.x == x and entity.y == y for entity in dungeon.entities):
+            if random.random() < 0.8:
+                entity_factory.orc.spawn_copy(dungeon, x, y)
+            else:
+                entity_factory.troll.spawn_copy(dungeon, x, y)
+
+
 def generate_dungeon(
         max_rooms: int, room_min_size: int, room_max_size: int,
         map_width: int, map_height: int, player: Entity,
+        max_monsters_per_room: int,
     ) -> GameMap:
     """ Return The Generated Dungeon of given size. """
-    dungeon = GameMap(map_width, map_height)
+    dungeon = GameMap(map_width, map_height, entities=[player])
     rooms: List[RectangularRoom] = []
     for r in range(max_rooms):
         room_width = random.randint(room_min_size, room_max_size)
@@ -84,6 +99,8 @@ def generate_dungeon(
             # Dig out a tunnel between this room and the last one.
             for x, y in make_tunnel_between(rooms[-1].center, new_room.center):
                 dungeon.tiles[x, y] = tile_types.floor
+        # Place the monsters in the Generated room.
+        place_entities(new_room, dungeon, max_monsters_per_room)
         # Append the new room to the list.
         rooms.append(new_room)
     return dungeon
