@@ -11,7 +11,7 @@ import tcod
 from typing import Iterator, Tuple, TYPE_CHECKING, List
 
 if TYPE_CHECKING:
-    from entity import Entity
+    from engine import Engine
 
 class RectangularRoom:
     """ A Class that define a Rectangular Room For Dungeon Generation"""
@@ -72,11 +72,12 @@ def place_entities(room: RectangularRoom, dungeon: GameMap, maximum_monsters: in
 
 def generate_dungeon(
         max_rooms: int, room_min_size: int, room_max_size: int,
-        map_width: int, map_height: int, player: Entity,
+        map_width: int, map_height: int, engine: Engine,
         max_monsters_per_room: int,
     ) -> GameMap:
     """ Return The Generated Dungeon of given size. """
-    dungeon = GameMap(map_width, map_height, entities=[player])
+    player = engine.player
+    dungeon = GameMap(engine, map_width, map_height, entities=[player])
     rooms: List[RectangularRoom] = []
     for r in range(max_rooms):
         room_width = random.randint(room_min_size, room_max_size)
@@ -94,7 +95,7 @@ def generate_dungeon(
         dungeon.tiles[new_room.inner] = tile_types.floor
         # Put the player in the center of the first room
         if len(rooms) == 0:
-            player.x, player.y = new_room.center
+            player.place_at(*new_room.center, dungeon)
         else:
             # Dig out a tunnel between this room and the last one.
             for x, y in make_tunnel_between(rooms[-1].center, new_room.center):

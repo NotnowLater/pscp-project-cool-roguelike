@@ -9,11 +9,13 @@ from tcod.console import Console
 import tile_types
 
 if TYPE_CHECKING:
+    from engine import Engine
     from entity import Entity
 
 class GameMap:
-    def __init__(self, width: int, height: int, entities: Iterable[Entity] = ()):
+    def __init__(self, engine: Engine, width: int, height: int, entities: Iterable[Entity] = ()):
         self.width, self.height = width, height
+        self.engine = engine
         self.entities = set(entities)
         # Create the map array and fill it with Wall.
         self.tiles = np.full((width, height), fill_value=tile_types.wall, order="F")
