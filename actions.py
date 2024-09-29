@@ -6,12 +6,14 @@ from typing import Optional, Tuple, TYPE_CHECKING
 # from engine import Engine
 # from entity import Entity
 
+import util
+
 if TYPE_CHECKING:
     from engine import Engine
-    from entity import Entity
+    from entity import Entity, Actor
 
 class Action:
-    def __init__(self, entity: Entity) -> None:
+    def __init__(self, entity: Actor) -> None:
         super().__init__()
         self.entity = entity
 
@@ -30,7 +32,7 @@ class Action:
         raise NotImplementedError()
     
 class ActionWithDirection(Action):
-    def __init__(self, entity: Entity, dx: int, dy: int) -> None:
+    def __init__(self, entity: Actor, dx: int, dy: int) -> None:
         super().__init__(entity)
         self.dx = dx
         self.dy = dy
@@ -45,6 +47,11 @@ class ActionWithDirection(Action):
         """ Return the blocking entity at this action destination. """
         return self.engine.game_map.get_blocking_entity_at(*self.dest_xy)
 
+    @property
+    def action_target_actor(self) -> Optional[Actor]:
+        """Return the actor at this actions destination."""
+        return self.engine.game_map.get_actor_at(*self.dest_xy)
+
     def perform(self) -> None:
         raise NotImplementedError()
 
@@ -56,10 +63,18 @@ class EscapeAction(Action):
 class MeleeAction(ActionWithDirection):
     """" Perform Melee(attack) action to an entity in that direction."""
     def perform(self) -> None:
-        target = self.action_blocking_entity
+        target = self.action_target_actor
+        # Check if has target to attack
         if not target:
             return
-        print(f"You push the {target.name}, {target.name} seem to be annoyed by your action.")
+        # Attack hit check.
+        if not util.hit_check(target.fighter.dv, 0):
+            print(f"You Attack the {target.name} but missed.")
+            return
+        dmg = util.roll_dice(1, self.entity.fighter.attack, 0)
+        # print(f"You push the {target.name}, {target.name} seem to be annoyed by your action.")
+        print(f"You attack the {target.name} for {dmg}.")
+        target.fighter.hp -= dmg
 
 class MovementAction(ActionWithDirection):
     def perform(self) -> None:
@@ -76,8 +91,12 @@ class MovementAction(ActionWithDirection):
 class BumpAction(ActionWithDirection):
     """ An Action class to determine if the Action should be Melee or Movement Action """
     def perform(self) -> None:
-        if self.action_blocking_entity:
+        if self.action_target_actor:
             return MeleeAction(self.entity, self.dx, self.dy).perform()
         else:
             return MovementAction(self.entity, self.dx, self.dy).perform()
     
+class WaitAction(Action):
+    """ Just Wait. """
+    def perform(self) -> None:
+        pass

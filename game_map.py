@@ -1,16 +1,18 @@
 """ Define The GameMap """
 
 from __future__ import annotations
-from typing import Iterable, Optional,TYPE_CHECKING
+from typing import Iterable, Iterator, Optional, TYPE_CHECKING
 
 import numpy as np
 from tcod.console import Console
 
 import tile_types
 
+from entity import Actor
 if TYPE_CHECKING:
     from engine import Engine
     from entity import Entity
+
 
 class GameMap:
     def __init__(self, engine: Engine, width: int, height: int, entities: Iterable[Entity] = ()):
@@ -25,10 +27,22 @@ class GameMap:
         # Tiles that the player have seen
         self.seen = np.full((width, height), fill_value=False, order="F")
 
+    @property
+    def actors(self) -> Iterator[Actor]:
+        """ Iterate over this maps living actors. """
+        yield from(entity for entity in self.entities if isinstance(entity, Actor) and entity.alive)
+
     def is_in_bounds(self, x: int, y: int) -> bool:
         """Return True if x and y are inside of the bounds of this map."""
         return 0 <= x < self.width and 0 <= y < self.height
     
+    def get_actor_at(self, x: int, y: int) -> Optional[Actor]:
+        """ Return An Actor at given location. """
+        for actor in self.actors:
+            if actor.x == x and actor.y == y:
+                return actor
+        return None
+
     def get_blocking_entity_at(self, x: int, y: int) -> Optional[Entity]:
         """ Return the blocking entity and given location """
         for entity in self.entities:
@@ -49,7 +63,9 @@ class GameMap:
             default=tile_types.UNSEEN
         )
 
-        for entity in self.entities:
+        sorted_entities = sorted(self.entities, key=lambda x: x.render_order.value)
+
+        for entity in sorted_entities:
             # Only draw the entities that are in the FOV 
             if self.visible[entity.x, entity.y]:
                 console.print(entity.x, entity.y, entity.char, fg=entity.color)

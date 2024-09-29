@@ -1,12 +1,21 @@
 """ Define the game entity """
 
-from typing import Optional, Tuple, TypeVar, TYPE_CHECKING
+from __future__ import annotations
 
 import copy
+from typing import Optional, Type, Tuple, TypeVar, TYPE_CHECKING
+
+from render_order import RenderOrder
+
 # Maybe use this, idk man.
-# if TYPE_CHECKING:
-#     from game_map import GameMap
-from game_map import GameMap
+if TYPE_CHECKING:
+    from components.ai_component import BaseAI
+    from components.fighter_component import Fighter
+    from game_map import GameMap
+
+# from game_map import GameMap
+# from components.ai_component import BaseAI
+# from components.fighter_component import Fighter
 
 T = TypeVar("T", bound="Entity")
 
@@ -23,7 +32,8 @@ class Entity:
             char: str = "?", 
             color: Tuple[int, int, int] = (255, 255, 255),
             name = "entity name here",
-            blocks_movement = False
+            blocks_movement = False,
+            render_order: RenderOrder = RenderOrder.CORPSE,
             ):
         self.x = x
         self.y = y
@@ -33,6 +43,7 @@ class Entity:
         self.color = color
         self.name = name
         self.blocks_movement = blocks_movement
+        self.render_order = render_order
         if gamemap:
             self.game_map = gamemap
             self.game_map.entities.add(self)
@@ -60,3 +71,33 @@ class Entity:
         # Move the entity by dx, dy.
         self.x += dx
         self.y += dy
+
+class Actor(Entity):
+    def __init__(
+            self,
+            *,
+            x: int = 0,
+            y: int = 0,
+            char: str = "?",
+            color: Tuple[int, int, int] = (255, 255, 255),
+            name = "entity name here",
+            ai_class: Type[BaseAI],
+            fighter: Fighter,
+    ):
+        super().__init__(
+            x=x,
+            y=y,
+            char=char,
+            color=color,
+            name=name,
+            blocks_movement=True,
+            render_order=RenderOrder.ACTOR,
+        )
+        self.ai: Optional[BaseAI] = ai_class(self)
+        self.fighter = fighter
+        self.fighter.entity = self
+
+    @property
+    def alive(self):
+        """ Return True if entity is still alive. """
+        return bool(self.ai)

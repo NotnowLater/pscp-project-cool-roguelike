@@ -1,11 +1,8 @@
-""" Main Game Entry Point """
+""" Main Game Entry Point (PutTeamNameHere)"""
 
 import tcod
 
 from engine import Engine
-from entity import Entity
-
-from game_map import GameMap
 import entity_factory
 from dungen import generate_dungeon
 
