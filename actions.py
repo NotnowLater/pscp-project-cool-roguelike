@@ -7,6 +7,7 @@ from typing import Optional, Tuple, TYPE_CHECKING
 # from entity import Entity
 
 import util
+import colors
 
 if TYPE_CHECKING:
     from engine import Engine
@@ -72,8 +73,12 @@ class MeleeAction(ActionWithDirection):
             print(f"You Attack the {target.name} but missed.")
             return
         dmg = util.roll_dice(1, self.entity.fighter.attack, 0)
-        # print(f"You push the {target.name}, {target.name} seem to be annoyed by your action.")
-        print(f"You attack the {target.name} for {dmg}.")
+
+        if self.entity is self.engine.player:
+            attack_color = colors.player_atk
+        else:
+            attack_color = colors.enemy_atk
+        self.engine.message_log.add_message(f"{self.entity.name.capitalize()} Attacks {target.name} for {dmg} hit points.", fg=attack_color)
         target.fighter.hp -= dmg
 
 class MovementAction(ActionWithDirection):

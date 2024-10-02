@@ -7,6 +7,7 @@ import entity_factory
 from dungen import generate_dungeon
 
 import copy
+import colors
 
 def main() -> None:
     screen_width = 100
@@ -32,7 +33,7 @@ def main() -> None:
         max_monsters_per_room=max_monsters_per_room, 
     )
     game_engine.update_fov()
-
+    # game_engine.message_log.add_message("Woo the message log freaking work!!!", stack=False)
     with tcod.context.new_terminal(
         screen_width,
         screen_height,
@@ -43,9 +44,10 @@ def main() -> None:
         root_console = tcod.console.Console(screen_width, screen_height, order="F")
         # main game loop here
         while True:
-            game_engine.render(console=root_console, context=context)
-            game_engine.event_handler.handle_events()
-
+            root_console.clear()
+            game_engine.event_handler.on_render(console=root_console)
+            context.present(root_console)
+            game_engine.event_handler.handle_events(context)
 
 if __name__ == "__main__":
     main()
