@@ -34,11 +34,12 @@ def main() -> None:
     )
     game_engine.update_fov()
     # game_engine.message_log.add_message("Woo the message log freaking work!!!", stack=False)
-    with tcod.context.new_terminal(
-        screen_width,
-        screen_height,
+    with tcod.context.new(
+        width=1000,
+        height=700,
+        sdl_window_flags=tcod.context.SDL_WINDOW_RESIZABLE,
         tileset=tileset,
-        title="Game nane here",
+        title="RogueLike@Home",
         vsync=True,
     ) as context:
         root_console = tcod.console.Console(screen_width, screen_height, order="F")
@@ -46,7 +47,7 @@ def main() -> None:
         while True:
             root_console.clear()
             game_engine.event_handler.on_render(console=root_console)
-            context.present(root_console)
+            context.present(root_console, integer_scaling=True)
             game_engine.event_handler.handle_events(context)
 
 if __name__ == "__main__":

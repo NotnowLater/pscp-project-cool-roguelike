@@ -70,7 +70,7 @@ class MeleeAction(ActionWithDirection):
             return
         # Attack hit check.
         if not util.hit_check(target.fighter.dv, 0):
-            print(f"You Attack the {target.name} but missed.")
+            self.engine.message_log.add_message(f"{self.entity.name.capitalize()} Attack the {target.name} but missed.", fg=colors.enemy_atk)
             return
         dmg = util.roll_dice(1, self.entity.fighter.attack, 0)
 
