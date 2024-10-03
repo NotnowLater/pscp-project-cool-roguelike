@@ -23,10 +23,10 @@ class Entity:
     """
     A generic object to represent entity in the game like player, enemy, item.
     """
-    game_map : GameMap
+    parent : GameMap
     def __init__(
             self,
-            gamemap: Optional[GameMap] = None,
+            parent: Optional[GameMap] = None,
             x: int = 0, 
             y: int = 0, 
             char: str = "?", 
@@ -44,16 +44,22 @@ class Entity:
         self.name = name
         self.blocks_movement = blocks_movement
         self.render_order = render_order
-        if gamemap:
-            self.game_map = gamemap
-            self.game_map.entities.add(self)
+
+        if parent:
+            self.parent = parent
+            self.parent.entities.add(self)
+    
+    @property
+    def game_map(self) -> GameMap:
+        """ Return this entity parent game_map"""
+        return self.parent.game_map
 
     def spawn_copy(self: T, game_map : GameMap, x : int, y : int):
         """ Spawn a copy of this instance at the given location on the game map. """
         clone = copy.deepcopy(self)
         clone.x = x
         clone.y = y
-        clone.game_map = game_map
+        clone.parent = game_map
         game_map.entities.add(clone)
         return clone
 
@@ -61,9 +67,10 @@ class Entity:
         """ Place this entity at the given location. """
         self.x, self.y = x, y
         if game_map:
-            if hasattr(self, "game_map"):
-                self.game_map.entities.remove(self)
-            self.game_map = game_map
+            if hasattr(self, "parent"):
+                if self.parent is self.game_map:
+                    self.game_map.entities.remove(self)
+            self.parent = game_map
             self.game_map.entities.add(self)
 
 
@@ -95,7 +102,7 @@ class Actor(Entity):
         )
         self.ai: Optional[BaseAI] = ai_class(self)
         self.fighter = fighter
-        self.fighter.entity = self
+        self.fighter.parent = self
 
     @property
     def alive(self):

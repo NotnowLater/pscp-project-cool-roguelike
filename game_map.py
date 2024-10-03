@@ -28,6 +28,12 @@ class GameMap:
         self.seen = np.full((width, height), fill_value=False, order="F")
 
     @property
+    def game_map(self) -> GameMap:
+        """ Return the game_map. """
+        return self
+
+
+    @property
     def actors(self) -> Iterator[Actor]:
         """ Iterate over this maps living actors. """
         yield from(entity for entity in self.entities if isinstance(entity, Actor) and entity.alive)

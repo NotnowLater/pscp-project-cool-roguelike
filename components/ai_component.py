@@ -8,12 +8,11 @@ import numpy as np
 import tcod
 
 from actions import Action, MeleeAction, MovementAction, WaitAction
-from components.base_component import BaseComponent
 
 if TYPE_CHECKING:
    from entity import Actor
 
-class BaseAI(Action, BaseComponent):
+class BaseAI(Action):
     entity: Actor
 
     def perform(self) -> None:
@@ -40,7 +39,7 @@ class BaseAI(Action, BaseComponent):
             return [(index[0], index[1]) for index in path]
         
 class HostileEnemy(BaseAI):
-    def __init__(self, entity: Entity) -> None:
+    def __init__(self, entity: Actor) -> None:
         super().__init__(entity)
         self.path: List[Tuple[int, int]] = []
 
