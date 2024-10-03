@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import copy
-from typing import Optional, Type, Tuple, TypeVar, TYPE_CHECKING
+from typing import Optional, Type, Tuple, TypeVar, TYPE_CHECKING, Union
 
 from render_order import RenderOrder
 
@@ -11,6 +11,8 @@ from render_order import RenderOrder
 if TYPE_CHECKING:
     from components.ai_component import BaseAI
     from components.fighter_component import Fighter
+    from components.consumable import Consumable
+    from components.inventory import Inventory
     from game_map import GameMap
 
 # from game_map import GameMap
@@ -23,7 +25,9 @@ class Entity:
     """
     A generic object to represent entity in the game like player, enemy, item.
     """
-    parent : GameMap
+    # The parent is GameMap when on the ground, and is Inventory when this item is inventory.
+    parent : Union[GameMap, Inventory]
+    
     def __init__(
             self,
             parent: Optional[GameMap] = None,
@@ -90,6 +94,7 @@ class Actor(Entity):
             name = "entity name here",
             ai_class: Type[BaseAI],
             fighter: Fighter,
+            inventory: Inventory,
     ):
         super().__init__(
             x=x,
@@ -103,8 +108,34 @@ class Actor(Entity):
         self.ai: Optional[BaseAI] = ai_class(self)
         self.fighter = fighter
         self.fighter.parent = self
+        self.inventory = inventory
+        self.inventory.parent = self
 
     @property
     def alive(self):
         """ Return True if entity is still alive. """
         return bool(self.ai)
+    
+class Item(Entity):
+    def __init__(
+            self,
+            *,
+            x : int = 0,
+            y : int = 0,
+            char : str = "?", 
+            color : Tuple[int] = (255, 255, 255), 
+            name="entity name here", 
+            consumable : Consumable,
+        ):
+        super().__init__(
+            x=x,
+            y=y,
+            char=char,
+            color=color,
+            name=name,
+            blocks_movement=False,
+            render_order=RenderOrder.ITEM
+        )
+
+        self.consumable = consumable
+        self.consumable.parent = self

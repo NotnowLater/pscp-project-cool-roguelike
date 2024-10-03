@@ -1,6 +1,7 @@
 """ Define The GameMap """
 
 from __future__ import annotations
+
 from typing import Iterable, Iterator, Optional, TYPE_CHECKING
 
 import numpy as np
@@ -8,7 +9,8 @@ from tcod.console import Console
 
 import tile_types
 
-from entity import Actor
+from entity import Actor, Item
+
 if TYPE_CHECKING:
     from engine import Engine
     from entity import Entity
@@ -32,11 +34,15 @@ class GameMap:
         """ Return the game_map. """
         return self
 
-
     @property
     def actors(self) -> Iterator[Actor]:
         """ Iterate over this maps living actors. """
         yield from(entity for entity in self.entities if isinstance(entity, Actor) and entity.alive)
+
+    @property
+    def items(self) -> Iterator[Item]:
+        """" Iterate over this maps items. """
+        yield from(entity for entity in self.entities if isinstance(entity, Item))
 
     def is_in_bounds(self, x: int, y: int) -> bool:
         """Return True if x and y are inside of the bounds of this map."""

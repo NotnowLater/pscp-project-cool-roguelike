@@ -9,6 +9,8 @@ from input_handlers import MainGameEventHandler
 from render_functions import render_progress_bars, render_names_at_mouse_location
 from message_log import MessageLog
 
+import exceptions
+
 from tcod.map import compute_fov
 
 if TYPE_CHECKING:
@@ -17,6 +19,8 @@ if TYPE_CHECKING:
     from input_handlers import EventHandler
 
 class Engine:
+    game_map: GameMap
+
     def __init__(self, player: Actor):
         self.event_handler = MainGameEventHandler(self)
         self.message_log = MessageLog()
@@ -27,7 +31,11 @@ class Engine:
         """ Handle All the enemies turn action """
         for entity in set(self.game_map.actors) - {self.player}:
             if entity.ai:
-                entity.ai.perform()
+                try:
+                    entity.ai.perform()
+                except exceptions.Impossible:
+                    # Ignore ai that perform the Impossible action
+                    pass
             else:
                 print(f'The {entity.name} wonders about all the thing it could do it if can take a real turn.')
 

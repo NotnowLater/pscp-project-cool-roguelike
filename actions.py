@@ -6,12 +6,14 @@ from typing import Optional, Tuple, TYPE_CHECKING
 # from engine import Engine
 # from entity import Entity
 
+from entity import Actor
 import util
 import colors
+import exceptions
 
 if TYPE_CHECKING:
     from engine import Engine
-    from entity import Entity, Actor
+    from entity import Entity, Actor, Item
 
 class Action:
     def __init__(self, entity: Actor) -> None:
@@ -56,10 +58,22 @@ class ActionWithDirection(Action):
     def perform(self) -> None:
         raise NotImplementedError()
 
-class EscapeAction(Action):
+class ItemAction(Action):
+    def __init__(self, entity : Actor, item : Item, target_xy: Optional[Tuple[int, int]] = None):
+        super().__init__(entity=entity)
+        self.item = item
+        if not target_xy:
+            target_xy = entity.x, entity.y
+        self.target_xy = target_xy
+
+    @property
+    def action_target_actor(self) -> Optional[Actor]:
+        """ Return the actor at this actions destination. """
+        return self.engine.game_map.get_actor_at_location(*self.target_xy)
+    
     def perform(self) -> None:
-        """ Perform Game Escape(Exit) Action. """
-        raise SystemExit()
+        """ Invoke the items ability, this action will be given to provide context. """
+        self.item.consumable.activate(self)
 
 class MeleeAction(ActionWithDirection):
     """" Perform Melee(attack) action to an entity in that direction."""
@@ -67,7 +81,7 @@ class MeleeAction(ActionWithDirection):
         target = self.action_target_actor
         # Check if has target to attack
         if not target:
-            return
+            raise exceptions.Impossible("No target to attack.")
         # Attack hit check.
         if not util.hit_check(target.fighter.dv, 0):
             self.engine.message_log.add_message(f"{self.entity.name.capitalize()} Attack the {target.name} but missed.", fg=colors.enemy_atk)
@@ -86,11 +100,14 @@ class MovementAction(ActionWithDirection):
         """ Perform the Movement Action"""
         dest_x, dest_y = self.dest_xy
         if not self.engine.game_map.is_in_bounds(x=dest_x, y=dest_y):
-            return # Destination is out of bounds, don't move.
+            # Destination is out of bounds, don't move.
+            raise exceptions.Impossible("The Way is blocked.")
         if not self.engine.game_map.tiles["walkable"][dest_x, dest_y]:
-            return # Destination blocked, also don't move.
+            # Destination blocked, also don't move.
+            raise exceptions.Impossible("The Way is blocked.")
         if self.engine.game_map.get_blocking_entity_at(dest_x, dest_y):
-            return
+            # Destination blocked by an entity, also don't move.
+            raise exceptions.Impossible("The Way is blocked.")
         self.entity.move(self.dx, self.dy)
         
 class BumpAction(ActionWithDirection):
@@ -101,6 +118,33 @@ class BumpAction(ActionWithDirection):
         else:
             return MovementAction(self.entity, self.dx, self.dy).perform()
     
+class PickUpAction(Action):
+    """ Pickup an item and add it to the inventory if there is room for it. """
+    def __init__(self, entity: Actor) -> None:
+        super().__init__(entity)
+    
+    def perform(self) -> None:
+        actor_x = self.entity.x
+        actor_y = self.entity.y
+        inventory = self.entity.inventory
+
+        for item in self.engine.game_map.items:
+            if actor_x == item.x and actor_y == item.y:
+                if len(inventory.items) >= inventory.capacity:
+                    raise exceptions.Impossible("Your Inventory is full.")
+                self.engine.game_map.entities.remove(item)
+                item.parent = self.entity.inventory
+                inventory.items.append(item)
+
+                self.engine.message_log.add_message(f"You picked up the {item.name}!")
+                return
+        
+        raise exceptions.Impossible("There is nothing on the Ground here to pick up.")
+
+class DropItemAction(ItemAction):
+    def perform(self) -> None:
+        self.entity.inventory.drop(self.item)
+
 class WaitAction(Action):
     """ Just Wait. """
     def perform(self) -> None:

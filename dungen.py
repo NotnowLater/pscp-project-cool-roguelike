@@ -57,8 +57,10 @@ def make_tunnel_between(start: Tuple[int, int], end: Tuple[int, int]) -> Iterato
     for x, y in tcod.los.bresenham((corner_x, corner_y), (x2, y2)).tolist():
         yield x, y
 
-def place_entities(room: RectangularRoom, dungeon: GameMap, maximum_monsters: int,) -> None:
+def place_entities(room: RectangularRoom, dungeon: GameMap, maximum_monsters: int, maximum_items: int) -> None:
     number_of_monsters = random.randint(0, maximum_monsters)
+    number_of_items = random.randint(0, maximum_items)
+
     for i in range(number_of_monsters):
         x = random.randint(room.x1 + 1, room.x2 - 1)
         y = random.randint(room.y1 + 1, room.y2 - 1)
@@ -69,11 +71,18 @@ def place_entities(room: RectangularRoom, dungeon: GameMap, maximum_monsters: in
             else:
                 entity_factory.troll.spawn_copy(dungeon, x, y)
 
+    for i in range(number_of_items):
+        x = random.randint(room.x1 + 1, room.x2 - 1)
+        y = random.randint(room.y1 + 1, room.y2 - 1)
+        # Check if the entity is overlapping the existing entity first before placing it.
+        if not any(entity.x == x and entity.y == y for entity in dungeon.entities):
+            entity_factory.bandage.spawn_copy(dungeon, x, y)
 
 def generate_dungeon(
         max_rooms: int, room_min_size: int, room_max_size: int,
         map_width: int, map_height: int, engine: Engine,
         max_monsters_per_room: int,
+        max_items_per_room: int,
     ) -> GameMap:
     """ Return The Generated Dungeon of given size. """
     player = engine.player
@@ -101,7 +110,7 @@ def generate_dungeon(
             for x, y in make_tunnel_between(rooms[-1].center, new_room.center):
                 dungeon.tiles[x, y] = tile_types.floor
         # Place the monsters in the Generated room.
-        place_entities(new_room, dungeon, max_monsters_per_room)
+        place_entities(new_room, dungeon, max_monsters_per_room, max_items_per_room)
         # Append the new room to the list.
         rooms.append(new_room)
     return dungeon
