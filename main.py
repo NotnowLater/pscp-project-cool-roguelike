@@ -25,7 +25,7 @@ def main() -> None:
     room_min_size = 5
     max_rooms = 30
     tileset = tcod.tileset.load_tilesheet(
-        "dejavu10x10_gs_tc.png", 32, 8, tcod.tileset.CHARMAP_TCOD
+        "newtile16x16.png", 16, 16, tcod.tileset.CHARMAP_TCOD
     )
 
     # player = Entity(40, 25, "@", (255, 255, 255))
