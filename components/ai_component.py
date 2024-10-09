@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
-from typing import List, Tuple, TYPE_CHECKING
+import random
+from typing import List, Optional, Tuple, TYPE_CHECKING
 
 import numpy as np
 import tcod
 
-from actions import Action, MeleeAction, MovementAction, WaitAction
+from actions import Action, BumpAction, MeleeAction, MovementAction, WaitAction
+
 
 if TYPE_CHECKING:
    from entity import Actor
@@ -37,7 +39,49 @@ class BaseAI(Action):
             # Compute the path and remove the starting position.
             path: List[List[int]] = pathfinder.path_to((dest_x, dest_y))[1:].tolist()
             return [(index[0], index[1]) for index in path]
-        
+
+class BlindedEnemy(BaseAI):
+    """
+    A blinded enemy will stumble around aimlessly for a given number of turns, then revert back to its previous AI.
+    If an actor occupies a tile it is randomly moving into, it will attack.
+    """
+
+    def __init__(
+        self, entity: Actor, previous_ai: Optional[BaseAI], turns_remaining: int
+    ):
+        super().__init__(entity)
+
+        self.previous_ai = previous_ai
+        self.turns_remaining = turns_remaining
+
+    def perform(self) -> None:
+        # Revert the AI back to the original state if the effect has run its course.
+        if self.turns_remaining <= 0:
+            self.engine.message_log.add_message(
+                f"The {self.entity.name} can see again and regains its senses."
+            )
+            self.entity.ai = self.previous_ai
+        else:
+            # Pick a random direction due to blindness
+            direction_x, direction_y = random.choice(
+                [
+                    (-1, -1),  # Northwest
+                    (0, -1),  # North
+                    (1, -1),  # Northeast
+                    (-1, 0),  # West
+                    (1, 0),  # East
+                    (-1, 1),  # Southwest
+                    (0, 1),  # South
+                    (1, 1),  # Southeast
+                ]
+            )
+
+            self.turns_remaining -= 1
+
+            # The blinded actor will either try to move or attack in the chosen random direction.
+            # It may bump into walls or miss an attack due to blindness.
+            return BumpAction(self.entity, direction_x, direction_y,).perform()
+
 class HostileEnemy(BaseAI):
     def __init__(self, entity: Actor) -> None:
         super().__init__(entity)

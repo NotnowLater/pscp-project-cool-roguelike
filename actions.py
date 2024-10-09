@@ -69,7 +69,7 @@ class ItemAction(Action):
     @property
     def action_target_actor(self) -> Optional[Actor]:
         """ Return the actor at this actions destination. """
-        return self.engine.game_map.get_actor_at_location(*self.target_xy)
+        return self.engine.game_map.get_actor_at(*self.target_xy)
     
     def perform(self) -> None:
         """ Invoke the items ability, this action will be given to provide context. """

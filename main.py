@@ -25,7 +25,7 @@ def main() -> None:
     room_min_size = 5
     max_rooms = 30
     tileset = tcod.tileset.load_tilesheet(
-        "newtile16x16.png", 16, 16, tcod.tileset.CHARMAP_TCOD
+        "newtile16x16.png", 16, 16, tcod.tileset.CHARMAP_CP437
     )
 
     # player = Entity(40, 25, "@", (255, 255, 255))
@@ -36,7 +36,7 @@ def main() -> None:
         room_min_size=room_min_size, 
         room_max_size=room_max_size, 
         map_width=map_width,
-        map_height=map_height, 
+        map_height=map_height,
         engine=game_engine,
         max_monsters_per_room=max_monsters_per_room, 
         max_items_per_room=max_items_per_room

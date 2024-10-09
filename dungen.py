@@ -76,7 +76,14 @@ def place_entities(room: RectangularRoom, dungeon: GameMap, maximum_monsters: in
         y = random.randint(room.y1 + 1, room.y2 - 1)
         # Check if the entity is overlapping the existing entity first before placing it.
         if not any(entity.x == x and entity.y == y for entity in dungeon.entities):
-            entity_factory.bandage.spawn_copy(dungeon, x, y)
+            item_chance = random.random()
+
+            if item_chance < 0.7:
+                entity_factory.bandage.spawn_copy(dungeon, x, y)
+            elif item_chance < 0.8:
+                entity_factory.flash_grenade.spawn_copy(dungeon, x, y)
+            else:
+                entity_factory.explosive_grenade.spawn_copy(dungeon, x, y)
 
 def generate_dungeon(
         max_rooms: int, room_min_size: int, room_max_size: int,
