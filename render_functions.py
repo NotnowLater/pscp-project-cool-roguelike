@@ -20,11 +20,11 @@ def render_progress_bars(
     """ Draw a progress bar with given value and size at the given location. """
     bar_width = int(float(current) / max * total_width)
     # Draw the bar's background.
-    console.draw_rect(x=0, y=60, width=total_width, height=1, ch=1, bg=colors.bar_empty)
+    console.draw_rect(x=0, y=46, width=total_width, height=1, ch=1, bg=colors.bar_empty)
     # Draw the actual bar.
     if bar_width > 0:
-        console.draw_rect(x=0, y=60, width=bar_width, height=1, ch=1, bg=colors.bar_filled)
-    console.print(x=1, y=60, string=f"HP: {current}/{max}", fg=colors.bar_text)
+        console.draw_rect(x=0, y=46, width=bar_width, height=1, ch=1, bg=colors.bar_filled)
+    console.print(x=1, y=46, string=f"HP: {current}/{max}", fg=colors.bar_text)
 
 def get_names_at_location(x : int, y : int, game_map : GameMap) -> str:
    """ Return entities names at the given location """

@@ -5,7 +5,6 @@ from typing import  TYPE_CHECKING
 
 from tcod.console import Console
 
-from input_handlers import MainGameEventHandler
 from render_functions import render_progress_bars, render_names_at_mouse_location
 from message_log import MessageLog
 
@@ -16,13 +15,11 @@ from tcod.map import compute_fov
 if TYPE_CHECKING:
     from entity import Actor
     from game_map import GameMap
-    from input_handlers import EventHandler
 
 class Engine:
     game_map: GameMap
 
     def __init__(self, player: Actor):
-        self.event_handler = MainGameEventHandler(self)
         self.message_log = MessageLog()
         self.player = player
         self.mouse_location = (0, 0)
@@ -56,6 +53,6 @@ class Engine:
         # Render The player hp
         # console.print(x=1, y=61, string=f"HP {self.player.fighter.hp}/{self.player.fighter.max_hp}")
         render_progress_bars(console=console, current=self.player.fighter.hp, max=self.player.fighter.max_hp, total_width=20)
-        self.message_log.render(console=console, x=30, y=60, width=70, height=10)
-        render_names_at_mouse_location(console=console, x=1, y=61, engine=self)
+        self.message_log.render(console=console, x=35, y=46, width=60, height=8)
+        render_names_at_mouse_location(console=console, x=1, y=48, engine=self)
 
