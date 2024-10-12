@@ -13,8 +13,8 @@ import libtcodpy
 import colors
 from engine import Engine
 import entity_factory
+from game_map import GameWorld
 import input_handlers
-from dungen import generate_dungeon
 
 
 # Load the background image and remove the alpha channel.
@@ -24,7 +24,7 @@ background_image = tcod.image.load("menu_background.png")[:, :, :3]
 def new_game() -> Engine:
     """Return a brand new game session as an Engine instance."""
     map_width, map_height = 94, 43
-    
+
     room_max_size = 10
     room_min_size = 6
     max_rooms = 30
@@ -36,7 +36,8 @@ def new_game() -> Engine:
 
     engine = Engine(player=player)
 
-    engine.game_map = generate_dungeon(
+    engine.game_world = GameWorld(
+        engine=engine,
         max_rooms=max_rooms,
         room_min_size=room_min_size,
         room_max_size=room_max_size,
@@ -44,8 +45,8 @@ def new_game() -> Engine:
         map_height=map_height,
         max_monsters_per_room=max_monsters_per_room,
         max_items_per_room=max_items_per_room,
-        engine=engine,
     )
+    engine.game_world.generate_floor()
     engine.update_fov()
 
     engine.message_log.add_message(
