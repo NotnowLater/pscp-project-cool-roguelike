@@ -66,9 +66,9 @@ class Engine:
         render_functions.render_dungeon_level(
             console=console,
             dungeon_level=self.game_world.current_floor,
-            location=(0, 47),
+            location=(1, 48),
         )
 
         render_functions.render_names_at_mouse_location(
-            console=console, x=21, y=44, engine=self
+            console=console, x=1, y=50, engine=self
         )

@@ -16,11 +16,11 @@ class Fighter(BaseComponent):
     """ A Figther Component class to make Entity able to Fight. """
     parent : Actor  # The parent entity that this component is attacth to.
 
-    def __init__(self, hp: int, dv: int, attack: int) -> None:
+    def __init__(self, hp: int, base_dv: int, base_attack: int):
         self.max_hp = hp
         self._hp = hp
-        self.dv = dv
-        self.attack = attack
+        self.base_dv  = base_dv
+        self.base_attack = base_attack
 
     @property
     def hp(self) -> int:
@@ -44,6 +44,28 @@ class Fighter(BaseComponent):
 
     def take_damage(self, amount : int) -> None:
         self.hp -= amount
+
+    @property
+    def dv(self) -> int:
+        return self.base_dv + self.dv_bonus
+
+    @property
+    def attack(self) -> int:
+        return self.base_attack + self.attack_bonus
+
+    @property
+    def dv_bonus(self) -> int:
+        if self.parent.equipment:
+            return self.parent.equipment.dv_bonus
+        else:
+            return 0
+
+    @property
+    def attack_bonus(self) -> int:
+        if self.parent.equipment:
+            return self.parent.equipment.attack_bonus
+        else:
+            return 0
 
     def die(self) -> None:
         if self.engine.player is self.parent:

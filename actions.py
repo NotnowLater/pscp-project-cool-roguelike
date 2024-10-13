@@ -86,7 +86,8 @@ class ItemAction(Action):
     
     def perform(self) -> None:
         """ Invoke the items ability, this action will be given to provide context. """
-        self.item.consumable.activate(self)
+        if self.item.consumable:
+            self.item.consumable.activate(self)
 
 class MeleeAction(ActionWithDirection):
     """" Perform Melee(attack) action to an entity in that direction."""
@@ -96,10 +97,10 @@ class MeleeAction(ActionWithDirection):
         if not target:
             raise exceptions.Impossible("No target to attack.")
         # Attack hit check.
-        if not util.hit_check(target.fighter.dv, 0):
+        if not util.hit_check(target.fighter.base_dv, 0):
             self.engine.message_log.add_message(f"{self.entity.name.capitalize()} Attack the {target.name} but missed.", fg=colors.enemy_atk)
             return
-        dmg = util.roll_dice(1, self.entity.fighter.attack, 0)
+        dmg = util.roll_dice(1, self.entity.fighter.base_attack, 0)
 
         if self.entity is self.engine.player:
             attack_color = colors.player_atk
@@ -156,7 +157,18 @@ class PickUpAction(Action):
 
 class DropItemAction(ItemAction):
     def perform(self) -> None:
+        if self.entity.equipment.item_is_equipped(self.item):
+            self.entity.equipment.toggle_equip(self.item)
         self.entity.inventory.drop(self.item)
+
+class EquipAction(Action):
+    def __init__(self, entity: Actor, item: Item):
+        super().__init__(entity)
+
+        self.item = item
+
+    def perform(self) -> None:
+        self.entity.equipment.toggle_equip(self.item)
 
 class WaitAction(Action):
     """ Just Wait. """

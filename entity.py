@@ -13,6 +13,8 @@ if TYPE_CHECKING:
     from components.ai_component import BaseAI
     from components.fighter_component import Fighter
     from components.consumable import Consumable
+    from components.equipment import Equipment
+    from components.equippable import Equippable
     from components.inventory import Inventory
     from components.level import Level
     from game_map import GameMap
@@ -98,6 +100,7 @@ class Actor(Entity):
             color: Tuple[int, int, int] = (255, 255, 255),
             name = "entity name here",
             ai_class: Type[BaseAI],
+            equipment: Equipment,
             fighter: Fighter,
             inventory: Inventory,
             level: Level,
@@ -112,6 +115,8 @@ class Actor(Entity):
             render_order=RenderOrder.ACTOR,
         )
         self.ai: Optional[BaseAI] = ai_class(self)
+        self.equipment: Equipment = equipment
+        self.equipment.parent = self
         self.fighter = fighter
         self.fighter.parent = self
         self.inventory = inventory
@@ -133,7 +138,8 @@ class Item(Entity):
             char : str = "?", 
             color : Tuple[int] = (255, 255, 255), 
             name="entity name here", 
-            consumable : Consumable,
+            consumable: Optional[Consumable] = None,
+            equippable: Optional[Equippable] = None,
         ):
         super().__init__(
             x=x,
@@ -146,4 +152,10 @@ class Item(Entity):
         )
 
         self.consumable = consumable
-        self.consumable.parent = self
+        if self.consumable:
+            self.consumable.parent = self
+
+        self.equippable = equippable
+
+        if self.equippable:
+            self.equippable.parent = self

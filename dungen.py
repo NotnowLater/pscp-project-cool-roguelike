@@ -25,17 +25,16 @@ max_monsters_by_floor = [
 ]
 
 item_chance: Dict[int, List[Tuple[Entity, int]]] = {
-    0: [(entity_factories.health_potion, 35)],
-    2: [(entity_factories.confusion_scroll, 10)],
-    4: [(entity_factories.lightning_scroll, 25)],
-    6: [(entity_factories.fireball_scroll, 25)],
+    0: [(entity_factory.bandage, 35)],
+    2: [(entity_factory.flash_grenade, 25), (entity_factory.sword, 5)],
+    4: [(entity_factory.explosive_grenade, 25), (entity_factory.chain_mail, 15)],
 }
 
 enemy_chances: Dict[int, List[Tuple[Entity, int]]] = {
-    0: [(entity_factories.orc, 80)],
-    3: [(entity_factories.troll, 15)],
-    5: [(entity_factories.troll, 30)],
-    7: [(entity_factories.troll, 60)],
+    0: [(entity_factory.orc, 80)],
+    3: [(entity_factory.troll, 15)],
+    5: [(entity_factory.troll, 30)],
+    7: [(entity_factory.troll, 60)],
 }
 
 def get_max_value_for_floor(
@@ -125,12 +124,14 @@ def place_entities(room : RectangularRoom, dungeon: GameMap, floor_number : int,
     number_of_monsters = random.randint(
         0, get_max_value_for_floor(max_monsters_by_floor, floor_number)
     )
-
+    number_of_items = random.randint(
+        0, get_max_value_for_floor(max_items_by_floor, floor_number)
+    )
     monsters: List[Entity] = get_entities_at_random(
         enemy_chances, number_of_monsters, floor_number
     )
     items: List[Entity] = get_entities_at_random(
-        item_chances, number_of_items, floor_number
+        item_chance, number_of_items, floor_number
     )
 
     for entity in monsters + items:
@@ -138,7 +139,7 @@ def place_entities(room : RectangularRoom, dungeon: GameMap, floor_number : int,
         y = random.randint(room.y1 + 1, room.y2 - 1)
         # Check if the entity is overlapping the existing entity first before placing it.
         if not any(entity.x == x and entity.y == y for entity in dungeon.entities):
-            entity.spawn(dungeon, x, y)
+            entity.spawn_copy(dungeon, x, y)
 
 def generate_dungeon(
         max_rooms: int, room_min_size: int, room_max_size: int,
