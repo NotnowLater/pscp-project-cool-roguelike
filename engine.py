@@ -7,7 +7,7 @@ from typing import  TYPE_CHECKING
 
 from tcod.console import Console
 
-from render_functions import render_progress_bars, render_names_at_mouse_location
+import render_functions
 from message_log import MessageLog
 
 import exceptions
@@ -61,7 +61,14 @@ class Engine:
 
         # Render The player hp
         # console.print(x=1, y=61, string=f"HP {self.player.fighter.hp}/{self.player.fighter.max_hp}")
-        render_progress_bars(console=console, current=self.player.fighter.hp, max=self.player.fighter.max_hp, total_width=20)
+        render_functions.render_progress_bars(console=console, current=self.player.fighter.hp, max=self.player.fighter.max_hp, total_width=20)
         self.message_log.render(console=console, x=35, y=46, width=60, height=8)
-        render_names_at_mouse_location(console=console, x=1, y=48, engine=self)
+        render_functions.render_dungeon_level(
+            console=console,
+            dungeon_level=self.game_world.current_floor,
+            location=(0, 47),
+        )
 
+        render_functions.render_names_at_mouse_location(
+            console=console, x=21, y=44, engine=self
+        )
