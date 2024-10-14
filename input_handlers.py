@@ -426,7 +426,7 @@ class MainGameEventHandler(EventHandler):
         elif key == tcod.event.KeySym.ESCAPE:
             raise SystemExit()
 
-        elif key == tcod.event.KeySym.l:
+        elif key == tcod.event.KeySym.m:
             return MessageLogHistoryViewer(self.engine)
         elif key == tcod.event.KeySym.g:
             action = PickUpAction(player)
@@ -436,7 +436,7 @@ class MainGameEventHandler(EventHandler):
             return InventoryDropHandler(self.engine)
         elif key == tcod.event.KeySym.c:
             return CharacterScreenEventHandler(self.engine)
-        elif key == tcod.event.KeySym.SLASH:
+        elif key == tcod.event.KeySym.l:
             return LookHandler(self.engine)
 
         # No valid key was pressed
