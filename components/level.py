@@ -59,14 +59,14 @@ class Level(BaseComponent):
         self.increase_level()
 
     def increase_attack(self, amount: int = 1) -> None:
-        self.parent.fighter.base_attack += amount
+        self.parent.fighter.strength += amount
 
         self.engine.message_log.add_message("You feel stronger!")
 
         self.increase_level()
 
     def increase_dv(self, amount: int = 1) -> None:
-        self.parent.fighter.base_dv += amount
+        self.parent.fighter.agility += amount
 
         self.engine.message_log.add_message("Your movements are getting swifter!")
 

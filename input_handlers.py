@@ -9,7 +9,7 @@ from typing import Callable, Optional, Tuple, TYPE_CHECKING, Union
 import tcod.event
 
 from actions import Action, BumpAction, WaitAction, PickUpAction, DropItemAction, TakeStairsAction, EquipAction, RangedAttackAction
-
+import components.item_pic 
 import colors
 import exceptions
 
@@ -507,6 +507,18 @@ class MessageLogHistoryViewer(EventHandler):
             return MainGameEventHandler(self.engine)
         return None
 
+def print_center_text(log_console, text, console_width, console_height, x_offset):
+    lines = text.splitlines()
+    num_lines = len(lines)
+    # Calculate the vertical offset to center the text vertically
+    vertical_offset = (console_height - num_lines) // 2
+    for i, line in enumerate(lines):
+        line_length = len(line)
+        # Calculate leading spaces to center the line horizontally
+        leading_spaces = (console_width - line_length) // 2
+        # Print the line with adjusted x and y positions for centering
+        log_console.print(leading_spaces + x_offset, vertical_offset + i, line)
+
 class InventoryEventHandler(AskUserEventHandler):
     """
     This handler lets the user select an item.
@@ -516,7 +528,7 @@ class InventoryEventHandler(AskUserEventHandler):
         super().__init__(engine)
         self.cursor = 0
         self.scroll_offset = 0
-    
+        self.item_pic = components.item_pic.Item_pic
     TITLE = "Title Here"
 
     def on_render(self, console: tcod.console.Console) -> None:
@@ -546,10 +558,11 @@ class InventoryEventHandler(AskUserEventHandler):
                     item_string = f"- {item_string}"
                 else:
                     item_string = f">  {item_string}  <"
+                    print_center_text(log_console, self.item_pic[item.name],72,30,30)
+                    # log_console.print(80-len(self.item_pic[item.name].splitlines()), 4, self.item_pic[item.name])
                 log_console.print(2, i + 1, item_string)
         else:
             log_console.print(1, 1, "(Empty)")
-
         log_console.blit(console, 3, 3)
 
     def ev_keydown(self, event: tcod.event.KeyDown) -> Optional[ActionOrHandler]:
