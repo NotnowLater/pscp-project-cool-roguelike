@@ -39,16 +39,16 @@ UNSEEN = np.array((ord(" "), (255, 255, 255), (0, 0, 0)), dtype=graphic_dt)
 floor = new_tile(
     walkable=True, 
     transparent=True, 
-    dark=(ord("."), (40, 40, 40), (0, 0, 0)),
+    dark=(ord("."), (50, 50, 50), (0, 0, 0)),
     light=(ord("."), (80, 80, 80), (0, 0, 0)))
 wall = new_tile(
     walkable=False, 
     transparent=False, 
-    dark=(ord("#"), (50, 50, 50), (0, 0, 0)),
-    light=(ord("#"), (150, 150, 150), (0, 0, 0)))
+    dark=(ord("#"), (0, 0, 0), (50, 50, 50)),
+    light=(ord("#"), (255, 255, 255), (150, 150, 169)))
 down_stairs = new_tile(
     walkable=True,
     transparent=True,
-    dark=(ord(">"), (0, 0, 100), (50, 50, 150)),
-    light=(ord(">"), (255, 255, 255), (200, 180, 50)),
+    dark=(ord(">"), (50, 50, 50), (0, 0, 0)),
+    light=(ord(">"), (255, 255, 255), (0, 0, 0)),
 )

@@ -8,14 +8,14 @@ from components.inventory import Inventory
 from components.level import Level
 from entity import Actor, Item
 
-player = Actor(char="☺", color=(255, 255, 255), name="Player", ai_class=HostileEnemy,equipment=Equipment(), fighter=Fighter(hp=100, agility=10, strength=10),inventory=Inventory(capacity=26),level=Level(level_up_base=200),)
+player = Actor(char="☺", color=(255, 255, 255), name="Player", ai_class=HostileEnemy,equipment=Equipment(), fighter=Fighter(hp=100, agility=50, strength=60),inventory=Inventory(capacity=26),level=Level(level_up_base=200),)
 
-orc = Actor(char="J", color=(63, 127, 63), name="Janitor", ai_class=HostileEnemy,equipment=Equipment(), fighter=Fighter(hp=8, agility=6, strength=8),inventory=Inventory(capacity=0),level=Level(xp_given=35),)
-troll = Actor(char="C", color=(0, 127, 0), name="Crew", ai_class=HostileEnemy,equipment=Equipment(), fighter=Fighter(hp=10, agility=8, strength=6),inventory=Inventory(capacity=0),level=Level(xp_given=100),)
+orc = Actor(char="♥", color=(255, 255, 255), name="Janitor", ai_class=HostileEnemy,equipment=Equipment(), fighter=Fighter(hp=10, agility=0, strength=20),inventory=Inventory(capacity=0),level=Level(xp_given=35),)
+troll = Actor(char="♦", color=(255, 255, 255), name="Crew", ai_class=HostileEnemy,equipment=Equipment(), fighter=Fighter(hp=16, agility=1, strength=20),inventory=Inventory(capacity=0),level=Level(xp_given=100),)
 
 flash_grenade = Item(
     char="~",
-    color=(207, 63, 255),
+    color=(240, 240, 240),
     name="Flash grenade",
     consumable=consumable.FlashConsumable(number_of_turns=10, radius=3),
 )
@@ -35,20 +35,20 @@ bandage = Item(
 )
 
 dagger = Item(
-    char="/", color=(0, 191, 255), name="Knife", equippable=equippable.Dagger()
+    char="/", color=(150, 150, 150), name="Knife", equippable=equippable.Dagger()
 )
 
 sword = Item(char="/", color=(0, 191, 255), name="Razorblade", equippable=equippable.Sword())
 
 leather_armor = Item(
     char="[",
-    color=(139, 69, 19),
+    color=(69, 69, 69),
     name="Jumpsuit",
     equippable=equippable.LeatherArmor(),
 )
 
 chain_mail = Item(
-    char="[", color=(139, 69, 19), name="Reinforced Jumpsuit", equippable=equippable.ChainMail()
+    char="[", color=(0, 191, 255), name="Reinforced Jumpsuit", equippable=equippable.ChainMail()
 )
 
 pistol = Item(

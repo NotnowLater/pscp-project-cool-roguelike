@@ -219,7 +219,7 @@ class CharacterScreenEventHandler(AskUserEventHandler):
         )
 
         console.print(
-            x=x + 1, y=y + 4, string=f"Attack: {self.engine.player.fighter.attack}"
+            x=x + 1, y=y + 4, string=f"Attack: {self.engine.player.fighter.strength}"
         )
         console.print(
             x=x + 1, y=y + 5, string=f"Defense: {self.engine.player.fighter.dv}"
@@ -258,7 +258,7 @@ class LevelUpEventHandler(AskUserEventHandler):
         console.print(
             x=x + 1,
             y=5,
-            string=f"b) Strength (+1 attack, from {self.engine.player.fighter.attack})",
+            string=f"b) Strength (+1 attack, from {self.engine.player.fighter.strength})",
         )
         console.print(
             x=x + 1,
