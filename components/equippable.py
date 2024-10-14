@@ -20,15 +20,29 @@ class Equippable(BaseComponent):
         tohit: int = 0,
         attack_die: int = 0,
         attack_roll: int = 0,
+        attack_base: int = 0,
         dv_bonus: int = 0,
         ranged: bool = False,
+        ranged_tohit: int = 0,
+        ranged_attack_die: int = 0,
+        ranged_attack_roll: int = 0,
+        ranged_attack_base: int = 0,
+        ranged_attack_shot: int = 0,
+        ranged_ammo_cap: int = 0,
     ):
         self.equipment_type = equipment_type
         self.tohit = tohit
         self.attack_die = attack_die
         self.attack_roll = attack_roll
+        self.attack_base = attack_base
         self.dv_bonus = dv_bonus
         self.ranged = ranged
+        self.ranged_tohit = ranged_tohit
+        self.ranged_attack_die = ranged_attack_die
+        self.ranged_attack_roll = ranged_attack_roll
+        self.ranged_attack_base = ranged_attack_base
+        self.ranged_attack_shot = ranged_attack_shot
+        self.ranged_ammo_cap = ranged_ammo_cap
 
 class Dagger(Equippable):
     def __init__(self) -> None:
@@ -48,3 +62,18 @@ class LeatherArmor(Equippable):
 class ChainMail(Equippable):
     def __init__(self) -> None:
         super().__init__(equipment_type=EquipmentType.ARMOR, dv_bonus=3)
+
+class Pistol(Equippable):
+    def __init__(self) -> None:
+        super().__init__(
+            equipment_type=EquipmentType.WEAPON, 
+            attack_die=1, 
+            attack_roll=2, 
+            ranged=True,
+            ranged_attack_die=2,
+            ranged_attack_roll=4,
+            ranged_attack_base=2,
+            ranged_tohit=1,
+            ranged_attack_shot=1,
+            ranged_ammo_cap=6,
+            )

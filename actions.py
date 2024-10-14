@@ -109,6 +109,29 @@ class MeleeAction(ActionWithDirection):
         self.engine.message_log.add_message(f"{self.entity.name.capitalize()} Attacks {target.name} for {dmg} hit points.", fg=attack_color)
         target.fighter.hp -= dmg
 
+class RangedAttackAction(Action):
+    def __init__(self, entity: Actor, target_xy: Optional[Tuple[int, int]] = None) -> None:
+
+        self.entity = entity
+        self.target = entity.game_map.get_actor_at(*target_xy)
+
+    def perform(self) -> None:
+        if not self.target:
+            raise exceptions.Impossible("No target to attack at.")
+        target_fighter = self.target.fighter
+        # Attack hit check
+        if not util.hit_check(target_fighter.dv, self.entity.fighter.ranged_tohit):
+            self.engine.message_log.add_message(f"{self.entity.name.capitalize()} Shoots at the {target_fighter.parent.name} but missed.", fg=colors.enemy_atk)
+            return
+        dmg = util.roll_dice(self.entity.fighter.ranged_attack_die, self.entity.fighter.ranged_attack_roll, self.entity.fighter.ranged_attack_base)
+        
+        if self.entity is self.engine.player:
+            attack_color = colors.player_atk
+        else:
+            attack_color = colors.enemy_atk
+        self.engine.message_log.add_message(f"{self.entity.name.capitalize()} Shoots at the {target_fighter.parent.name} for {dmg} hit points.", fg=attack_color)
+        target_fighter.hp -= dmg
+
 class MovementAction(ActionWithDirection):
     def perform(self) -> None:
         """ Perform the Movement Action"""

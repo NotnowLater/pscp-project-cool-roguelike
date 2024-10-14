@@ -10,8 +10,8 @@ from entity import Actor, Item
 
 player = Actor(char="☺", color=(255, 255, 255), name="Player", ai_class=HostileEnemy,equipment=Equipment(), fighter=Fighter(hp=100, agility=10, strength=10),inventory=Inventory(capacity=26),level=Level(level_up_base=200),)
 
-orc = Actor(char="J", color=(63, 127, 63), name="Janitor", ai_class=HostileEnemy,equipment=Equipment(), fighter=Fighter(hp=10, agility=6, strength=8),inventory=Inventory(capacity=0),level=Level(xp_given=35),)
-troll = Actor(char="C", color=(0, 127, 0), name="Crew", ai_class=HostileEnemy,equipment=Equipment(), fighter=Fighter(hp=16, agility=8, strength=6),inventory=Inventory(capacity=0),level=Level(xp_given=100),)
+orc = Actor(char="J", color=(63, 127, 63), name="Janitor", ai_class=HostileEnemy,equipment=Equipment(), fighter=Fighter(hp=8, agility=6, strength=8),inventory=Inventory(capacity=0),level=Level(xp_given=35),)
+troll = Actor(char="C", color=(0, 127, 0), name="Crew", ai_class=HostileEnemy,equipment=Equipment(), fighter=Fighter(hp=10, agility=8, strength=6),inventory=Inventory(capacity=0),level=Level(xp_given=100),)
 
 flash_grenade = Item(
     char="~",
@@ -49,4 +49,8 @@ leather_armor = Item(
 
 chain_mail = Item(
     char="[", color=(139, 69, 19), name="Reinforced Jumpsuit", equippable=equippable.ChainMail()
+)
+
+pistol = Item(
+    char=";", color=(139, 69, 19), name="Nk-1 Pistol", equippable=equippable.Pistol()
 )

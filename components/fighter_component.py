@@ -51,11 +51,11 @@ class Fighter(BaseComponent):
 
     @property
     def attack_damage_bonus(self) -> int:
-        return self.get_stat_mods(self.strength)
+        return self.get_stat_mods(self.strength) + self.equipment_attack_base
 
     @property
     def tohit(self) -> int:
-        return self.get_stat_mods(self.agility) + self.equipment_tohit
+        return self.get_stat_mods(self.strength) + self.equipment_tohit
 
     @property
     def dv(self) -> int:
@@ -96,7 +96,62 @@ class Fighter(BaseComponent):
             return self.parent.equipment.attack_roll
         else:
             return 0
+        
+    @property
+    def equipment_attack_base(self) -> int:
+        if self.parent.equipment:
+            return self.parent.equipment.attack_base
+        else:
+            return 0
+        
+    @property
+    def can_ranged_attack(self):
+        if self.parent.equipment:
+            return self.parent.equipment.ranged
+        else:
+            return False
 
+    @property
+    def ranged_attack_die(self) -> int:
+        if self.parent.equipment:
+            return self.parent.equipment.ranged_attack_die
+        else:
+            return 0
+
+    @property
+    def ranged_attack_roll(self) -> int:
+        if self.parent.equipment:
+            return self.parent.equipment.ranged_attack_roll
+        else:
+            return 0
+
+    @property
+    def ranged_attack_base(self) -> int:
+        if self.parent.equipment:
+            return self.parent.equipment.ranged_attack_base
+        else:
+            return 0
+
+    @property
+    def ranged_tohit(self) -> int:
+        if self.parent.equipment:
+            return self.parent.equipment.ranged_tohit
+        else:
+            return 0
+
+    @property
+    def ranged_ammo_cap(self) -> int:
+        if self.parent.equipment:
+            return self.parent.equipment.ranged_ammo_cap
+        else:
+            return 0
+
+    @property
+    def ranged_attack_shot(self) -> int:
+        if self.parent.equipment:
+            return self.parent.equipment.ranged_attack_shot
+        else:
+            return 0
 
     def die(self) -> None:
         if self.engine.player is self.parent:

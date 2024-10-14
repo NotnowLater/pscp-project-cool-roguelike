@@ -29,17 +29,27 @@ class Equipment(BaseComponent):
         return bonus
 
     @property
-    def attack_bonus(self) -> int:
-        bonus = 0
-
+    def attack_base(self) -> int:
+        base = 0
         if self.weapon is not None and self.weapon.equippable is not None:
-            bonus += self.weapon.equippable.attack_bonus
+            base += self.weapon.equippable.attack_base
 
         if self.armor is not None and self.armor.equippable is not None:
-            bonus += self.armor.equippable.attack_bonus
+            base += self.armor.equippable.attack_base
 
-        return bonus
-    
+        return base
+
+    @property
+    def ranged_attack_base(self) -> int:
+        base = 0
+        if self.weapon is not None and self.weapon.equippable is not None:
+            base += self.weapon.equippable.ranged_attack_base
+
+        if self.armor is not None and self.armor.equippable is not None:
+            base += self.armor.equippable.ranged_attack_base
+
+        return base
+
     @property 
     def tohit(self) -> int:
         th = 0
@@ -66,7 +76,59 @@ class Equipment(BaseComponent):
         if self.armor is not None and self.armor.equippable is not None:
             ad += self.armor.equippable.attack_die
         return ad
+    
+    @property
+    def ranged(self) -> int:
+        if self.weapon is not None and self.weapon.equippable is not None:
+            return self.weapon.equippable.ranged
+        # if self.armor is not None and self.armor.equippable is not None:
+        #     return True
+        return False
+    
+    @property
+    def ranged_attack_die(self) -> int:
+        ra = 0
+        if self.weapon is not None and self.weapon.equippable is not None:
+            ra += self.weapon.equippable.ranged_attack_die
+        if self.armor is not None and self.armor.equippable is not None:
+            ra += self.armor.equippable.ranged_attack_die
+        return ra
 
+    @property
+    def ranged_tohit(self) -> int:
+        ad = 0
+        if self.weapon is not None and self.weapon.equippable is not None:
+            ad += self.weapon.equippable.ranged_tohit
+        if self.armor is not None and self.armor.equippable is not None:
+            ad += self.armor.equippable.ranged_tohit
+        return ad
+
+    @property
+    def ranged_attack_roll(self) -> int:
+        ad = 0
+        if self.weapon is not None and self.weapon.equippable is not None:
+            ad += self.weapon.equippable.ranged_attack_roll
+        if self.armor is not None and self.armor.equippable is not None:
+            ad += self.armor.equippable.ranged_attack_roll
+        return ad
+
+    @property
+    def ranged_attack_shot(self) -> int:
+        ad = 0
+        if self.weapon is not None and self.weapon.equippable is not None:
+            ad += self.weapon.equippable.ranged_attack_shot
+        if self.armor is not None and self.armor.equippable is not None:
+            ad += self.armor.equippable.ranged_attack_shot
+        return ad
+
+    @property
+    def ranged_ammo_cap(self) -> int:
+        ad = 0
+        if self.weapon is not None and self.weapon.equippable is not None:
+            ad += self.weapon.equippable.ranged_ammo_cap
+        if self.armor is not None and self.armor.equippable is not None:
+            ad += self.armor.equippable.ranged_ammo_cap
+        return ad
 
     def item_is_equipped(self, item: Item) -> bool:
         return self.weapon == item or self.armor == item

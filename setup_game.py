@@ -51,6 +51,8 @@ def new_game() -> Engine:
 
     dagger = copy.deepcopy(entity_factory.dagger)
     leather_armor = copy.deepcopy(entity_factory.leather_armor)
+    pistol = copy.deepcopy(entity_factory.pistol)
+    grenade = copy.deepcopy(entity_factory.explosive_grenade)
 
     dagger.parent = player.inventory
     leather_armor.parent = player.inventory
@@ -60,6 +62,9 @@ def new_game() -> Engine:
 
     player.inventory.items.append(leather_armor)
     player.equipment.toggle_equip(leather_armor, add_message=False)
+
+    print(pistol.equippable.equipment_type)
+    player.inventory.items.append(pistol)
 
     return engine
 

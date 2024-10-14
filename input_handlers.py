@@ -8,7 +8,7 @@ from typing import Callable, Optional, Tuple, TYPE_CHECKING, Union
 
 import tcod.event
 
-from actions import Action, BumpAction, WaitAction, PickUpAction, DropItemAction, TakeStairsAction, EquipAction
+from actions import Action, BumpAction, WaitAction, PickUpAction, DropItemAction, TakeStairsAction, EquipAction, RangedAttackAction
 
 import colors
 import exceptions
@@ -50,6 +50,10 @@ CURSOR_Y_KEYS = {
    tcod.event.KeySym.DOWN: 1,
    tcod.event.KeySym.PAGEUP: -10,
    tcod.event.KeySym.PAGEDOWN: 10,
+}
+
+RANGED_ATTACK_KEYS = {
+    tcod.event.KeySym.f,
 }
 
 ActionOrHandler = Union[Action, "BaseEventHandler"]
@@ -355,9 +359,7 @@ class LookHandler(SelectIndexHandler):
 class SingleRangedAttackHandler(SelectIndexHandler):
     """Handles targeting a single enemy. Only the enemy selected will be affected."""
 
-    def __init__(
-        self, engine: Engine, callback: Callable[[Tuple[int, int]], Optional[Action]]
-    ):
+    def __init__(self, engine: Engine, callback: Callable[[Tuple[int, int]], Optional[Action]]):
         super().__init__(engine)
 
         self.callback = callback
@@ -380,6 +382,7 @@ class AreaRangedAttackHandler(SelectIndexHandler):
         self.radius = radius
         self.callback = callback
         self.color = color
+        print(callback)
 
     def on_render(self, console: tcod.Console) -> None:
         """Highlight the tile under the cursor."""
@@ -438,6 +441,9 @@ class MainGameEventHandler(EventHandler):
             return CharacterScreenEventHandler(self.engine)
         elif key == tcod.event.KeySym.l:
             return LookHandler(self.engine)
+        elif key in RANGED_ATTACK_KEYS:
+            if player.fighter.can_ranged_attack:
+                return SingleRangedAttackHandler(self.engine, lambda xy:RangedAttackAction(player, xy))
 
         # No valid key was pressed
         return action
