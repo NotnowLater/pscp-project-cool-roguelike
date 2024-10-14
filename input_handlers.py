@@ -512,68 +512,75 @@ class InventoryEventHandler(AskUserEventHandler):
     This handler lets the user select an item.
     What happens then depends on the subclass.
     """
-
+    def __init__(self, engine: Engine) -> None:
+        super().__init__(engine)
+        self.cursor = 0
+        self.scroll_offset = 0
+    
     TITLE = "Title Here"
 
     def on_render(self, console: tcod.console.Console) -> None:
-        """
-        Render an inventory menu, which displays the items in the inventory, and the letter to select them.
-        Will move to a different position based on where the player is located, so the player can always see where
-        they are.
-        """
-        super().on_render(console)
+        super().on_render(console)  # Draw the main state as the background.
         number_of_items_in_inventory = len(self.engine.player.inventory.items)
-        height = number_of_items_in_inventory + 2
+        log_console = tcod.console.Console(console.width - 6, console.height - 6)
 
-        if height <= 3:
-            height = 3
-
-        if self.engine.player.x <= 30:
-            x = 40
-        else:
-            x = 0
-        y = 0
-
-        width = len(self.TITLE) + 4
-
-        console.draw_frame(
-            x=x,
-            y=y,
-            width=width,
-            height=height,
-            title=self.TITLE,
-            clear=True,
-            fg=(255, 255, 255),
-            bg=(0, 0, 0),
-        )
+        max_visible_items = console.height - 6
+        height = min(number_of_items_in_inventory + 2, max_visible_items)
+        # Draw a frame with a custom banner title.
+        log_console.draw_frame(0, 0, log_console.width, log_console.height)
+        log_console.print_box(0, 0, log_console.width, 1, f"┤{self.TITLE}├", alignment=libtcodpy.CENTER)
+        log_console.draw_frame(42, 2, log_console.width-44, log_console.height-4)
+        # Render the message log using the cursor parameter.
+        start_index = self.scroll_offset
+        end_index = min(start_index + max_visible_items - 2, number_of_items_in_inventory)
 
         if number_of_items_in_inventory > 0:
-           for i, item in enumerate(self.engine.player.inventory.items):
-                item_key = chr(ord("a") + i)
+            for i, item in enumerate(self.engine.player.inventory.items[start_index:end_index]):
                 is_equipped = self.engine.player.equipment.item_is_equipped(item)
-
-                item_string = f"({item_key}) {item.name}"
+                item_string = f"{item.name}"
 
                 if is_equipped:
-                    item_string = f"{item_string} (E)"
+                    item_string = f" {item_string} (E)"
 
-                console.print(x + 1, y + i + 1, item_string)
+                if i + start_index != self.cursor:
+                    item_string = f"- {item_string}"
+                else:
+                    item_string = f">  {item_string}  <"
+                log_console.print(2, i + 1, item_string)
         else:
-            console.print(x + 1, y + 1, "(Empty)")
+            log_console.print(1, 1, "(Empty)")
+
+        log_console.blit(console, 3, 3)
 
     def ev_keydown(self, event: tcod.event.KeyDown) -> Optional[ActionOrHandler]:
-        player = self.engine.player
-        key = event.sym
-        index = key - tcod.event.KeySym.a
-
-        if 0 <= index <= 26:
-            try:
-                selected_item = player.inventory.items[index]
-            except IndexError:
-                self.engine.message_log.add_message("Invalid entry.", colors.invalid)
-                return None
-            return self.on_item_selected(selected_item)
-        return super().ev_keydown(event)
+        max_visible_items = 48
+        number_of_items_in_inventory = len(self.engine.player.inventory.items)
+        if event.sym in CURSOR_Y_KEYS:
+            adjust = CURSOR_Y_KEYS[event.sym]
+            if adjust < 0 and self.cursor == 0:
+                # Only move from the top to the bottom when you're on the edge.
+                self.cursor = number_of_items_in_inventory - 1
+            elif adjust > 0 and self.cursor == number_of_items_in_inventory - 1:
+                # Same with bottom to top movement.
+                self.cursor = 0
+            else:
+                # Otherwise move while staying clamped to the bounds of the Inventory.
+                self.cursor = max(0, min(self.cursor + adjust, number_of_items_in_inventory - 1))
+            if self.cursor < self.scroll_offset:
+                self.scroll_offset = self.cursor
+            elif self.cursor >= self.scroll_offset + max_visible_items - 2:
+                self.scroll_offset = self.cursor - (max_visible_items - 3)
+        elif event.sym == tcod.event.KeySym.HOME:
+            self.cursor = 0  # Move directly to the top message.
+        elif event.sym == tcod.event.KeySym.END:
+            self.cursor = number_of_items_in_inventory - 1  # Move directly to the last message.
+        
+        elif event.sym == tcod.event.KeySym.RETURN:
+            if 0 <= self.cursor < number_of_items_in_inventory:
+                selected_item = self.engine.player.inventory.items[self.cursor]
+                return self.on_item_selected(selected_item)
+        else:
+            return MainGameEventHandler(self.engine)
 
     def on_item_selected(self, item: Item) -> Optional[ActionOrHandler]:
        """Called when the user selects a valid item."""
