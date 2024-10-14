@@ -16,11 +16,11 @@ class Fighter(BaseComponent):
     """ A Figther Component class to make Entity able to Fight. """
     parent : Actor  # The parent entity that this component is attacth to.
 
-    def __init__(self, hp: int, base_dv: int, base_attack: int):
+    def __init__(self, hp: int, strength: int, agility: int):
         self.max_hp = hp
         self._hp = hp
-        self.base_dv  = base_dv
-        self.base_attack = base_attack
+        self.strength = strength
+        self.agility = agility
 
     @property
     def hp(self) -> int:
@@ -45,13 +45,29 @@ class Fighter(BaseComponent):
     def take_damage(self, amount : int) -> None:
         self.hp -= amount
 
-    @property
-    def dv(self) -> int:
-        return self.base_dv + self.dv_bonus
+    def get_stat_mods(self, stat: int) -> int:
+        """ return the stats modifiler of the given stats value"""
+        return int((stat - 10) / 2)
 
     @property
-    def attack(self) -> int:
-        return self.base_attack + self.attack_bonus
+    def attack_damage_bonus(self) -> int:
+        return self.get_stat_mods(self.strength)
+
+    @property
+    def tohit(self) -> int:
+        return self.get_stat_mods(self.agility) + self.equipment_tohit
+
+    @property
+    def dv(self) -> int:
+        return 3 + self.get_stat_mods(self.agility) + self.dv_bonus
+
+    @property
+    def attack_die(self) -> int:
+        return self.equipment_attack_die + 1
+
+    @property
+    def attack_roll(self) -> int:
+        return self.equipment_attack_roll + 1
 
     @property
     def dv_bonus(self) -> int:
@@ -61,11 +77,26 @@ class Fighter(BaseComponent):
             return 0
 
     @property
-    def attack_bonus(self) -> int:
+    def equipment_tohit(self) -> int:
         if self.parent.equipment:
-            return self.parent.equipment.attack_bonus
+            return self.parent.equipment.tohit
         else:
             return 0
+
+    @property
+    def equipment_attack_die(self) -> int:
+        if self.parent.equipment:
+            return self.parent.equipment.attack_die
+        else:
+            return 0
+
+    @property
+    def equipment_attack_roll(self) -> int:
+        if self.parent.equipment:
+            return self.parent.equipment.attack_roll
+        else:
+            return 0
+
 
     def die(self) -> None:
         if self.engine.player is self.parent:

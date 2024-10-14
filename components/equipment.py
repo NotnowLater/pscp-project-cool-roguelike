@@ -39,6 +39,34 @@ class Equipment(BaseComponent):
             bonus += self.armor.equippable.attack_bonus
 
         return bonus
+    
+    @property 
+    def tohit(self) -> int:
+        th = 0
+        if self.weapon is not None and self.weapon.equippable is not None:
+            th += self.weapon.equippable.tohit
+        if self.armor is not None and self.armor.equippable is not None:
+            th += self.weapon.equippable.tohit
+        return th
+    
+    @property
+    def attack_roll(self) -> int:
+        ar = 0
+        if self.weapon is not None and self.weapon.equippable is not None:
+            ar += self.weapon.equippable.attack_roll
+        if self.armor is not None and self.armor.equippable is not None:
+            ar += self.weapon.equippable.attack_roll
+        return ar
+
+    @property
+    def attack_die(self) -> int:
+        ad = 0
+        if self.weapon is not None and self.weapon.equippable is not None:
+            ad += self.weapon.equippable.attack_die
+        if self.armor is not None and self.armor.equippable is not None:
+            ad += self.weapon.equippable.attack_die
+        return ad
+
 
     def item_is_equipped(self, item: Item) -> bool:
         return self.weapon == item or self.armor == item
@@ -73,6 +101,7 @@ class Equipment(BaseComponent):
         setattr(self, slot, None)
 
     def toggle_equip(self, equippable_item: Item, add_message: bool = True) -> None:
+        """ Determine if the equip action will equip or unequip the item. """
         if (
             equippable_item.equippable
             and equippable_item.equippable.equipment_type == EquipmentType.WEAPON

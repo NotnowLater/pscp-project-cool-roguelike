@@ -97,10 +97,10 @@ class MeleeAction(ActionWithDirection):
         if not target:
             raise exceptions.Impossible("No target to attack.")
         # Attack hit check.
-        if not util.hit_check(target.fighter.base_dv, 0):
+        if not util.hit_check(target.fighter.dv, self.entity.fighter.tohit):
             self.engine.message_log.add_message(f"{self.entity.name.capitalize()} Attack the {target.name} but missed.", fg=colors.enemy_atk)
             return
-        dmg = util.roll_dice(1, self.entity.fighter.base_attack, 0)
+        dmg = util.roll_dice(self.entity.fighter.attack_die, self.entity.fighter.attack_roll, self.entity.fighter.attack_damage_bonus)
 
         if self.entity is self.engine.player:
             attack_color = colors.player_atk

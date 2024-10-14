@@ -8,10 +8,10 @@ from components.inventory import Inventory
 from components.level import Level
 from entity import Actor, Item
 
-player = Actor(char="☺", color=(255, 255, 255), name="Player", ai_class=HostileEnemy,equipment=Equipment(), fighter=Fighter(hp=100, base_dv=50, base_attack=60),inventory=Inventory(capacity=26),level=Level(level_up_base=200),)
+player = Actor(char="☺", color=(255, 255, 255), name="Player", ai_class=HostileEnemy,equipment=Equipment(), fighter=Fighter(hp=100, agility=10, strength=10),inventory=Inventory(capacity=26),level=Level(level_up_base=200),)
 
-orc = Actor(char="J", color=(63, 127, 63), name="Janitor", ai_class=HostileEnemy,equipment=Equipment(), fighter=Fighter(hp=10, base_dv=0, base_attack=20),inventory=Inventory(capacity=0),level=Level(xp_given=35),)
-troll = Actor(char="C", color=(0, 127, 0), name="Crew", ai_class=HostileEnemy,equipment=Equipment(), fighter=Fighter(hp=16, base_dv=1, base_attack=20),inventory=Inventory(capacity=0),level=Level(xp_given=100),)
+orc = Actor(char="J", color=(63, 127, 63), name="Janitor", ai_class=HostileEnemy,equipment=Equipment(), fighter=Fighter(hp=10, agility=6, strength=8),inventory=Inventory(capacity=0),level=Level(xp_given=35),)
+troll = Actor(char="C", color=(0, 127, 0), name="Crew", ai_class=HostileEnemy,equipment=Equipment(), fighter=Fighter(hp=16, agility=8, strength=6),inventory=Inventory(capacity=0),level=Level(xp_given=100),)
 
 flash_grenade = Item(
     char="~",
