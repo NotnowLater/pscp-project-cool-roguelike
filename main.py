@@ -42,7 +42,6 @@ def main() -> None:
                 root_console.clear()
                 handler.on_render(console=root_console)
                 context.present(root_console)
-
                 try:
                     for event in tcod.event.wait():
                         context.convert_event(event)

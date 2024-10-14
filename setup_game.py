@@ -16,6 +16,7 @@ import entity_factory
 from game_map import GameWorld
 import input_handlers
 
+import audio
 
 # Load the background image and remove the alpha channel.
 background_image = tcod.image.load("menu_background.png")[:, :, :3]
@@ -71,7 +72,9 @@ def load_game(filename: str) -> Engine:
 
 class MainMenu(input_handlers.BaseEventHandler):
     """Handle the main menu rendering and input."""
-    def on_render(self, console: tcod.Console) -> None:
+    main_menu_snd : audio.AudioPlayBack = None
+
+    def on_render(self, console: tcod.console.Console) -> None:
         """Render the main menu on a background image."""
         console.draw_semigraphics(background_image, 0, 0)
         console.print(
@@ -111,6 +114,11 @@ class MainMenu(input_handlers.BaseEventHandler):
                     (20, 50), (37, 4), (55, 40),]
         for x,y in star_pos:
             console.print(x,y,"☻",fg=colors.white)
+        # play the main menu sound
+        if not self.main_menu_snd:
+            self.main_menu_snd = audio.AudioPlayBack("sounds/scifimain.mp3", True)
+        if not self.main_menu_snd.playback.playing:
+            self.main_menu_snd.play()
 
     def ev_keydown(
         self, event: tcod.event.KeyDown
@@ -119,13 +127,16 @@ class MainMenu(input_handlers.BaseEventHandler):
             raise SystemExit()
         elif event.sym == tcod.event.KeySym.c:
             try:
-                return input_handlers.MainGameEventHandler(load_game("savegame.sav"))
+                ld = input_handlers.MainGameEventHandler(load_game("savegame.sav"))
+                if ld:
+                    self.main_menu_snd.stop()
+                return ld
             except FileNotFoundError:
                 return input_handlers.PopupMessage(self, "No saved game to load.")
             except Exception as exc:
                 traceback.print_exc()  # Print to stderr.
                 return input_handlers.PopupMessage(self, f"Failed to load save:\n{exc}")
         elif event.sym == tcod.event.KeySym.n:
+            self.main_menu_snd.stop()
             return input_handlers.MainGameEventHandler(new_game())
-
         return None
