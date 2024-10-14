@@ -46,7 +46,7 @@ class Equipment(BaseComponent):
         if self.weapon is not None and self.weapon.equippable is not None:
             th += self.weapon.equippable.tohit
         if self.armor is not None and self.armor.equippable is not None:
-            th += self.weapon.equippable.tohit
+            th += self.armor.equippable.tohit
         return th
     
     @property
@@ -55,7 +55,7 @@ class Equipment(BaseComponent):
         if self.weapon is not None and self.weapon.equippable is not None:
             ar += self.weapon.equippable.attack_roll
         if self.armor is not None and self.armor.equippable is not None:
-            ar += self.weapon.equippable.attack_roll
+            ar += self.armor.equippable.attack_roll
         return ar
 
     @property
@@ -64,7 +64,7 @@ class Equipment(BaseComponent):
         if self.weapon is not None and self.weapon.equippable is not None:
             ad += self.weapon.equippable.attack_die
         if self.armor is not None and self.armor.equippable is not None:
-            ad += self.weapon.equippable.attack_die
+            ad += self.armor.equippable.attack_die
         return ad
 
 
