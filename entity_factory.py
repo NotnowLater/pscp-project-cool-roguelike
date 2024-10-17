@@ -97,7 +97,7 @@ troll = Actor(
     )
 
 security = Actor(
-    char="S", 
+    char="♣", 
     color=(255, 255, 255), 
     name="Security", 
     ai_class=HostileRangedEnemy,equipment=Equipment(weapon=pistol, armor=leather_armor), 
