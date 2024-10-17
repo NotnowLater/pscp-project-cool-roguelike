@@ -559,7 +559,6 @@ class InventoryEventHandler(AskUserEventHandler):
                 else:
                     item_string = f">  {item_string}  <"
                     print_center_text(log_console, self.item_pic.get(item.name, ""),72,30,30)
-                    # log_console.print(80-len(self.item_pic[item.name].splitlines()), 4, self.item_pic[item.name])
                 log_console.print(2, i + 1, item_string)
         else:
             log_console.print(1, 1, "(Empty)")

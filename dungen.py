@@ -176,7 +176,7 @@ def generate_dungeon(
             center_of_last_room = new_room.center
         # Place the monsters in the Generated room.
         place_entities(new_room, dungeon, engine.game_world.current_floor)
-        dungeon.tiles[center_of_last_room] = tile_types.down_stairs
+        dungeon.tiles[center_of_last_room] = tile_types.up_stairs
         dungeon.downstairs_location = center_of_last_room
         # Append the new room to the list.
         rooms.append(new_room)

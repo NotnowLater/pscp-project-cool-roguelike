@@ -159,4 +159,13 @@ O 0[XX####XX]
  #################### 
    ################   
 """,
+"Box of 20 Ammo":"""
+ mmmmmmmmmmmmmmmmmmmm
+AAAAAAAAAAAAAAAAAAAE]
+AC  ┌─────────┐  CAE]
+AC  │ 20AMMO- │  CAE]
+AC  └─────────┘  CAE]
+ACCCCCCCCCCCCCCCCCAE]
+AAAAAAAAAAAAAAAAAAAE 
+"""
 }
