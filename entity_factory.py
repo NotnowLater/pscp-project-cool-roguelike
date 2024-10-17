@@ -1,6 +1,6 @@
 """ A Factory that hold all entities definitions that are use to spawn the entity. """
 
-from components.ai_component import HostileEnemy
+from components.ai_component import HostileEnemy, HostileRangedEnemy
 from components.fighter_component import Fighter
 from components import consumable, equippable
 from components.equipment import Equipment
@@ -8,29 +8,10 @@ from components.inventory import Inventory
 from components.level import Level
 from entity import Actor, Item
 
-player = Actor(char="☺", color=(255, 255, 255), name="Player", ai_class=HostileEnemy,equipment=Equipment(), fighter=Fighter(hp=100, agility=14, strength=14),inventory=Inventory(capacity=0),level=Level(level_up_base=200),)
-
+##############
+# ITEMS      #
+##############
 mop = Item(char="=", color=(0, 191, 255), name="Cleaing Mop", equippable=equippable.Mop(), weight=5)
-
-orc = Actor(
-    char="♥", 
-    color=(255, 255, 255), 
-    name="Janitor", 
-    ai_class=HostileEnemy,
-    equipment=Equipment(weapon=mop), 
-    fighter=Fighter(hp=6, agility=6, strength=6),
-    inventory=Inventory(capacity=0),
-    level=Level(xp_given=35),
-    )
-troll = Actor(
-    char="♦", 
-    color=(255, 255, 255), 
-    name="Crew", 
-    ai_class=HostileEnemy,equipment=Equipment(), 
-    fighter=Fighter(hp=12, agility=6, strength=8),
-    inventory=Inventory(capacity=0),
-    level=Level(xp_given=100),
-    )
 
 flash_grenade = Item(
     char="~",
@@ -54,6 +35,14 @@ bandage = Item(
     name="Nano patch",
     consumable=consumable.HealingConsumable(amount=4),
     weight=2,
+)
+
+ammo20 = Item(
+    char="!",
+    color=(0, 127, 255),
+    name="Box of 20 Ammo",
+    consumable=consumable.AmmoConsumable(amount=20),
+    weight=4,
 )
 
 dagger = Item(
@@ -80,3 +69,39 @@ pistol = Item(
     char=";", color=(139, 69, 19), name="Nk-1 Pistol", equippable=equippable.Pistol(),
     weight=4,
 )
+
+##############
+# ACTORS     #
+##############
+
+player = Actor(char="☺", color=(255, 255, 255), name="Player", ai_class=HostileEnemy,equipment=Equipment(), fighter=Fighter(hp=100, agility=14, strength=14, ammo=0),inventory=Inventory(capacity=0),level=Level(level_up_base=200),)
+
+orc = Actor(
+    char="♥", 
+    color=(255, 255, 255), 
+    name="Janitor", 
+    ai_class=HostileEnemy,
+    equipment=Equipment(weapon=mop), 
+    fighter=Fighter(hp=6, agility=6, strength=6, ammo=0),
+    inventory=Inventory(capacity=0),
+    level=Level(xp_given=35),
+    )
+troll = Actor(
+    char="♦", 
+    color=(255, 255, 255), 
+    name="Crew", 
+    ai_class=HostileEnemy,equipment=Equipment(), 
+    fighter=Fighter(hp=12, agility=6, strength=8, ammo=0),
+    inventory=Inventory(capacity=0),
+    level=Level(xp_given=100),
+    )
+
+security = Actor(
+    char="S", 
+    color=(255, 255, 255), 
+    name="Security", 
+    ai_class=HostileRangedEnemy,equipment=Equipment(weapon=pistol, armor=leather_armor), 
+    fighter=Fighter(hp=14, agility=8, strength=8, ammo=1),
+    inventory=Inventory(capacity=0),
+    level=Level(xp_given=125),
+    ) 

@@ -125,3 +125,14 @@ class HealingConsumable(Consumable):
         else:
             raise Impossible(f"Your health is already full.")
 
+class AmmoConsumable(Consumable):
+    def __init__(self, amount : int):
+        self.amount = amount
+
+    def activate(self, action : actions.ItemAction) -> None:
+        consumer = action.entity
+        consumer.fighter.ammo += self.amount
+
+        self.engine.message_log.add_message(f"You open the {self.parent.name}, and got {self.amount} Ammo!",colors.health_recovered,)
+        self.consume()
+    

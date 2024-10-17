@@ -16,11 +16,12 @@ class Fighter(BaseComponent):
     """ A Figther Component class to make Entity able to Fight. """
     parent : Actor  # The parent entity that this component is attacth to.
 
-    def __init__(self, hp: int, strength: int, agility: int):
+    def __init__(self, hp: int, strength: int, agility: int, ammo: int):
         self.max_hp = hp
         self._hp = hp
         self.strength = strength
         self.agility = agility
+        self._ammo = ammo
 
     @property
     def hp(self) -> int:
@@ -140,11 +141,12 @@ class Fighter(BaseComponent):
             return 0
 
     @property
-    def ranged_ammo_cap(self) -> int:
-        if self.parent.equipment:
-            return self.parent.equipment.ranged_ammo_cap
-        else:
-            return 0
+    def ammo(self) -> int:
+            return self._ammo
+
+    @ammo.setter
+    def ammo(self, val: int) -> int:
+            self._ammo = val
 
     @property
     def ranged_attack_shot(self) -> int:

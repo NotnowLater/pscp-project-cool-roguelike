@@ -51,6 +51,14 @@ def render_player_inventory_cap(console: Console, cap: int, max_cap: int, locati
 
     console.print(x=x, y=y, string=f"INV : {cap}/{max_cap}")
 
+def render_player_ammo(console: Console, cap: int, location: Tuple[int, int]) -> None:
+    """
+    Render the player's ammo, at the given location.
+    """
+    x, y = location
+
+    console.print(x=x, y=y, string=f"AM : {cap}")
+
 
 def render_names_at_mouse_location(console: Console, x: int, y: int, engine: Engine) -> None:
     """ Render the entities name at the given location on the console."""

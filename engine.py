@@ -74,6 +74,11 @@ class Engine:
             max_cap=self.player.inventory.capacity,
             location=(1, 49),
         )
+        render_functions.render_player_ammo(
+            console=console,
+            cap=self.player.fighter.ammo,
+            location=(20, 49),
+        )
         render_functions.render_names_at_mouse_location(
             console=console, x=1, y=50, engine=self
         )

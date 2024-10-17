@@ -13,11 +13,13 @@ if TYPE_CHECKING:
     from engine import Engine
     from entity import Entity
 
+#(Floor, Max Item)
 max_items_by_floor = [
-    (1, 1),
+    (1, 2),
     (4, 2),
 ]
 
+#(Floor, Max Monsters)
 max_monsters_by_floor = [
     (1, 2),
     (4, 3),
@@ -25,13 +27,13 @@ max_monsters_by_floor = [
 ]
 
 item_chance: Dict[int, List[Tuple[Entity, int]]] = {
-    0: [(entity_factory.bandage, 35)],
+    0: [(entity_factory.bandage, 25), (entity_factory.ammo20, 75)],
     2: [(entity_factory.flash_grenade, 25), (entity_factory.sword, 5)],
     4: [(entity_factory.explosive_grenade, 25), (entity_factory.chain_mail, 15)],
 }
 
 enemy_chances: Dict[int, List[Tuple[Entity, int]]] = {
-    0: [(entity_factory.orc, 80)],
+    0: [(entity_factory.orc, 1), (entity_factory.security, 99)],
     3: [(entity_factory.troll, 15)],
     5: [(entity_factory.troll, 30)],
     7: [(entity_factory.troll, 60)],

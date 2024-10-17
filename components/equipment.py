@@ -121,15 +121,6 @@ class Equipment(BaseComponent):
             ad += self.armor.equippable.ranged_attack_shot
         return ad
 
-    @property
-    def ranged_ammo_cap(self) -> int:
-        ad = 0
-        if self.weapon is not None and self.weapon.equippable is not None:
-            ad += self.weapon.equippable.ranged_ammo_cap
-        if self.armor is not None and self.armor.equippable is not None:
-            ad += self.armor.equippable.ranged_ammo_cap
-        return ad
-
     def item_is_equipped(self, item: Item) -> bool:
         return self.weapon == item or self.armor == item
 

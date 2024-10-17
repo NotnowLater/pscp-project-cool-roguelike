@@ -122,11 +122,21 @@ class RangedAttackAction(Action):
         if not self.target:
             raise exceptions.Impossible("No target to attack at.")
         target_fighter = self.target.fighter
+        # Ammo Check
+        if self.entity.fighter.ammo <= 0:
+            raise exceptions.Impossible("You don't have any ammo to shoot.")
         # Attack hit check
         if not util.hit_check(target_fighter.dv, self.entity.fighter.ranged_tohit):
             self.engine.message_log.add_message(f"{self.entity.name.capitalize()} Shoots at the {target_fighter.parent.name} but missed.", fg=colors.enemy_atk)
             return
-        dmg = util.roll_dice(self.entity.fighter.ranged_attack_die, self.entity.fighter.ranged_attack_roll, self.entity.fighter.ranged_attack_base)
+        dmg = 0
+        for _ in range(self.entity.fighter.ranged_attack_shot):
+            if self.entity.fighter.ammo <= 0:
+                break
+            temp = util.roll_dice(self.entity.fighter.ranged_attack_die, self.entity.fighter.ranged_attack_roll, self.entity.fighter.ranged_attack_base)
+            temp = max(temp, 0)
+            dmg += temp
+            self.entity.fighter.ammo -= 1
         # limit damage to 0
         dmg = max(dmg, 0)
         
