@@ -17,7 +17,7 @@ class Inventory(BaseComponent):
         self._capacity = capacity
         self.items = item
 
-    def drop(self, item: Item) -> None:
+    def drop(self, item: Item, ) -> None:
         """
         Removes an item from the inventory and restores it to the game map, at the player's current location.
         """

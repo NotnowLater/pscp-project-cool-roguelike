@@ -10,7 +10,7 @@ from entity import Actor, Item
 
 player = Actor(char="☺", color=(255, 255, 255), name="Player", ai_class=HostileEnemy,equipment=Equipment(), fighter=Fighter(hp=100, agility=14, strength=14),inventory=Inventory(capacity=0),level=Level(level_up_base=200),)
 
-mop = Item(char="=", color=(0, 191, 255), name="Cleaing Mop", equippable=equippable.Mop())
+mop = Item(char="=", color=(0, 191, 255), name="Cleaing Mop", equippable=equippable.Mop(), weight=5)
 
 orc = Actor(
     char="♥", 
@@ -20,7 +20,8 @@ orc = Actor(
     equipment=Equipment(weapon=mop), 
     fighter=Fighter(hp=6, agility=6, strength=6),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=35),)
+    level=Level(xp_given=35),
+    )
 troll = Actor(
     char="♦", 
     color=(255, 255, 255), 
@@ -36,6 +37,7 @@ flash_grenade = Item(
     color=(240, 240, 240),
     name="Flash grenade",
     consumable=consumable.FlashConsumable(number_of_turns=10, radius=3),
+    weight=3,
 )
 
 explosive_grenade = Item(
@@ -43,6 +45,7 @@ explosive_grenade = Item(
     color=(255, 0, 0),
     name="Explosive grenade",
     consumable=consumable.ExplosiveConsumable(damage=12, radius=3),
+    weight=3,
 )
 
 bandage = Item(
@@ -50,25 +53,30 @@ bandage = Item(
     color=(127, 0, 255),
     name="Nano patch",
     consumable=consumable.HealingConsumable(amount=4),
+    weight=2,
 )
 
 dagger = Item(
-    char="/", color=(150, 150, 150), name="Knife", equippable=equippable.Dagger()
+    char="/", color=(150, 150, 150), name="Knife", equippable=equippable.Dagger(),
+    weight=2,
 )
 
-sword = Item(char="/", color=(0, 191, 255), name="Razorblade", equippable=equippable.Sword())
+sword = Item(char="/", color=(0, 191, 255), name="Razorblade", equippable=equippable.Sword(), weight=4,)
 
 leather_armor = Item(
     char="[",
     color=(69, 69, 69),
     name="Jumpsuit",
     equippable=equippable.LeatherArmor(),
+    weight=10,
 )
 
 chain_mail = Item(
-    char="[", color=(0, 191, 255), name="Reinforced Jumpsuit", equippable=equippable.ChainMail()
+    char="[", color=(0, 191, 255), name="Reinforced Jumpsuit", equippable=equippable.ChainMail(),
+    weight=20,
 )
 
 pistol = Item(
-    char=";", color=(139, 69, 19), name="Nk-1 Pistol", equippable=equippable.Pistol()
+    char=";", color=(139, 69, 19), name="Nk-1 Pistol", equippable=equippable.Pistol(),
+    weight=4,
 )

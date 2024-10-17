@@ -68,7 +68,12 @@ class Engine:
             dungeon_level=self.game_world.current_floor,
             location=(1, 48),
         )
-
+        render_functions.render_player_inventory_cap(
+            console=console,
+            cap=self.player.inventory.total_weight,
+            max_cap=self.player.inventory.capacity,
+            location=(1, 49),
+        )
         render_functions.render_names_at_mouse_location(
             console=console, x=1, y=50, engine=self
         )
