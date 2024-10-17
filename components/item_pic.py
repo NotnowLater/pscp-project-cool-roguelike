@@ -25,26 +25,31 @@ AAx xAx
                   xxx
  """,
     "Razorblade" : """
-aa                         
- aaa                       
-  aaaa                     
-   aaaaa                   
-    aaaaa                  
-     aaaaaa                
-      aaaaaa               
-        aaaaa              
-         aaaaa             
-          aaaaaa           
-           aaaaaa          
-             aaaaa         
-              aaaaaa       
-               aaaaaa   O  
-                 aaaaOOOO  
-                  aOOOx    
-               OOOOOxxxx   
-                     xxxxx 
-                      xxxxx
-                        xxx
+x                         
+lx                        
+lxx                       
+l xx                      
+ a xx                     
+  a xx                    
+   a xx                   
+    a xx                  
+     a xx                 
+      a xx                
+       a xx               
+        a xx              
+         a xx             
+          a xx            
+           a xx           
+            a xx          
+             a xx         
+              a xx        
+               aaaO--     
+                [OOpO     
+                [oL[xi    
+                   x[xx   
+                    xx]x  
+                      xxw 
+                       ww 
 """,
     "Jumpsuit" : """
             xx   xx             

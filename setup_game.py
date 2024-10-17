@@ -49,7 +49,7 @@ def new_game() -> Engine:
         "Hello and welcome, adventurer, to yet another dungeon!", colors.welcome_text
     )
 
-    dagger = copy.deepcopy(entity_factory.dagger)
+    dagger = copy.deepcopy(entity_factory.sword)
     leather_armor = copy.deepcopy(entity_factory.leather_armor)
     pistol = copy.deepcopy(entity_factory.pistol)
     grenade = copy.deepcopy(entity_factory.explosive_grenade)
