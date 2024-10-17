@@ -53,6 +53,14 @@ class Sword(Equippable):
     def __init__(self) -> None:
         super().__init__(equipment_type=EquipmentType.WEAPON, attack_die=2, attack_roll=4)
 
+class Mop(Equippable):
+    def __init__(self) -> None:
+        super().__init__(
+            equipment_type=EquipmentType.WEAPON, 
+            attack_die=1, 
+            attack_roll=2,
+            tohit=-2
+            )
 
 class LeatherArmor(Equippable):
     def __init__(self) -> None:

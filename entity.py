@@ -123,6 +123,9 @@ class Actor(Entity):
         self.inventory.parent = self
         self.level = level
         self.level.parent = self
+        # Set inventory capacity by fighter strength.
+        if self.fighter:
+            self.inventory.capacity = 40 + max(self.fighter.get_stat_mods(self.fighter.strength) * 15, 0)
 
     @property
     def alive(self):
@@ -138,6 +141,8 @@ class Item(Entity):
             char : str = "?", 
             color : Tuple[int] = (255, 255, 255), 
             name="entity name here", 
+            weight: int = 0,
+            stackable: bool = False,
             consumable: Optional[Consumable] = None,
             equippable: Optional[Equippable] = None,
         ):
@@ -150,6 +155,9 @@ class Item(Entity):
             blocks_movement=False,
             render_order=RenderOrder.ITEM
         )
+
+        self.weight = weight
+        self.staackable = stackable
 
         self.consumable = consumable
         if self.consumable:

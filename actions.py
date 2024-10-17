@@ -102,6 +102,9 @@ class MeleeAction(ActionWithDirection):
             return
         dmg = util.roll_dice(self.entity.fighter.attack_die, self.entity.fighter.attack_roll, self.entity.fighter.attack_damage_bonus)
 
+        # limit damage to 0
+        dmg = max(dmg, 0)
+
         if self.entity is self.engine.player:
             attack_color = colors.player_atk
         else:
@@ -124,6 +127,8 @@ class RangedAttackAction(Action):
             self.engine.message_log.add_message(f"{self.entity.name.capitalize()} Shoots at the {target_fighter.parent.name} but missed.", fg=colors.enemy_atk)
             return
         dmg = util.roll_dice(self.entity.fighter.ranged_attack_die, self.entity.fighter.ranged_attack_roll, self.entity.fighter.ranged_attack_base)
+        # limit damage to 0
+        dmg = max(dmg, 0)
         
         if self.entity is self.engine.player:
             attack_color = colors.player_atk
@@ -167,7 +172,7 @@ class PickUpAction(Action):
 
         for item in self.engine.game_map.items:
             if actor_x == item.x and actor_y == item.y:
-                if len(inventory.items) >= inventory.capacity:
+                if inventory.total_weight >= inventory.capacity:
                     raise exceptions.Impossible("Your Inventory is full.")
                 self.engine.game_map.entities.remove(item)
                 item.parent = self.entity.inventory
