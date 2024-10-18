@@ -1,6 +1,6 @@
 """ A Factory that hold all entities definitions that are use to spawn the entity. """
 
-from components.ai_component import HostileEnemy, HostileRangedEnemy
+from components.ai_component import HostileEnemy, HostileRangedEnemy, StaticEnemy
 from components.fighter_component import Fighter
 from components import consumable, equippable
 from components.equipment import Equipment
@@ -104,4 +104,13 @@ security = Actor(
     fighter=Fighter(hp=14, agility=8, strength=8, ammo=1),
     inventory=Inventory(capacity=0),
     level=Level(xp_given=125),
+    ) 
+item_box = Actor(
+    char="Γ", 
+    color=(255, 255, 255), 
+    name="Item box", 
+    ai_class=StaticEnemy,equipment=Equipment(), 
+    fighter=Fighter(hp=14, agility=0, strength=0, ammo=0),
+    inventory=Inventory(capacity=0),
+    level=Level(xp_given=0),
     ) 

@@ -130,3 +130,10 @@ class HostileRangedEnemy(BaseAI):
             return MovementAction(self.entity, dest_x - self.entity.x, dest_y - self.entity.y,).perform()
         # Wait if can't find a path to player
         return WaitAction(self.entity).perform()
+
+class StaticEnemy(BaseAI):
+    def __init__(self, entity: Actor) -> None:
+        super().__init__(entity)
+        self.path: List[Tuple[int, int]] = []
+    def perform(self) -> None:
+        pass

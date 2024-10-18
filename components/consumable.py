@@ -62,7 +62,7 @@ class FlashConsumable(Consumable):
 
         targets_hit = False
         for actor in self.engine.game_map.actors:
-            if actor.distance(*target_xy) <= self.radius:
+            if actor.distance(*target_xy) <= self.radius and actor.ai.__class__ != components.ai_component.StaticEnemy and actor.name != "Player":
                 self.engine.message_log.add_message(
                     f"The {actor.name} is blinded by the flash and stumbles around!",
                     colors.status_effect_applied,

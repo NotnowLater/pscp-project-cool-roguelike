@@ -26,6 +26,13 @@ max_monsters_by_floor = [
     (6, 5),
 ]
 
+item_box_chance: Dict[int, List[Tuple[Entity, int]]] = {
+    0: [(entity_factory.bandage, 25), (entity_factory.ammo20, 70), (entity_factory.flash_grenade, 5)],
+    1: [(entity_factory.flash_grenade, 25), (entity_factory.sword, 10),
+        (entity_factory.explosive_grenade, 5), (entity_factory.bandage, 20),
+        (entity_factory.ammo20, 10)],
+}
+
 item_chance: Dict[int, List[Tuple[Entity, int]]] = {
     0: [(entity_factory.bandage, 25), (entity_factory.ammo20, 75)],
     2: [(entity_factory.flash_grenade, 25), (entity_factory.sword, 5)],
@@ -33,9 +40,9 @@ item_chance: Dict[int, List[Tuple[Entity, int]]] = {
 }
 
 enemy_chances: Dict[int, List[Tuple[Entity, int]]] = {
-    0: [(entity_factory.orc, 1), (entity_factory.security, 99)],
-    3: [(entity_factory.troll, 15)],
-    5: [(entity_factory.troll, 30)],
+    0: [(entity_factory.orc, 50), (entity_factory.security, 20), (entity_factory.item_box, 1)],
+    3: [(entity_factory.troll, 15), (entity_factory.item_box, 3)],
+    5: [(entity_factory.troll, 30), (entity_factory.item_box, 5)],
     7: [(entity_factory.troll, 60)],
 }
 
@@ -121,6 +128,18 @@ def make_tunnel_between(start: Tuple[int, int], end: Tuple[int, int]) -> Iterato
         yield x, y
     for x, y in tcod.los.bresenham((corner_x, corner_y), (x2, y2)).tolist():
         yield x, y
+
+def drop_random_items(entity: Entity, dungeon: GameMap, box_type: int) -> None:
+    """Drop random items when item box is destroyed."""
+    
+    #random dropped item
+    items = random.choices(
+            [value[0] for value in item_box_chance[box_type]],
+            weights=[value[1] for value in item_box_chance[box_type]],
+            k=1
+            )
+    
+    items[0].spawn_copy(dungeon, entity.x, entity.y)
 
 def place_entities(room : RectangularRoom, dungeon: GameMap, floor_number : int,) -> None:
     number_of_monsters = random.randint(

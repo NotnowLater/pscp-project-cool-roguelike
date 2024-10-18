@@ -160,15 +160,20 @@ class Fighter(BaseComponent):
            death_message = "You died!"
            death_msg_color = colors.player_die
         else:
-            death_message = f"{self.parent.name} is dead!"
-            death_msg_color = colors.enemy_die
-
-        self.parent.char = "%"
-        self.parent.color = (191, 0, 0)
-        self.parent.blocks_movement = False
+            if self.parent.name == "Item box":
+                death_message = f"{self.parent.name} is destroyed!"
+                death_msg_color = colors.enemy_die
+                import dungen
+                dungen.drop_random_items(self.parent, self.engine.game_map, 0)
+                self.engine.game_map.entities.remove(self.parent)
+            else:
+                death_message = f"{self.parent.name} is dead!"
+                death_msg_color = colors.enemy_die
+                self.parent.char = "%"
+                self.parent.name = f"Corpse of {self.parent.name}"
+                self.parent.color = (191, 0, 0)     
+                self.parent.render_order = RenderOrder.CORPSE   
         self.parent.ai = None
-        self.parent.name = f"Corspe of {self.parent.name}"
-        self.parent.render_order = RenderOrder.CORPSE
-
+        self.parent.blocks_movement = False
         self.engine.message_log.add_message(death_message, death_msg_color)
         self.engine.player.level.add_xp(self.parent.level.xp_given)
