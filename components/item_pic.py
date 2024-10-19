@@ -167,5 +167,28 @@ AC  │ 20AMMO- │  CAE]
 AC  └─────────┘  CAE]
 ACCCCCCCCCCCCCCCCCAE]
 AAAAAAAAAAAAAAAAAAAE 
+""",
+"Cleaning Mop":"""
+                         mm      
+                        xX       
+                       xX        
+                      xX         
+                     xX          
+                    xX           
+                   xX            
+                  xX             
+                 xX              
+                xX               
+               xX                
+              xX                 
+             xxX                 
+            xxX                  
+           NNN                   
+       iiMiiiMi                  
+     iiiiiiiiii                  
+  iiiiiiiiiiii i                 
+ ii iiiiiiiiii                   
+ii  i ii iii i                   
+      i i i i i                  
 """
 }

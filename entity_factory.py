@@ -11,7 +11,7 @@ from entity import Actor, Item
 ##############
 # ITEMS      #
 ##############
-mop = Item(char="l", color=(125, 125, 125), name="Cleaing Mop", equippable=equippable.Mop(), weight=5)
+mop = Item(char="l", color=(125, 125, 125), name="Cleaning Mop", equippable=equippable.Mop(), weight=5)
 
 flash_grenade = Item(
     char="~",
