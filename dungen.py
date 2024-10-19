@@ -12,6 +12,7 @@ from typing import Dict, Iterator, List, Tuple, TYPE_CHECKING
 if TYPE_CHECKING:
     from engine import Engine
     from entity import Entity
+    from components.equipment import Equipment
 
 #(Floor, Max Item)
 max_items_by_floor = [
@@ -129,7 +130,7 @@ def make_tunnel_between(start: Tuple[int, int], end: Tuple[int, int]) -> Iterato
     for x, y in tcod.los.bresenham((corner_x, corner_y), (x2, y2)).tolist():
         yield x, y
 
-def drop_random_items(entity: Entity, dungeon: GameMap, box_type: int) -> None:
+def item_box_drop_item(entity: Entity, dungeon: GameMap, box_type: int) -> None:
     """Drop random items when item box is destroyed."""
     
     #random dropped item
@@ -140,6 +141,25 @@ def drop_random_items(entity: Entity, dungeon: GameMap, box_type: int) -> None:
             )
     
     items[0].spawn_copy(dungeon, entity.x, entity.y)
+
+def entity_drop_item(entity: Entity, dungeon: GameMap, equipment: Equipment, drop_chance: float) -> None:
+    """Drop random items when enemy is die."""
+
+    #return if you unlucky T-T
+    if random.random() > drop_chance:
+        return
+    
+    items_to_drop = []
+    if equipment.weapon:
+        items_to_drop.append(equipment.weapon)
+    if equipment.armor:
+        items_to_drop.append(equipment.armor)
+
+    #random dropped item
+    if items_to_drop:
+        items_to_drop = random.choice(items_to_drop)
+        items_to_drop.spawn_copy(dungeon, entity.x, entity.y)
+
 
 def place_entities(room : RectangularRoom, dungeon: GameMap, floor_number : int,) -> None:
     number_of_monsters = random.randint(

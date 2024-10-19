@@ -164,10 +164,13 @@ class Fighter(BaseComponent):
                 death_message = f"{self.parent.name} is destroyed!"
                 death_msg_color = colors.enemy_die
                 import dungen
-                dungen.drop_random_items(self.parent, self.engine.game_map, 0)
+                dungen.item_box_drop_item(self.parent, self.engine.game_map, 0)
                 self.engine.game_map.entities.remove(self.parent)
             else:
                 death_message = f"{self.parent.name} is dead!"
+                if self.parent.equipment:
+                    import dungen
+                    dungen.entity_drop_item(self.parent, self.engine.game_map, self.parent.equipment,self.parent.item_drop_chance)
                 death_msg_color = colors.enemy_die
                 self.parent.char = "%"
                 self.parent.name = f"Corpse of {self.parent.name}"

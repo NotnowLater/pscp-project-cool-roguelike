@@ -104,6 +104,7 @@ class Actor(Entity):
             fighter: Fighter,
             inventory: Inventory,
             level: Level,
+            item_drop_chance: float,
     ):
         super().__init__(
             x=x,
@@ -123,6 +124,7 @@ class Actor(Entity):
         self.inventory.parent = self
         self.level = level
         self.level.parent = self
+        self.item_drop_chance = item_drop_chance
         # Set inventory capacity by fighter strength.
         if self.fighter:
             self.inventory.capacity = 40 + max(self.fighter.get_stat_mods(self.fighter.strength) * 15, 0)
