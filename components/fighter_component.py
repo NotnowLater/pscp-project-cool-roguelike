@@ -163,19 +163,21 @@ class Fighter(BaseComponent):
             if self.parent.name == "Item box":
                 death_message = f"{self.parent.name} is destroyed!"
                 death_msg_color = colors.enemy_die
-                import dungen
-                dungen.item_box_drop_item(self.parent, self.engine.game_map, 0)
+                from dungen import item_box_drop_item
+                item_box_drop_item(self.parent, self.engine.game_map, 0)
                 self.engine.game_map.entities.remove(self.parent)
+                self.engine.message_log.add_message(death_message, death_msg_color)
+                return
             else:
                 death_message = f"{self.parent.name} is dead!"
                 if self.parent.equipment:
-                    import dungen
-                    dungen.entity_drop_item(self.parent, self.engine.game_map, self.parent.equipment,self.parent.item_drop_chance)
+                    from dungen import entity_drop_item
+                    entity_drop_item(self.parent, self.engine.game_map, self.parent.equipment,self.parent.item_drop_chance)
                 death_msg_color = colors.enemy_die
-                self.parent.char = "%"
-                self.parent.name = f"Corpse of {self.parent.name}"
-                self.parent.color = (191, 0, 0)     
-                self.parent.render_order = RenderOrder.CORPSE   
+        self.parent.char = "%"
+        self.parent.name = f"Corpse of {self.parent.name}"
+        self.parent.color = (191, 0, 0)     
+        self.parent.render_order = RenderOrder.CORPSE   
         self.parent.ai = None
         self.parent.blocks_movement = False
         self.engine.message_log.add_message(death_message, death_msg_color)

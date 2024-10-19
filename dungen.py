@@ -27,6 +27,36 @@ max_monsters_by_floor = [
     (6, 5),
 ]
 
+#(Floor, Max special rooms)
+max_special_rooms_by_floor = [
+    (1, 3),
+    (4, 4),
+    (6, 5),
+]
+
+#(Floor, Chance)
+special_room_appear_chance: Dict = {
+    0: 0.05,
+    3: 0.1,
+    5: 0.2,
+    7: 0.3,
+}
+
+#(Floor, Max Monsters)
+special_room_type_chance: Dict[int, List[Tuple[int, int]]] = {
+    0: [(0, 5)],
+    2: [(1, 5), (2, 5)],
+}
+
+#(Type, [Min_x ,Max_x, Min_y, Max_y, [(Entity,(pos_x,pos_y))]]])
+#        --------Room size----------  -----Entity in Room-----
+special_room_attribute: Dict = {
+    0: (7,7,7,7,[(entity_factory.item_box,(3,3))]),
+    1: (10,10,10,10,[(entity_factory.orc,(5,5))]),
+    2: (10,10,10,10,[(entity_factory.troll,(5,5))]),
+}
+
+#(Type, Item in Box)
 item_box_chance: Dict[int, List[Tuple[Entity, int]]] = {
     0: [(entity_factory.bandage, 25), (entity_factory.ammo20, 70), (entity_factory.flash_grenade, 5)],
     1: [(entity_factory.flash_grenade, 25), (entity_factory.sword, 10),
@@ -34,12 +64,14 @@ item_box_chance: Dict[int, List[Tuple[Entity, int]]] = {
         (entity_factory.ammo20, 10)],
 }
 
+#(Floor, Item)
 item_chance: Dict[int, List[Tuple[Entity, int]]] = {
     0: [(entity_factory.bandage, 25), (entity_factory.ammo20, 75)],
     2: [(entity_factory.flash_grenade, 25), (entity_factory.sword, 5)],
     4: [(entity_factory.explosive_grenade, 25), (entity_factory.chain_mail, 15)],
 }
 
+#(Floor, Enemy)
 enemy_chances: Dict[int, List[Tuple[Entity, int]]] = {
     0: [(entity_factory.orc, 50), (entity_factory.security, 20), (entity_factory.item_box, 1)],
     3: [(entity_factory.troll, 15), (entity_factory.item_box, 3)],
@@ -160,6 +192,14 @@ def entity_drop_item(entity: Entity, dungeon: GameMap, equipment: Equipment, dro
         items_to_drop = random.choice(items_to_drop)
         items_to_drop.spawn_copy(dungeon, entity.x, entity.y)
 
+def is_special_room(floor_number: int) -> bool:
+    chance = 0.0
+    for floor, prob in special_room_appear_chance.items():
+        if floor < floor_number:
+            chance = prob
+        else:
+            break
+    return random.random() < chance
 
 def place_entities(room : RectangularRoom, dungeon: GameMap, floor_number : int,) -> None:
     number_of_monsters = random.randint(
@@ -182,6 +222,12 @@ def place_entities(room : RectangularRoom, dungeon: GameMap, floor_number : int,
         if not any(entity.x == x and entity.y == y for entity in dungeon.entities):
             entity.spawn_copy(dungeon, x, y)
 
+def place_entities_in_special_room(room: RectangularRoom, dungeon: GameMap, type: int) -> None:
+    """spawn entites in special room"""
+    for entity, (entity_x, entity_y) in special_room_attribute[type[0]][4]:
+        if not any(entity.x == entity_x and entity.y == entity_y for entity in dungeon.entities):
+            entity.spawn_copy(dungeon, room.x1 + entity_x, room.y1 + entity_y)
+
 def generate_dungeon(
         max_rooms: int, room_min_size: int, room_max_size: int,
         map_width: int, map_height: int, engine: Engine,
@@ -191,20 +237,33 @@ def generate_dungeon(
     dungeon = GameMap(engine, map_width, map_height, entities=[player])
     rooms: List[RectangularRoom] = []
     center_of_last_room = (0, 0)
+    max_sp_room = get_max_value_for_floor(max_special_rooms_by_floor,engine.game_world.current_floor)
+    sp_room_count = 0
     for r in range(max_rooms):
-        room_width = random.randint(room_min_size, room_max_size)
-        room_height = random.randint(room_min_size, room_max_size)
+        #len(rooms) > 1 to fix that first and second rooms isn't special room
+        special_room = is_special_room(engine.game_world.current_floor) and len(rooms) > 1 and sp_room_count < max_sp_room
+
+        if not special_room:
+            room_width = random.randint(room_min_size, room_max_size)
+            room_height = random.randint(room_min_size, room_max_size)
+        else:
+            sp_room_count += 1
+            special_room_type = get_entities_at_random(special_room_type_chance, 1, engine.game_world.current_floor)
+            room_width = random.randint(special_room_attribute[special_room_type[0]][0], special_room_attribute[special_room_type[0]][1])
+            room_height = random.randint(special_room_attribute[special_room_type[0]][2], special_room_attribute[special_room_type[0]][3])
 
         x = random.randint(0, dungeon.width - room_width - 1)
         y = random.randint(0, dungeon.height - room_height - 1)
 
         new_room = RectangularRoom(x, y, room_width, room_height)
+        
         # Check through the other rooms and see if they intersect with this one.
         if any(new_room.check_intersects(other_room) for other_room in rooms):
             continue  # This room intersects, so go to the next attempt.
 
         # No intersects, The Room is Valid, Dig out this rooms inner area.
         dungeon.tiles[new_room.inner] = tile_types.floor
+        
         # Put the player in the center of the first room
         if len(rooms) == 0:
             player.place_at(*new_room.center, dungeon)
@@ -212,11 +271,16 @@ def generate_dungeon(
             # Dig out a tunnel between this room and the last one.
             for x, y in make_tunnel_between(rooms[-1].center, new_room.center):
                 dungeon.tiles[x, y] = tile_types.floor
-            center_of_last_room = new_room.center
+            if not special_room:
+                center_of_last_room = new_room.center
+
         # Place the monsters in the Generated room.
-        place_entities(new_room, dungeon, engine.game_world.current_floor)
-        dungeon.tiles[center_of_last_room] = tile_types.up_stairs
-        dungeon.downstairs_location = center_of_last_room
+        if special_room:
+            place_entities_in_special_room(new_room, dungeon, special_room_type)
+        else:
+            place_entities(new_room, dungeon, engine.game_world.current_floor)
         # Append the new room to the list.
         rooms.append(new_room)
+    dungeon.tiles[center_of_last_room] = tile_types.up_stairs
+    dungeon.downstairs_location = center_of_last_room
     return dungeon
