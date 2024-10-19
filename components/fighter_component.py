@@ -174,10 +174,13 @@ class Fighter(BaseComponent):
                     from dungen import entity_drop_item
                     entity_drop_item(self.parent, self.engine.game_map, self.parent.equipment,self.parent.item_drop_chance)
                 death_msg_color = colors.enemy_die
-        self.parent.char = "%"
+        if (self.parent.x,self.parent.y) != self.engine.game_map.upstairs_location:
+            self.parent.char = "%"
+            self.parent.color = (191, 0, 0) 
+        else:
+            self.parent.char = ""
+        self.parent.render_order = RenderOrder.CORPSE
         self.parent.name = f"Corpse of {self.parent.name}"
-        self.parent.color = (191, 0, 0)     
-        self.parent.render_order = RenderOrder.CORPSE   
         self.parent.ai = None
         self.parent.blocks_movement = False
         self.engine.message_log.add_message(death_message, death_msg_color)

@@ -282,5 +282,5 @@ def generate_dungeon(
         # Append the new room to the list.
         rooms.append(new_room)
     dungeon.tiles[center_of_last_room] = tile_types.up_stairs
-    dungeon.downstairs_location = center_of_last_room
+    dungeon.upstairs_location = center_of_last_room
     return dungeon

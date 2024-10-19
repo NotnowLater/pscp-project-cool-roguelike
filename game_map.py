@@ -28,7 +28,7 @@ class GameMap:
         self.visible = np.full((width, height), fill_value=False, order="F")
         # Tiles that the player have seen
         self.seen = np.full((width, height), fill_value=False, order="F")
-        self.downstairs_location = (0, 0)
+        self.upstairs_location = (0, 0)
 
     @property
     def game_map(self) -> GameMap:
