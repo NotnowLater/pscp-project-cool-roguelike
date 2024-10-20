@@ -38,7 +38,7 @@ class GameMap:
     @property
     def actors(self) -> Iterator[Actor]:
         """ Iterate over this maps living actors. """
-        yield from(entity for entity in self.entities if isinstance(entity, Actor) and entity.alive)
+        yield from(entity for entity in self.entities.copy() if isinstance(entity, Actor) and entity.alive)
 
     @property
     def items(self) -> Iterator[Item]:
