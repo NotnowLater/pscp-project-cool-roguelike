@@ -41,7 +41,7 @@ def render_dungeon_level(console: Console, dungeon_level: int, location: Tuple[i
     """
     x, y = location
 
-    console.print(x=x, y=y, string=f"Dungeon level: {dungeon_level}")
+    console.print(x=x, y=y, string=f"Floor: {dungeon_level}")
 
 def render_player_inventory_cap(console: Console, cap: int, max_cap: int, location: Tuple[int, int]) -> None:
     """

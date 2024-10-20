@@ -237,18 +237,18 @@ def generate_dungeon(
     dungeon = GameMap(engine, map_width, map_height, entities=[player])
     rooms: List[RectangularRoom] = []
     center_of_last_room = (0, 0)
-    max_sp_room = get_max_value_for_floor(max_special_rooms_by_floor,engine.game_world.current_floor)
+    current_floor = engine.game_world.current_floor
+    max_sp_room = get_max_value_for_floor(max_special_rooms_by_floor,current_floor)
     sp_room_count = 0
     for r in range(max_rooms):
         #len(rooms) > 1 to fix that first and second rooms isn't special room
-        special_room = is_special_room(engine.game_world.current_floor) and len(rooms) > 1 and sp_room_count < max_sp_room
+        special_room = is_special_room(current_floor) and len(rooms) > 1 and sp_room_count < max_sp_room
 
         if not special_room:
             room_width = random.randint(room_min_size, room_max_size)
             room_height = random.randint(room_min_size, room_max_size)
         else:
-            sp_room_count += 1
-            special_room_type = get_entities_at_random(special_room_type_chance, 1, engine.game_world.current_floor)
+            special_room_type = get_entities_at_random(special_room_type_chance, 1, current_floor)
             room_width = random.randint(special_room_attribute[special_room_type[0]][0], special_room_attribute[special_room_type[0]][1])
             room_height = random.randint(special_room_attribute[special_room_type[0]][2], special_room_attribute[special_room_type[0]][3])
 
@@ -276,11 +276,16 @@ def generate_dungeon(
 
         # Place the monsters in the Generated room.
         if special_room:
+            sp_room_count += 1
             place_entities_in_special_room(new_room, dungeon, special_room_type)
         else:
-            place_entities(new_room, dungeon, engine.game_world.current_floor)
+            place_entities(new_room, dungeon, current_floor)
         # Append the new room to the list.
         rooms.append(new_room)
-    dungeon.tiles[center_of_last_room] = tile_types.up_stairs
-    dungeon.upstairs_location = center_of_last_room
+    if current_floor != 20:
+        dungeon.tiles[center_of_last_room] = tile_types.up_stairs
+        dungeon.upstairs_location = center_of_last_room
+    else:
+        dungeon.tiles[center_of_last_room] = tile_types.end_switch
+        dungeon.endswitch_location = center_of_last_room
     return dungeon

@@ -52,3 +52,9 @@ up_stairs = new_tile(
     dark=(ord("◙"), (50, 50, 50), (0, 0, 0)),
     light=(ord("◙"), (255, 255, 255), (0, 0, 0)),
 )
+end_switch = new_tile(
+    walkable=True,
+    transparent=True,
+    dark=(ord("π"), (50, 50, 50), (0, 0, 0)),
+    light=(ord("π"), (255, 255, 255), (0, 0, 0)),
+)

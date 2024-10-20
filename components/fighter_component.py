@@ -174,7 +174,7 @@ class Fighter(BaseComponent):
                     from dungen import entity_drop_item
                     entity_drop_item(self.parent, self.engine.game_map, self.parent.equipment,self.parent.item_drop_chance)
                 death_msg_color = colors.enemy_die
-        if (self.parent.x,self.parent.y) != self.engine.game_map.upstairs_location:
+        if not (self.parent.x,self.parent.y) in [self.engine.game_map.upstairs_location,self.engine.game_map.endswitch_location]:
             self.parent.char = "%"
             self.parent.color = (191, 0, 0) 
         else:
