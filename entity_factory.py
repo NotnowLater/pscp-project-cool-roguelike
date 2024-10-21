@@ -61,7 +61,10 @@ leather_armor = Item(
 )
 
 chain_mail = Item(
-    char="[", color=(0, 191, 255), name="Reinforced Jumpsuit", equippable=equippable.ChainMail(),
+    char="[",
+    color=(0, 191, 255),
+    name="Reinforced Jumpsuit",
+    equippable=equippable.ChainMail(),
     weight=20,
 )
 

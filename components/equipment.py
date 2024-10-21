@@ -29,6 +29,15 @@ class Equipment(BaseComponent):
         return bonus
 
     @property
+    def def_bonus(self) -> int:
+        bonus = 0
+
+        if self.armor is not None and self.armor.equippable is not None:
+            bonus += self.armor.equippable.defense
+
+        return bonus
+
+    @property
     def attack_base(self) -> int:
         base = 0
         if self.weapon is not None and self.weapon.equippable is not None:

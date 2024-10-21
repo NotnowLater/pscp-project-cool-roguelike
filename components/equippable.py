@@ -28,6 +28,7 @@ class Equippable(BaseComponent):
         ranged_attack_roll: int = 0,
         ranged_attack_base: int = 0,
         ranged_attack_shot: int = 0,
+        defense: int = 0,
     ):
         self.equipment_type = equipment_type
         self.tohit = tohit
@@ -41,6 +42,7 @@ class Equippable(BaseComponent):
         self.ranged_attack_roll = ranged_attack_roll
         self.ranged_attack_base = ranged_attack_base
         self.ranged_attack_shot = ranged_attack_shot
+        self.defense = defense
 
 class Dagger(Equippable):
     def __init__(self) -> None:
@@ -62,12 +64,12 @@ class Mop(Equippable):
 
 class LeatherArmor(Equippable):
     def __init__(self) -> None:
-        super().__init__(equipment_type=EquipmentType.ARMOR, dv_bonus=2)
+        super().__init__(equipment_type=EquipmentType.ARMOR, dv_bonus=2, defense=1)
 
 
 class ChainMail(Equippable):
     def __init__(self) -> None:
-        super().__init__(equipment_type=EquipmentType.ARMOR, dv_bonus=5)
+        super().__init__(equipment_type=EquipmentType.ARMOR, dv_bonus=5, defense=2)
 
 class Pistol(Equippable):
     def __init__(self) -> None:

@@ -105,9 +105,9 @@ class MeleeAction(ActionWithDirection):
             self.engine.message_log.add_message(f"{self.entity.name.capitalize()} Attack the {target.name} but missed.", fg=colors.enemy_atk)
             return
         dmg = util.roll_dice(self.entity.fighter.attack_die, self.entity.fighter.attack_roll, self.entity.fighter.attack_damage_bonus)
-
+        
         # limit damage to 0
-        dmg = max(dmg, 0)
+        dmg = max(dmg-target.equipment.def_bonus, 0)
 
         if self.entity is self.engine.player:
             attack_color = colors.player_atk
@@ -142,7 +142,7 @@ class RangedAttackAction(Action):
             dmg += temp
             self.entity.fighter.ammo -= 1
         # limit damage to 0
-        dmg = max(dmg, 0)
+        dmg = max(dmg-self.target.equipment.def_bonus, 0)
         
         if self.entity is self.engine.player:
             attack_color = colors.player_atk
