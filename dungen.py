@@ -44,16 +44,17 @@ special_room_appear_chance: Dict = {
 
 #(Floor, Max Monsters)
 special_room_type_chance: Dict[int, List[Tuple[int, int]]] = {
-    0: [(0, 5)],
-    2: [(1, 5), (2, 5)],
+    0: [(0, 0),(1, 5)],
+    2: [(2, 5)],
 }
 
 #(Type, [Min_x ,Max_x, Min_y, Max_y, [(Entity,(pos_x,pos_y))]]])
 #        --------Room size----------  -----Entity in Room-----
 special_room_attribute: Dict = {
-    0: (7,7,7,7,[(entity_factory.item_box,(3,3))]),
-    1: (10,10,10,10,[(entity_factory.orc,(5,5))]),
-    2: (10,10,10,10,[(entity_factory.troll,(5,5))]),
+    0: (7,7,7,7,[(entity_factory.item_box,(3,3))],[]),
+    1: (10,10,10,10,[(entity_factory.table,(2,2)),(entity_factory.table,(3,3)),
+                     (entity_factory.table,(4,4)),(entity_factory.table,(5,5))],[]),
+    2: (10,10,10,10,[(entity_factory.troll,(5,5))],[(tile_types.wall2,(5,5))]),
 }
 
 #(Type, Item in Box)
@@ -227,6 +228,8 @@ def place_entities_in_special_room(room: RectangularRoom, dungeon: GameMap, type
     for entity, (entity_x, entity_y) in special_room_attribute[type[0]][4]:
         if not any(entity.x == entity_x and entity.y == entity_y for entity in dungeon.entities):
             entity.spawn_copy(dungeon, room.x1 + entity_x, room.y1 + entity_y)
+    for tile, (x,y) in special_room_attribute[type[0]][5]:
+        dungeon.tiles[(room.x1 + x,room.y1 + y)] = tile
 
 def generate_dungeon(
         max_rooms: int, room_min_size: int, room_max_size: int,
@@ -270,7 +273,8 @@ def generate_dungeon(
         else:
             # Dig out a tunnel between this room and the last one.
             for x, y in make_tunnel_between(rooms[-1].center, new_room.center):
-                dungeon.tiles[x, y] = tile_types.floor
+                if dungeon.tiles[x, y] != tile_types.wall2:
+                    dungeon.tiles[x, y] = tile_types.floor
             if not special_room:
                 center_of_last_room = new_room.center
 

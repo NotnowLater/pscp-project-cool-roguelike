@@ -522,7 +522,7 @@ def print_center_text(log_console, text, console_width, console_height, x_offset
 def print_item_details():
     pass
 
-item_description = {"Nano patch":"Restore 60 HP",
+item_description = {"Nano patch":"Recover 60 HP",
                     "Flash grenade":"Grants blindness to enemies in a\n\n      radius for 10 turns",
                     "Explosive grenade":"Deals 12 damage to all enemies\n\n      within a radius(including yourself)",
                     "Box of 20 Ammo":"Gain 20 ammo"

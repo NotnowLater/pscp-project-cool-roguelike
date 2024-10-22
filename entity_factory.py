@@ -121,3 +121,13 @@ item_box = Actor(
     level=Level(xp_given=0),
     item_drop_chance = 0
     ) 
+table = Actor(
+    char="Σ", 
+    color=(255, 255, 255), 
+    name="Table", 
+    ai_class=StaticEnemy,equipment=Equipment(), 
+    fighter=Fighter(hp=10, agility=0, strength=0, ammo=0),
+    inventory=Inventory(capacity=0),
+    level=Level(xp_given=0),
+    item_drop_chance = 0
+    ) 

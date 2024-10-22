@@ -168,6 +168,11 @@ class Fighter(BaseComponent):
                 self.engine.game_map.entities.remove(self.parent)
                 self.engine.message_log.add_message(death_message, death_msg_color)
                 return
+            elif self.parent.name == "Table":
+                death_message = f"{self.parent.name} is destroyed!"
+                death_msg_color = colors.enemy_die
+                self.engine.game_map.entities.remove(self.parent)
+                self.engine.message_log.add_message(death_message, death_msg_color)
             else:
                 death_message = f"{self.parent.name} is dead!"
                 if self.parent.equipment:
