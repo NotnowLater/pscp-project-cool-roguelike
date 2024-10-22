@@ -571,8 +571,13 @@ class InventoryEventHandler(AskUserEventHandler):
                     log_console.draw_frame(43, 30, log_console.width-46, 15, item.name)
                     if item.equippable is not None:
                         if item.equippable.equipment_type.value == 1:
-                            log_console.print(45, 32, f'"ATK:"{item.equippable.attack_base+self.engine.player.fighter.attack_damage_bonus}-{((item.equippable.attack_roll+1)*(item.equippable.attack_die+1))+self.engine.player.fighter.attack_damage_bonus}')
-                            log_console.print(46, 42, "[Weapon]")
+                            if not item.equippable.ranged:
+                                log_console.print(45, 32, f'"Melee ATK:"{item.equippable.attack_base+self.engine.player.fighter.attack_damage_bonus}-{((item.equippable.attack_roll+1)*(item.equippable.attack_die+1))+self.engine.player.fighter.attack_damage_bonus}')
+                                log_console.print(46, 42, "[Melee Weapon]")
+                            else:
+                                log_console.print(45, 32, f'"Melee ATK:"{item.equippable.attack_base+self.engine.player.fighter.attack_damage_bonus}-{((item.equippable.attack_roll+1)*(item.equippable.attack_die+1))+self.engine.player.fighter.attack_damage_bonus}')
+                                log_console.print(45, 34, f'"Range ATK:"{item.equippable.ranged_attack_base+self.engine.player.fighter.attack_damage_bonus}-{((item.equippable.ranged_attack_roll)*(item.equippable.ranged_attack_die))+self.engine.player.fighter.attack_damage_bonus}')
+                                log_console.print(46, 42, "[Range Weapon]")
                         else:
                             log_console.print(45, 32, f'"DEF:+"{item.equippable.defense}')
                             log_console.print(45, 34, f'"AGI:+"{item.equippable.dv_bonus}')
