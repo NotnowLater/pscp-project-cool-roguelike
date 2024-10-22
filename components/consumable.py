@@ -53,7 +53,7 @@ class FlashConsumable(Consumable):
             callback=lambda xy: actions.ItemAction(consumer, self.parent, xy),
             color=colors.white,
         )
- 
+
     def activate(self, action: actions.ItemAction) -> None:
         target_xy = action.target_xy
 
@@ -101,10 +101,11 @@ class ExplosiveConsumable(Consumable):
         targets_hit = False
         for actor in self.engine.game_map.actors:
             if actor.distance(*target_xy) <= self.radius:
+                dmg = max(0,self.damage-actor.equipment.def_bonus)
                 self.engine.message_log.add_message(
-                    f"The {actor.name} is caught in the explosion, taking {self.damage} damage!"
+                    f"The {actor.name} is caught in the explosion, taking {dmg} damage!"
                 )
-                actor.fighter.take_damage(self.damage)
+                actor.fighter.take_damage(dmg)
                 targets_hit = True
 
         if not targets_hit:

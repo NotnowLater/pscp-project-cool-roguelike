@@ -33,7 +33,7 @@ bandage = Item(
     char="!",
     color=(127, 0, 255),
     name="Nano patch",
-    consumable=consumable.HealingConsumable(amount=4),
+    consumable=consumable.HealingConsumable(amount=60),
     weight=2,
 )
 

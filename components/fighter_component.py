@@ -37,7 +37,7 @@ class Fighter(BaseComponent):
         if self.hp == self.max_hp:
             return 0
         # limit the healing to max hp.
-        new_hp = max(self.hp + amount, self.max_hp)
+        new_hp = min(self.hp + amount, self.max_hp)
         
         recovered = new_hp - self.hp
         self.hp = new_hp

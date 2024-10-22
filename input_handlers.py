@@ -519,6 +519,15 @@ def print_center_text(log_console, text, console_width, console_height, x_offset
         # Print the line with adjusted x and y positions for centering
         log_console.print(leading_spaces + x_offset, vertical_offset + i, line)
 
+def print_item_details():
+    pass
+
+item_description = {"Nano patch":"Restore 60 HP",
+                    "Flash grenade":"Grants blindness to enemies in a\n\n      radius for 10 turns",
+                    "Explosive grenade":"Deals 12 damage to all enemies\n\n      within a radius(including yourself)",
+                    "Box of 20 Ammo":"Gain 20 ammo"
+                    }
+
 class InventoryEventHandler(AskUserEventHandler):
     """
     This handler lets the user select an item.
@@ -559,6 +568,18 @@ class InventoryEventHandler(AskUserEventHandler):
                 else:
                     item_string = f">  {item_string}  <"
                     print_center_text(log_console, self.item_pic.get(item.name, ""),72,30,30)
+                    log_console.draw_frame(43, 30, log_console.width-46, 15, item.name)
+                    if item.equippable is not None:
+                        if item.equippable.equipment_type.value == 1:
+                            log_console.print(45, 32, f'"ATK:"{item.equippable.attack_base+self.engine.player.fighter.attack_damage_bonus}-{((item.equippable.attack_roll+1)*(item.equippable.attack_die+1))+self.engine.player.fighter.attack_damage_bonus}')
+                            log_console.print(46, 42, "[Weapon]")
+                        else:
+                            log_console.print(45, 32, f'"DEF:+"{item.equippable.defense}')
+                            log_console.print(45, 34, f'"AGI:+"{item.equippable.dv_bonus}')
+                            log_console.print(46, 42, "[Armor]")
+                    else:
+                        log_console.print(45, 32, f'"USE:"{item_description[item.name]}')
+                        log_console.print(46, 42, "[Consumable]")
                 log_console.print(2, i + 1, item_string)
         else:
             log_console.print(1, 1, "(Empty)")
