@@ -519,9 +519,6 @@ def print_center_text(log_console, text, console_width, console_height, x_offset
         # Print the line with adjusted x and y positions for centering
         log_console.print(leading_spaces + x_offset, vertical_offset + i, line)
 
-def print_item_details():
-    pass
-
 item_description = {"Nano patch":"Recover 60 HP",
                     "Flash grenade":"Grants blindness to enemies in a\n\n      radius for 10 turns",
                     "Explosive grenade":"Deals 12 damage to all enemies\n\n      within a radius(including yourself)",
