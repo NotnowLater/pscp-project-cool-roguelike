@@ -37,7 +37,7 @@ def main() -> None:
     ) as context:
         root_console = tcod.console.Console(screen_width, screen_height, order="F")
         # main game loop here
-        try:
+        try: 
             while True:
                 root_console.clear()
                 handler.on_render(console=root_console)

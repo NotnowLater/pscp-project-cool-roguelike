@@ -16,14 +16,22 @@ if TYPE_CHECKING:
 
 #(Floor, Max Item)
 max_items_by_floor = [
-    (1, 2),
-    (4, 2),
+    (1, 1),
+    (6, 2),
+]
+
+#(Floor, Max Item)
+max_items_for_floor_by_floor = [
+    (1, 3),
+    (3, 4),
+    (4, 6), 
+    (5, 10),
 ]
 
 #(Floor, Max Monsters)
 max_monsters_by_floor = [
-    (1, 2),
-    (4, 3),
+    (1, 3),
+    (4, 4),
     (6, 5),
 ]
 
@@ -37,15 +45,19 @@ max_special_rooms_by_floor = [
 #(Floor, Chance)
 special_room_appear_chance: Dict = {
     0: 0.05,
-    3: 0.1,
-    5: 0.2,
-    7: 0.3,
+    2: 0.06,
+    3: 0.12,
+    4: 0.24,
+    5: 0.3,
+    7: 0.37,
 }
 
 #(Floor, Max Monsters)
 special_room_type_chance: Dict[int, List[Tuple[int, int]]] = {
     0: [(0, 5),(1, 5)],
-    2: [(2, 5)],
+    2: [(2, 5),(12, 3),(6, 2),(10, 1),(15, 2),(16, 2)],
+    3: [(3, 4),(4, 5),(8, 3),(9, 1),(11, 2),(13, 3)],
+    4: [(5, 3),(7, 3),(14, 4)]
 }
 
 #(Type, [Min_x ,Max_x, Min_y, Max_y, [(Entity,(pos_x,pos_y))]]])
@@ -60,7 +72,7 @@ special_room_attribute: Dict = {
                      (entity_factory.item_box,(2,2)),(entity_factory.security,(5,5)),
                      (entity_factory.orc,(8,1)),],[]),
     3: (10,10,10,10,[(entity_factory.item_box,(5,5)),(entity_factory.security,(4,4)),
-                     (entity_factory.security,(6,4)),(entity_factory.security,(4,6)),
+                     (entity_factory.security,(6,4)),(entity_factory.security,(4,6)),(entity_factory.bandage,(5,2)),
                      (entity_factory.security,(6,6))],[(tile_types.wall2,(2,2)),
                      (tile_types.wall2,(8,2)),(tile_types.wall2,(2,8)),(tile_types.wall2,(8,8))]),
     4: (10,10,10,10,[(entity_factory.security,(5,5)),(entity_factory.bandage,(random.randint(3,8),random.randint(3,4)))],
@@ -107,12 +119,20 @@ special_room_attribute: Dict = {
                      ],[(tile_types.wall2,(4,4)),(tile_types.wall2,(5,4)),(tile_types.wall2,(6,4)),
                         (tile_types.wall2,(4,5)),(tile_types.wall2,(6,5)),(tile_types.wall2,(4,6)),
                         (tile_types.wall2,(5,6)),(tile_types.wall2,(6,6))]),
-    16: (10,10,10,10,[(entity_factory.troll,(5,5))],[(tile_types.wall2,(5,5))]),
+    16: (10,10,10,10,[(entity_factory.bandage,(5,1)),
+                      (entity_factory.orc,(8,2)),(entity_factory.item_box,(8,7))
+                     ],[(tile_types.wall2,(4,4)),(tile_types.wall2,(5,4)),(tile_types.wall2,(6,4)),
+                        (tile_types.wall2,(4,5)),(tile_types.wall2,(6,5)),(tile_types.wall2,(4,6)),
+                        (tile_types.wall2,(5,6)),(tile_types.wall2,(6,6))]),
+    17: (10,10,10,10,[(entity_factory.troll,(5,5))],[(tile_types.wall2,(5,5))]),
 }
 
 #(Type, Item in Box)
 item_box_chance: Dict[int, List[Tuple[Entity, int]]] = {
-    0: [(entity_factory.bandage, 25), (entity_factory.ammo20, 70), (entity_factory.flash_grenade, 5)],
+    0: [(entity_factory.bandage, 19), (entity_factory.ammo20, 12),
+        (entity_factory.flash_grenade, 12),(entity_factory.explosive_grenade, 5),
+        (entity_factory.sword, 4),(entity_factory.chain_mail, 4),
+        (entity_factory.dagger, 20),(entity_factory.leather_armor, 15),(entity_factory.pistol, 9)],
     1: [(entity_factory.flash_grenade, 25), (entity_factory.sword, 10),
         (entity_factory.explosive_grenade, 5), (entity_factory.bandage, 20),
         (entity_factory.ammo20, 10)],
@@ -120,15 +140,17 @@ item_box_chance: Dict[int, List[Tuple[Entity, int]]] = {
 
 #(Floor, Item)
 item_chance: Dict[int, List[Tuple[Entity, int]]] = {
-    0: [(entity_factory.bandage, 25), (entity_factory.ammo20, 75)],
-    2: [(entity_factory.flash_grenade, 25), (entity_factory.sword, 5)],
-    4: [(entity_factory.explosive_grenade, 25), (entity_factory.chain_mail, 15)],
+    0: [(entity_factory.bandage, 50)],
+    2: [(entity_factory.flash_grenade, 10),(entity_factory.ammo20, 8)],
+    3: [(entity_factory.ammo20, 12)],
+    4: [(entity_factory.explosive_grenade, 10)],
 }
 
 #(Floor, Enemy)
 enemy_chances: Dict[int, List[Tuple[Entity, int]]] = {
-    0: [(entity_factory.orc, 50), (entity_factory.security, 20), (entity_factory.item_box, 1)],
-    3: [(entity_factory.troll, 15), (entity_factory.item_box, 3)],
+    0: [(entity_factory.orc, 50),(entity_factory.troll, 3),(entity_factory.item_box, 1)],
+    2: [(entity_factory.troll, 15),],
+    3: [(entity_factory.security, 20),(entity_factory.item_box, 4)],
     5: [(entity_factory.troll, 30), (entity_factory.item_box, 5)],
     7: [(entity_factory.troll, 60)],
 }
@@ -246,16 +268,18 @@ def entity_drop_item(entity: Entity, dungeon: GameMap, equipment: Equipment, dro
         items_to_drop = random.choice(items_to_drop)
         items_to_drop.spawn_copy(dungeon, entity.x, entity.y)
 
-def is_special_room(floor_number: int) -> bool:
+def get_chance(floor_number: int, chance_dict: dict) -> bool:
     chance = 0.0
-    for floor, prob in special_room_appear_chance.items():
+    for floor, prob in chance_dict.items():
         if floor < floor_number:
             chance = prob
         else:
             break
     return random.random() < chance
 
+ITEM_COUNT = 0
 def place_entities(room : RectangularRoom, dungeon: GameMap, floor_number : int,) -> None:
+    global ITEM_COUNT
     number_of_monsters = random.randint(
         0, get_max_value_for_floor(max_monsters_by_floor, floor_number)
     )
@@ -269,11 +293,20 @@ def place_entities(room : RectangularRoom, dungeon: GameMap, floor_number : int,
         item_chance, number_of_items, floor_number
     )
 
-    for entity in monsters + items:
+    for entity in monsters:
         x = random.randint(room.x1 + 1, room.x2 - 1)
         y = random.randint(room.y1 + 1, room.y2 - 1)
         # Check if the entity is overlapping the existing entity first before placing it.
         if not any(entity.x == x and entity.y == y for entity in dungeon.entities):
+            entity.spawn_copy(dungeon, x, y)
+    
+    max_item_for_floor = get_max_value_for_floor(max_items_for_floor_by_floor, floor_number)
+    for entity in items:
+        x = random.randint(room.x1 + 1, room.x2 - 1)
+        y = random.randint(room.y1 + 1, room.y2 - 1)
+        # Check if the entity is overlapping the existing entity first before placing it.
+        if not any(entity.x == x and entity.y == y for entity in dungeon.entities) and ITEM_COUNT < max_item_for_floor:
+            ITEM_COUNT += 1
             entity.spawn_copy(dungeon, x, y)
 
 def place_entities_in_special_room(room: RectangularRoom, dungeon: GameMap, type: int) -> None:
@@ -296,9 +329,11 @@ def generate_dungeon(
     current_floor = engine.game_world.current_floor
     max_sp_room = get_max_value_for_floor(max_special_rooms_by_floor,current_floor)
     sp_room_count = 0
+    global ITEM_COUNT
+    ITEM_COUNT = 0
     for r in range(max_rooms):
         #len(rooms) > 1 to fix that first and second rooms isn't special room
-        special_room = is_special_room(current_floor) and len(rooms) > 1 and sp_room_count < max_sp_room
+        special_room = get_chance(current_floor,special_room_appear_chance) and len(rooms) > 1 and sp_room_count < max_sp_room
 
         if not special_room:
             room_width = random.randint(room_min_size, room_max_size)

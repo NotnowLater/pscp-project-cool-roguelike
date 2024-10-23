@@ -85,20 +85,20 @@ orc = Actor(
     name="Janitor", 
     ai_class=HostileEnemy,
     equipment=Equipment(weapon=mop), 
-    fighter=Fighter(hp=6, agility=6, strength=6, ammo=0),
+    fighter=Fighter(hp=6, agility=6, strength=7, ammo=0),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=35),
-    item_drop_chance = 0.35
+    level=Level(xp_given=30),
+    item_drop_chance = 0.3
     )
 troll = Actor(
     char="♦", 
     color=(255, 255, 255), 
     name="Crew", 
-    ai_class=HostileEnemy,equipment=Equipment(), 
+    ai_class=HostileEnemy,equipment=Equipment(weapon=dagger), 
     fighter=Fighter(hp=12, agility=6, strength=8, ammo=0),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=100),
-    item_drop_chance = 0
+    level=Level(xp_given=85),
+    item_drop_chance = 0.16
     )
 
 security = Actor(
@@ -106,10 +106,10 @@ security = Actor(
     color=(255, 255, 255), 
     name="Security", 
     ai_class=HostileRangedEnemy,equipment=Equipment(weapon=pistol, armor=leather_armor), 
-    fighter=Fighter(hp=14, agility=8, strength=8, ammo=1),
+    fighter=Fighter(hp=15, agility=8, strength=8, ammo=1),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=125),
-    item_drop_chance = 0.2
+    level=Level(xp_given=120),
+    item_drop_chance = 0.24
     ) 
 item_box = Actor(
     char="Γ", 
