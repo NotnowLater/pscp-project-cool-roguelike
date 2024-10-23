@@ -582,6 +582,7 @@ class InventoryEventHandler(AskUserEventHandler):
                     else:
                         log_console.print(45, 32, f'"USE:"{item_description[item.name]}')
                         log_console.print(46, 42, "[Consumable]")
+                    log_console.print(75, 42, f'"weight:"{item.weight}')
                 log_console.print(2, i + 1, item_string)
         else:
             log_console.print(1, 1, "(Empty)")
