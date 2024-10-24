@@ -79,7 +79,7 @@ pistol = Item(
 
 player = Actor(char="☺", color=(255, 255, 255), name="Player", ai_class=HostileEnemy,equipment=Equipment(), fighter=Fighter(hp=100, agility=14, strength=14, ammo=0),inventory=Inventory(capacity=0),level=Level(level_up_base=200),item_drop_chance = 0)
 
-orc = Actor(
+janitor = Actor(
     char="♥", 
     color=(255, 255, 255), 
     name="Janitor", 
@@ -90,7 +90,7 @@ orc = Actor(
     level=Level(xp_given=30),
     item_drop_chance = 0.3
     )
-troll = Actor(
+crew = Actor(
     char="♦", 
     color=(255, 255, 255), 
     name="Crew", 
@@ -100,7 +100,26 @@ troll = Actor(
     level=Level(xp_given=85),
     item_drop_chance = 0.16
     )
-
+error_clone01 = Actor(
+    char="1", 
+    color=(255, 255, 255), 
+    name="error_clone001", 
+    ai_class=HostileEnemy,equipment=Equipment(weapon=dagger, armor=chain_mail),
+    fighter=Fighter(hp=25, agility=10, strength=10, ammo=1),
+    inventory=Inventory(capacity=0),
+    level=Level(xp_given=150),
+    item_drop_chance = 0.32
+    )
+error_clone02 = Actor(
+    char="2", 
+    color=(255, 255, 255), 
+    name="error_clone002", 
+    ai_class=HostileEnemy,equipment=Equipment(weapon=explosive_grenade, armor=leather_armor), 
+    fighter=Fighter(hp=50, agility=10, strength=8, ammo=1),
+    inventory=Inventory(capacity=0),
+    level=Level(xp_given=100),
+    item_drop_chance = 0.32
+    )
 security = Actor(
     char="♣", 
     color=(255, 255, 255), 
@@ -110,7 +129,7 @@ security = Actor(
     inventory=Inventory(capacity=0),
     level=Level(xp_given=120),
     item_drop_chance = 0.24
-    ) 
+    )
 item_box = Actor(
     char="Γ", 
     color=(255, 255, 255), 
@@ -120,7 +139,7 @@ item_box = Actor(
     inventory=Inventory(capacity=0),
     level=Level(xp_given=0),
     item_drop_chance = 0
-    ) 
+    )
 table = Actor(
     char="Σ", 
     color=(255, 255, 255), 
@@ -130,4 +149,4 @@ table = Actor(
     inventory=Inventory(capacity=0),
     level=Level(xp_given=0),
     item_drop_chance = 0
-    ) 
+    )

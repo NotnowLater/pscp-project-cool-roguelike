@@ -66,11 +66,11 @@ special_room_attribute: Dict = {
     0: (7,7,7,7,[(entity_factory.item_box,(3,3))],[]),
     1: (10,10,10,10,[(entity_factory.table,(3,3)),(entity_factory.table,(7,3)),
                      (entity_factory.table,(3,6)),(entity_factory.table,(7,6)),
-                     (entity_factory.orc,(3,4)),(entity_factory.orc,(7,4)),
-                     (entity_factory.orc,(3,7)),(entity_factory.orc,(7,7))],[]),
+                     (entity_factory.janitor,(3,4)),(entity_factory.janitor,(7,4)),
+                     (entity_factory.janitor,(3,7)),(entity_factory.janitor,(7,7))],[]),
     2: (10,10,10,10,[(entity_factory.table,(8,2)),(entity_factory.table,(2,8)),
                      (entity_factory.item_box,(2,2)),(entity_factory.security,(5,5)),
-                     (entity_factory.orc,(8,1)),],[]),
+                     (entity_factory.janitor,(8,1)),],[]),
     3: (10,10,10,10,[(entity_factory.item_box,(5,5)),(entity_factory.security,(4,4)),
                      (entity_factory.security,(6,4)),(entity_factory.security,(4,6)),(entity_factory.bandage,(5,2)),
                      (entity_factory.security,(6,6))],[(tile_types.wall2,(2,2)),
@@ -84,10 +84,10 @@ special_room_attribute: Dict = {
                      (entity_factory.table,(6,6)), (entity_factory.table,(4,5)),
                      (entity_factory.table,(6,5)), (entity_factory.table,(5,4)),
                      (entity_factory.table,(5,6))],[]),
-    7: (10,10,10,10,[(entity_factory.orc,(4,4)),(entity_factory.orc,(5,4)),
-                     (entity_factory.orc,(6,4)),(entity_factory.orc,(4,5)),
-                     (entity_factory.orc,(6,5)), (entity_factory.orc,(4,6)),
-                     (entity_factory.orc,(5,6)), (entity_factory.orc,(6,6)),
+    7: (10,10,10,10,[(entity_factory.janitor,(4,4)),(entity_factory.janitor,(5,4)),
+                     (entity_factory.janitor,(6,4)),(entity_factory.janitor,(4,5)),
+                     (entity_factory.janitor,(6,5)), (entity_factory.janitor,(4,6)),
+                     (entity_factory.janitor,(5,6)), (entity_factory.janitor,(6,6)),
                      ],[(tile_types.wall2,(5,5))]),
     8: (10,10,10,10,[(entity_factory.item_box,(7,2)),(entity_factory.item_box,(8,2)),
                      (entity_factory.item_box,(7,3)),(entity_factory.item_box,(8,3)),
@@ -98,13 +98,13 @@ special_room_attribute: Dict = {
                      (entity_factory.item_box,(2,3)),(entity_factory.item_box,(3,3)),
                      ],[(tile_types.wall2,(5,5))]),
     10: (10,10,10,10,[(entity_factory.security,(4,2)),(entity_factory.security,(6,2)),
-                     (entity_factory.troll,(5,2)),(entity_factory.table,(4,3)),
+                     (entity_factory.crew,(5,2)),(entity_factory.table,(4,3)),
                      (entity_factory.table,(5,3)), (entity_factory.table,(6,3)),
                      ],[(tile_types.wall2,(5,5))]),
     11: (10,10,10,10,[(entity_factory.item_box,(2,2)),(entity_factory.item_box,(8,2)),
                      (entity_factory.item_box,(2,8)),(entity_factory.item_box,(8,8)),
                      ],[(tile_types.wall2,(5,5))]),
-    12: (10,10,10,10,[(entity_factory.troll,(3,3)),(entity_factory.troll,(7,7)),
+    12: (10,10,10,10,[(entity_factory.crew,(3,3)),(entity_factory.crew,(7,7)),
                      ],[(tile_types.wall2,(5,5))]),
     13: (10,10,10,10,[(entity_factory.item_box,(3,5)),(entity_factory.table,(5,4)),
                       (entity_factory.table,(6,4)),(entity_factory.table,(6,5)),(entity_factory.bandage,(2,8))
@@ -115,16 +115,16 @@ special_room_attribute: Dict = {
                         (tile_types.wall2,(4,5)),(tile_types.wall2,(6,5)),(tile_types.wall2,(4,6)),
                         (tile_types.wall2,(5,6)),(tile_types.wall2,(6,6))]),
     15: (10,10,10,10,[(entity_factory.security,(2,2)),(entity_factory.security,(5,8)),
-                      (entity_factory.orc,(8,2)),(entity_factory.item_box,(8,5))
+                      (entity_factory.janitor,(8,2)),(entity_factory.item_box,(8,5))
                      ],[(tile_types.wall2,(4,4)),(tile_types.wall2,(5,4)),(tile_types.wall2,(6,4)),
                         (tile_types.wall2,(4,5)),(tile_types.wall2,(6,5)),(tile_types.wall2,(4,6)),
                         (tile_types.wall2,(5,6)),(tile_types.wall2,(6,6))]),
     16: (10,10,10,10,[(entity_factory.bandage,(5,1)),
-                      (entity_factory.orc,(8,2)),(entity_factory.item_box,(8,7))
+                      (entity_factory.janitor,(8,2)),(entity_factory.item_box,(8,7))
                      ],[(tile_types.wall2,(4,4)),(tile_types.wall2,(5,4)),(tile_types.wall2,(6,4)),
                         (tile_types.wall2,(4,5)),(tile_types.wall2,(6,5)),(tile_types.wall2,(4,6)),
                         (tile_types.wall2,(5,6)),(tile_types.wall2,(6,6))]),
-    17: (10,10,10,10,[(entity_factory.troll,(5,5))],[(tile_types.wall2,(5,5))]),
+    17: (10,10,10,10,[(entity_factory.crew,(5,5))],[(tile_types.wall2,(5,5))]),
 }
 
 #(Type, Item in Box)
@@ -148,11 +148,11 @@ item_chance: Dict[int, List[Tuple[Entity, int]]] = {
 
 #(Floor, Enemy)
 enemy_chances: Dict[int, List[Tuple[Entity, int]]] = {
-    0: [(entity_factory.orc, 50),(entity_factory.troll, 3),(entity_factory.item_box, 1)],
-    2: [(entity_factory.troll, 15),],
+    0: [(entity_factory.janitor, 50),(entity_factory.crew, 3),(entity_factory.item_box, 1)],
+    2: [(entity_factory.crew, 15),],
     3: [(entity_factory.security, 20),(entity_factory.item_box, 4)],
-    5: [(entity_factory.troll, 30), (entity_factory.item_box, 5)],
-    7: [(entity_factory.troll, 60)],
+    5: [(entity_factory.crew, 30), (entity_factory.error_clone02, 10), (entity_factory.item_box, 5)],
+    7: [(entity_factory.crew, 20),  (entity_factory.error_clone01, 40), (entity_factory.error_clone02, 20)],
 }
 
 def get_max_value_for_floor(
