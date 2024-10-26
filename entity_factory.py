@@ -120,6 +120,26 @@ error_clone02 = Actor(
     level=Level(xp_given=100),
     item_drop_chance = 0.32
     )
+human_kimera = Actor(
+    char="A",
+    color=(255, 255, 255),
+    name="human_kimera",
+    ai_class=HostileEnemy,equipment=Equipment(weapon=sword, armor=leather_armor),
+    fighter=Fighter(hp=60, agility=15, strength=10, ammo=0),
+    inventory=Inventory(capacity=0),
+    level=Level(xp_given=170),
+    item_drop_chance= 0.3
+    )
+material_kimera = Actor(
+    char="B",
+    color=(255, 255, 255),
+    name="material_kimera",
+    ai_class=HostileEnemy,equipment=Equipment(weapon=flash_grenade),
+    fighter=Fighter(hp=30, agility=25, ammo=1),
+    inventory=Inventory(capacity=0),
+    level=Level(xp_given=50),
+    item_drop_chance=0.1
+    )
 security = Actor(
     char="♣", 
     color=(255, 255, 255), 

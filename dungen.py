@@ -150,9 +150,9 @@ item_chance: Dict[int, List[Tuple[Entity, int]]] = {
 enemy_chances: Dict[int, List[Tuple[Entity, int]]] = {
     0: [(entity_factory.janitor, 50),(entity_factory.crew, 3),(entity_factory.item_box, 1)],
     2: [(entity_factory.crew, 15),],
-    3: [(entity_factory.security, 20),(entity_factory.item_box, 4)],
-    5: [(entity_factory.crew, 30), (entity_factory.error_clone02, 10), (entity_factory.item_box, 5)],
-    7: [(entity_factory.crew, 20),  (entity_factory.error_clone01, 40), (entity_factory.error_clone02, 20)],
+    3: [(entity_factory.security, 20),(entity_factory.item_box, 4),((entity_factory.material_kimera, 100))],
+    5: [(entity_factory.crew, 30), (entity_factory.error_clone02, 10), (entity_factory.item_box, 5),(entity_factory.human_kimera, 20),(entity_factory.material_kimera, 80)],
+    7: [(entity_factory.crew, 20),  (entity_factory.error_clone01, 40), (entity_factory.error_clone02, 20),(entity_factory.human_kimera, 40),(entity_factory.material_kimera, 60)],
 }
 
 def get_max_value_for_floor(
