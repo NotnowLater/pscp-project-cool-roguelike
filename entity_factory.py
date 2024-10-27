@@ -135,7 +135,7 @@ material_kimera = Actor(
     color=(255, 255, 255),
     name="material_kimera",
     ai_class=HostileEnemy,equipment=Equipment(weapon=flash_grenade),
-    fighter=Fighter(hp=30, agility=25, ammo=1),
+    fighter=Fighter(hp=30, agility=25, strength=14, ammo=1),
     inventory=Inventory(capacity=0),
     level=Level(xp_given=50),
     item_drop_chance=0.1
