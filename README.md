@@ -2,11 +2,10 @@
 A Sci-fi roguelike game made in python with [libtcod](https://github.com/libtcod/python-tcod).
 
 # Requirements
-
-Python 3.11+.
-[tcod](https://github.com/libtcod/python-tcod).
-[libtcod](https://github.com/cheofusi/just_playback).
-Windows 10+.
+Python 3.11+.<br/>
+[tcod](https://github.com/libtcod/python-tcod).<br/>
+[libtcod](https://github.com/cheofusi/just_playback).<br/>
+Windows 10+.<br/>
 Required libsdl2 on Linux.
 
 # Installation
