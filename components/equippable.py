@@ -72,7 +72,15 @@ class LeatherArmor(Equippable):
 
 class ChainMail(Equippable):
     def __init__(self) -> None:
-        super().__init__(equipment_type=EquipmentType.ARMOR, dv_bonus=5, defense=2)
+        super().__init__(equipment_type=EquipmentType.ARMOR, dv_bonus=4, defense=2)
+
+class CombatJumpSuit(Equippable):
+    def __init__(self) -> None:
+        super().__init__(equipment_type=EquipmentType.ARMOR, dv_bonus=6, defense=2)
+
+class CombatArmor(Equippable):
+    def __init__(self) -> None:
+        super().__init__(equipment_type=EquipmentType.ARMOR, dv_bonus=7, defense=3)
 
 class Pistol(Equippable):
     def __init__(self) -> None:
@@ -86,5 +94,110 @@ class Pistol(Equippable):
             ranged_attack_base=2,
             ranged_tohit=1,
             ranged_attack_shot=1,
+            atk_snd_id="gun_1",
+            )
+        
+class SMG(Equippable):
+    def __init__(self) -> None:
+        super().__init__(
+            equipment_type=EquipmentType.WEAPON, 
+            attack_die=1, 
+            attack_roll=2, 
+            ranged=True,
+            ranged_attack_die=2,
+            ranged_attack_roll=4,
+            ranged_attack_base=2,
+            ranged_tohit=0,
+            ranged_attack_shot=3,
+            atk_snd_id="gun_1",
+            )
+
+class CarbineSA(Equippable):
+    def __init__(self) -> None:
+        super().__init__(
+            equipment_type=EquipmentType.WEAPON, 
+            attack_die=2, 
+            attack_roll=2, 
+            ranged=True,
+            ranged_attack_die=2,
+            ranged_attack_roll=6,
+            ranged_attack_base=2,
+            ranged_tohit=2,
+            ranged_attack_shot=1,
+            atk_snd_id="gun_1",
+            )
+
+class CarbineBA(Equippable):
+    def __init__(self) -> None:
+        super().__init__(
+            equipment_type=EquipmentType.WEAPON, 
+            attack_die=2, 
+            attack_roll=2, 
+            ranged=True,
+            ranged_attack_die=2,
+            ranged_attack_roll=6,
+            ranged_attack_base=2,
+            ranged_tohit=1,
+            ranged_attack_shot=2,
+            atk_snd_id="gun_1",
+            )
+        
+class RifleAP(Equippable):
+    def __init__(self) -> None:
+        super().__init__(
+            equipment_type=EquipmentType.WEAPON, 
+            attack_die=2, 
+            attack_roll=2, 
+            ranged=True,
+            ranged_attack_die=4,
+            ranged_attack_roll=4,
+            ranged_attack_base=4,
+            ranged_tohit=3,
+            ranged_attack_shot=1,
+            atk_snd_id="gun_1",
+            )
+
+class RifleLaser(Equippable):
+    def __init__(self) -> None:
+        super().__init__(
+            equipment_type=EquipmentType.WEAPON, 
+            attack_die=2, 
+            attack_roll=2, 
+            ranged=True,
+            ranged_attack_die=1,
+            ranged_attack_roll=12,
+            ranged_attack_base=4,
+            ranged_tohit=2,
+            ranged_attack_shot=1,
+            atk_snd_id="gun_1",
+            )
+   
+class TurretBeam(Equippable):
+    def __init__(self) -> None:
+        super().__init__(
+            equipment_type=EquipmentType.WEAPON, 
+            attack_die=1, 
+            attack_roll=1, 
+            ranged=True,
+            ranged_attack_die=1,
+            ranged_attack_roll=8,
+            ranged_attack_base=0,
+            ranged_tohit=4,
+            ranged_attack_shot=1,
+            atk_snd_id="gun_1",
+            )
+        
+class TurretPulse(Equippable):
+    def __init__(self) -> None:
+        super().__init__(
+            equipment_type=EquipmentType.WEAPON, 
+            attack_die=1, 
+            attack_roll=1, 
+            ranged=True,
+            ranged_attack_die=1,
+            ranged_attack_roll=2,
+            ranged_attack_base=0,
+            ranged_tohit=2,
+            ranged_attack_shot=4,
             atk_snd_id="gun_1",
             )

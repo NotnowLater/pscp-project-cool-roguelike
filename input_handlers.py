@@ -222,7 +222,7 @@ class CharacterScreenEventHandler(AskUserEventHandler):
             x=x + 1, y=y + 4, string=f"Strength: {self.engine.player.fighter.strength}"
         )
         console.print(
-            x=x + 1, y=y + 5, string=f"Agility: {self.engine.player.fighter.dv}"
+            x=x + 1, y=y + 5, string=f"Agility: {self.engine.player.fighter.agility}"
         )
 
 class LevelUpEventHandler(AskUserEventHandler):
@@ -251,19 +251,20 @@ class LevelUpEventHandler(AskUserEventHandler):
         console.print(x=x + 1, y=2, string="Select an attribute to increase.")
 
         console.print(
+            x=x + 2,
+            y=3,
+            string=f"[+{int(self.engine.player.fighter.max_hp / 2) + 4} HP, from {self.engine.player.fighter.max_hp}]",
+            fg=colors.health_recovered
+        )
+        console.print(
             x=x + 1,
             y=4,
-            string=f"a) HP (+20 HP, from {self.engine.player.fighter.max_hp})",
+            string=f"A] STR [+2 STR, from {self.engine.player.fighter.strength}]",
         )
         console.print(
             x=x + 1,
             y=5,
-            string=f"b) STR (+1 STR, from {self.engine.player.fighter.strength})",
-        )
-        console.print(
-            x=x + 1,
-            y=6,
-            string=f"c) AGI (+1 AGI, from {self.engine.player.fighter.agility})",
+            string=f"B] AGI [+2 AGI, from {self.engine.player.fighter.agility}]",
         )
 
     def ev_keydown(self, event: tcod.event.KeyDown) -> Optional[ActionOrHandler]:
@@ -271,13 +272,13 @@ class LevelUpEventHandler(AskUserEventHandler):
         key = event.sym
         index = key - tcod.event.KeySym.a
 
-        if 0 <= index <= 2:
+        if 0 <= index <= 1:
             if index == 0:
-                player.level.increase_max_hp()
+                player.level.increase_max_hp(int(player.fighter.max_hp / 2) + 4)
+                player.level.increase_attack(2)
             elif index == 1:
-                player.level.increase_attack()
-            else:
-                player.level.increase_dv()
+                player.level.increase_max_hp(int(player.fighter.max_hp / 2) + 4)
+                player.level.increase_dv(2)
         else:
             self.engine.message_log.add_message("Invalid entry.", colors.invalid)
 
