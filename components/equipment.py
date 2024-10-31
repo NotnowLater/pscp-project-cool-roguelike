@@ -130,6 +130,13 @@ class Equipment(BaseComponent):
             ad += self.armor.equippable.ranged_attack_shot
         return ad
 
+    @property
+    def attack_snd_id(self) -> str:
+        if self.weapon:
+            if self.weapon.equippable.atk_snd_id != "":
+                return self.weapon.equippable.atk_snd_id
+        return "knife_1"
+
     def item_is_equipped(self, item: Item) -> bool:
         return self.weapon == item or self.armor == item
 

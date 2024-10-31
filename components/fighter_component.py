@@ -154,7 +154,10 @@ class Fighter(BaseComponent):
             return self.parent.equipment.ranged_attack_shot
         else:
             return 0
-
+        
+    @property
+    def equip_attack_snd_id(self) -> str:
+        return self.parent.equipment.attack_snd_id
     def die(self) -> None:
         if self.engine.player is self.parent:
            death_message = "You died!"

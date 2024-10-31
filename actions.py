@@ -11,6 +11,8 @@ import util
 import colors
 import exceptions
 
+import audiobrain
+
 if TYPE_CHECKING:
     from engine import Engine
     from entity import Entity, Actor, Item
@@ -115,6 +117,8 @@ class MeleeAction(ActionWithDirection):
             attack_color = colors.enemy_atk
         self.engine.message_log.add_message(f"{self.entity.name.capitalize()} Attacks {target.name} for {dmg} hit points.", fg=attack_color)
         target.fighter.hp -= dmg
+        # play weapon attack sound if hit
+        getattr(audiobrain, self.entity.fighter.equip_attack_snd_id).play()
 
 class RangedAttackAction(Action):
     def __init__(self, entity: Actor, target_xy: Optional[Tuple[int, int]] = None) -> None:
@@ -150,6 +154,8 @@ class RangedAttackAction(Action):
             attack_color = colors.enemy_atk
         self.engine.message_log.add_message(f"{self.entity.name.capitalize()} Shoots at the {target_fighter.parent.name} for {dmg} hit points.", fg=attack_color)
         target_fighter.hp -= dmg
+        # play weapon attack sound if hit
+        getattr(audiobrain, self.entity.fighter.equip_attack_snd_id).play()
 
 class MovementAction(ActionWithDirection):
     def perform(self) -> None:

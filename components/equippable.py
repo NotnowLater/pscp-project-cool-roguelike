@@ -29,6 +29,7 @@ class Equippable(BaseComponent):
         ranged_attack_base: int = 0,
         ranged_attack_shot: int = 0,
         defense: int = 0,
+        atk_snd_id: str = "knife_1",
     ):
         self.equipment_type = equipment_type
         self.tohit = tohit
@@ -43,15 +44,16 @@ class Equippable(BaseComponent):
         self.ranged_attack_base = ranged_attack_base
         self.ranged_attack_shot = ranged_attack_shot
         self.defense = defense
+        self.atk_snd_id = atk_snd_id
 
 class Dagger(Equippable):
     def __init__(self) -> None:
-        super().__init__(equipment_type=EquipmentType.WEAPON, attack_die=1, attack_roll=4)
+        super().__init__(equipment_type=EquipmentType.WEAPON, attack_die=1, attack_roll=4, atk_snd_id="knife_1")
 
 
 class Sword(Equippable):
     def __init__(self) -> None:
-        super().__init__(equipment_type=EquipmentType.WEAPON, attack_die=2, attack_roll=4)
+        super().__init__(equipment_type=EquipmentType.WEAPON, attack_die=2, attack_roll=4, atk_snd_id="knife_1")
 
 class Mop(Equippable):
     def __init__(self) -> None:
@@ -83,4 +85,5 @@ class Pistol(Equippable):
             ranged_attack_base=2,
             ranged_tohit=1,
             ranged_attack_shot=1,
+            atk_snd_id="gun_1",
             )

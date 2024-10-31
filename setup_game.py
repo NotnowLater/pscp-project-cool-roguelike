@@ -16,7 +16,7 @@ import entity_factory
 from game_map import GameWorld
 import input_handlers
 
-import audio
+import audiobrain
 
 # Load the background image and remove the alpha channel.
 background_image = tcod.image.load("menu_background.png")[:, :, :3]
@@ -52,7 +52,7 @@ def new_game() -> Engine:
     # dagger = copy.deepcopy(entity_factory.dagger)
     # leather_armor = copy.deepcopy(entity_factory.leather_armor)
     # pistol = copy.deepcopy(entity_factory.pistol)
-    grenade = copy.deepcopy(entity_factory.explosive_grenade)
+    # grenade = copy.deepcopy(entity_factory.explosive_grenade)
 
     # dagger.parent = player.inventory
     # leather_armor.parent = player.inventory
@@ -76,7 +76,7 @@ def load_game(filename: str) -> Engine:
 
 class MainMenu(input_handlers.BaseEventHandler):
     """Handle the main menu rendering and input."""
-    main_menu_snd : audio.AudioPlayBack = None
+    # main_menu_snd : audio.AudioPlayBack = None
 
     def on_render(self, console: tcod.console.Console) -> None:
         """Render the main menu on a background image."""
@@ -119,10 +119,12 @@ class MainMenu(input_handlers.BaseEventHandler):
         for x,y in star_pos:
             console.print(x,y,"☻",fg=colors.white)
         # play the main menu sound
-        if not self.main_menu_snd:
-            self.main_menu_snd = audio.AudioPlayBack("sounds/scifimain.mp3", True)
-        if not self.main_menu_snd.playback.playing:
-            self.main_menu_snd.play()
+        # if not self.main_menu_snd:
+            # self.main_menu_snd = audio.AudioPlayBack("sounds/scifimain.mp3", True)
+        # if not self.main_menu_snd.playback.playing:
+            # self.main_menu_snd.play()
+        if not audiobrain.main_bgm.playback.playing:
+            audiobrain.main_bgm.play()
 
     def ev_keydown(
         self, event: tcod.event.KeyDown
@@ -133,7 +135,8 @@ class MainMenu(input_handlers.BaseEventHandler):
             try:
                 ld = input_handlers.MainGameEventHandler(load_game("savegame.sav"))
                 if ld:
-                    self.main_menu_snd.stop()
+                    # self.main_menu_snd.stop()
+                    audiobrain.main_bgm.stop()
                 return ld
             except FileNotFoundError:
                 return input_handlers.PopupMessage(self, "No saved game to load.")
@@ -141,6 +144,7 @@ class MainMenu(input_handlers.BaseEventHandler):
                 traceback.print_exc()  # Print to stderr.
                 return input_handlers.PopupMessage(self, f"Failed to load save:\n{exc}")
         elif event.sym == tcod.event.KeySym.n:
-            self.main_menu_snd.stop()
+            audiobrain.main_bgm.stop()
+            # self.main_menu_snd.stop()
             return input_handlers.MainGameEventHandler(new_game())
         return None
