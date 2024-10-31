@@ -101,7 +101,7 @@ crew = Actor(
     item_drop_chance = 0.16
     )
 error_clone01 = Actor(
-    char="1", 
+    char="○", 
     color=(255, 255, 255), 
     name="error_clone001", 
     ai_class=HostileEnemy,equipment=Equipment(weapon=dagger, armor=chain_mail),
@@ -111,7 +111,7 @@ error_clone01 = Actor(
     item_drop_chance = 0.32
     )
 error_clone02 = Actor(
-    char="2", 
+    char="◙", 
     color=(255, 255, 255), 
     name="error_clone002", 
     ai_class=HostileEnemy,equipment=Equipment(weapon=sword, armor=leather_armor), 
@@ -121,7 +121,7 @@ error_clone02 = Actor(
     item_drop_chance = 0.32
     )
 human_kimera = Actor(
-    char="A",
+    char="•",
     color=(255, 255, 255),
     name="human_kimera",
     ai_class=HostileEnemy,equipment=Equipment(weapon=sword, armor=leather_armor),
@@ -131,7 +131,7 @@ human_kimera = Actor(
     item_drop_chance= 0.3
     )
 material_kimera = Actor(
-    char="B",
+    char="◘",
     color=(255, 255, 255),
     name="material_kimera",
     ai_class=HostileEnemy,equipment=Equipment(weapon=dagger),
