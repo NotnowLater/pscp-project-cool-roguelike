@@ -135,7 +135,7 @@ class Equipment(BaseComponent):
         if self.weapon:
             if self.weapon.equippable.atk_snd_id != "":
                 return self.weapon.equippable.atk_snd_id
-        return "knife_1"
+        return "punch_1"
 
     def item_is_equipped(self, item: Item) -> bool:
         return self.weapon == item or self.armor == item
