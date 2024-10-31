@@ -8,6 +8,7 @@ import components.ai_component
 from components.base_component import BaseComponent
 import components.inventory
 from exceptions import Impossible
+import audiobrain
 from input_handlers import (
     ActionOrHandler,
     AreaRangedAttackHandler,
@@ -71,6 +72,8 @@ class FlashConsumable(Consumable):
                     entity=actor, previous_ai=actor.ai, turns_remaining=self.number_of_turns,
                 )
                 targets_hit = True
+                audiobrain.flash_grenade.play()
+
 
         if not targets_hit:
             raise Impossible("There are no targets in the radius.")
@@ -107,6 +110,7 @@ class ExplosiveConsumable(Consumable):
                 )
                 actor.fighter.take_damage(dmg)
                 targets_hit = True
+                audiobrain.explosive_grenade.play()
 
         if not targets_hit:
             raise Impossible("There are no targets in the radius.")
@@ -123,6 +127,7 @@ class HealingConsumable(Consumable):
         if amount_recovered > 0:
             self.engine.message_log.add_message(f"You consume the {self.parent.name}, and recover {amount_recovered} HP!",colors.health_recovered,)
             self.consume()
+            audiobrain.nano_patch.play()
         else:
             raise Impossible(f"Your health is already full.")
 

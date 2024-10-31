@@ -61,7 +61,8 @@ class Mop(Equippable):
             equipment_type=EquipmentType.WEAPON, 
             attack_die=1, 
             attack_roll=2,
-            tohit=-2
+            tohit=-2,
+            atk_snd_id="punch_1"
             )
 
 class LeatherArmor(Equippable):
