@@ -156,7 +156,7 @@ crew = Actor(
     ai_class=HostileEnemy,equipment=Equipment(weapon=dagger, armor=leather_armor), 
     fighter=Fighter(hp=12, agility=6, strength=8, ammo=0),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=85),
+    level=Level(xp_given=50),
     item_drop_chance = 0.16
     )
 
@@ -165,9 +165,9 @@ security = Actor(
     color=(255, 255, 255), 
     name="Security", 
     ai_class=HostileRangedEnemy,equipment=Equipment(weapon=pistol, armor=chain_mail), 
-    fighter=Fighter(hp=16, agility=8, strength=8, ammo=40),
+    fighter=Fighter(hp=16, agility=8, strength=8, ammo=3),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=120),
+    level=Level(xp_given=100),
     item_drop_chance = 0.24
     )
 
@@ -176,25 +176,25 @@ security_smg = Actor(
     color=(255, 255, 255), 
     name="Security", 
     ai_class=HostileRangedEnemy,equipment=Equipment(weapon=smg, armor=chain_mail), 
-    fighter=Fighter(hp=16, agility=8, strength=8, ammo=60),
-    inventory=Inventory(capacity=0),
-    level=Level(xp_given=140),
-    item_drop_chance = 0.3
-    )
-
-combat_droid = Actor(
-    char="♣", 
-    color=(255, 255, 255), 
-    name="Combat Droid", 
-    ai_class=HostileRangedEnemy,equipment=Equipment(weapon=smg), 
-    fighter=Fighter(hp=20, agility=6, strength=4, ammo=100),
+    fighter=Fighter(hp=16, agility=8, strength=8, ammo=3),
     inventory=Inventory(capacity=0),
     level=Level(xp_given=120),
     item_drop_chance = 0.3
     )
 
+combat_droid = Actor(
+    char="C", 
+    color=(255, 255, 255), 
+    name="Combat Droid", 
+    ai_class=HostileRangedEnemy,equipment=Equipment(weapon=smg), 
+    fighter=Fighter(hp=20, agility=6, strength=4, ammo=100),
+    inventory=Inventory(capacity=0),
+    level=Level(xp_given=140),
+    item_drop_chance = 0.3
+    )
+
 marine_sa = Actor(
-    char="♣", 
+    char="M", 
     color=(255, 255, 255), 
     name="Assault Marine", 
     ai_class=HostileRangedEnemy,equipment=Equipment(weapon=carbine_ba, armor=combat_armor),
@@ -205,7 +205,7 @@ marine_sa = Actor(
     )
 
 marine_ba = Actor(
-    char="♣", 
+    char="M", 
     color=(255, 255, 255), 
     name="Support Marine", 
     ai_class=HostileRangedEnemy,equipment=Equipment(weapon=carbine_sa, armor=combat_armor), 
@@ -215,8 +215,8 @@ marine_ba = Actor(
     item_drop_chance = 0.3
     )
 
-marine_ba = Actor(
-    char="♣", 
+marine_ap = Actor(
+    char="M", 
     color=(255, 255, 255), 
     name="Marine Sharpshooter", 
     ai_class=HostileRangedEnemy,equipment=Equipment(weapon=rifle_ap, armor=combat_armor), 
@@ -227,7 +227,7 @@ marine_ba = Actor(
     )
 
 marine_la = Actor(
-    char="♣", 
+    char="M", 
     color=(255, 255, 255), 
     name="Marine Laser Sharpshooter", 
     ai_class=HostileRangedEnemy,equipment=Equipment(weapon=rifle_laser, armor=combat_armor), 
@@ -238,7 +238,7 @@ marine_la = Actor(
     )
 
 beam_turret = Actor(
-    char="♣", 
+    char="T", 
     color=(255, 255, 255), 
     name="Beam Turret", 
     ai_class=TurretEnemy,equipment=Equipment(weapon=beam_t), 
@@ -249,7 +249,7 @@ beam_turret = Actor(
     )
 
 pulse_turret = Actor(
-    char="♣", 
+    char="T", 
     color=(255, 255, 255), 
     name="Pulse Turret", 
     ai_class=TurretEnemy,equipment=Equipment(weapon=pulse_t), 

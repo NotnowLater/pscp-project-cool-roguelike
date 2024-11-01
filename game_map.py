@@ -57,6 +57,18 @@ class GameMap:
                 return actor
         return None
 
+    def get_nearest_enemy_pos(self, player_x, player_y):
+        """ Return a Nearest enemy."""
+        min_distance = float("inf")
+        nearest_enemy_pos = None
+        for entity in self.entities:
+            if entity is not self.engine.player and hasattr(entity, "fighter") and entity.ai != None and self.engine.game_map.visible[entity.x,entity.y]:
+                distance = ((entity.x - player_x) ** 2 + (entity.y - player_y) ** 2) ** 0.5
+                if distance < min_distance:
+                    min_distance = distance
+                    nearest_enemy_pos = (entity.x,entity.y)
+        return nearest_enemy_pos
+
     def get_blocking_entity_at(self, x: int, y: int) -> Optional[Entity]:
         """ Return the blocking entity and given location """
         for entity in self.entities:

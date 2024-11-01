@@ -12,7 +12,6 @@ import audiobrain
 from input_handlers import (
     ActionOrHandler,
     AreaRangedAttackHandler,
-    SingleRangedAttackHandler,
 )
 
 if TYPE_CHECKING:

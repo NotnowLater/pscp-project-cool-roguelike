@@ -253,7 +253,7 @@ class LevelUpEventHandler(AskUserEventHandler):
         console.print(
             x=x + 2,
             y=3,
-            string=f"[+{int(self.engine.player.fighter.max_hp / 4) + 2} HP, from {self.engine.player.fighter.max_hp}]",
+            string=f"[+{int(self.engine.player.fighter.max_hp / 5) + 2} HP, from {self.engine.player.fighter.max_hp}]",
             fg=colors.health_recovered
         )
         console.print(
@@ -274,10 +274,10 @@ class LevelUpEventHandler(AskUserEventHandler):
 
         if 0 <= index <= 1:
             if index == 0:
-                player.level.increase_max_hp(int(player.fighter.max_hp / 4) + 2)
+                player.level.increase_max_hp(int(player.fighter.max_hp / 5) + 2)
                 player.level.increase_attack(2)
             elif index == 1:
-                player.level.increase_max_hp(int(player.fighter.max_hp / 4) + 2)
+                player.level.increase_max_hp(int(player.fighter.max_hp / 5) + 2)
                 player.level.increase_dv(2)
         else:
             self.engine.message_log.add_message("Invalid entry.", colors.invalid)
@@ -332,6 +332,12 @@ class SelectIndexHandler(AskUserEventHandler):
             y = max(0, min(y, self.engine.game_map.height - 1))
             self.engine.mouse_location = x, y
             return None
+        elif key == tcod.event.KeySym.w:
+            nearest_enemy_pos = self.engine.game_map.get_nearest_enemy_pos(self.engine.player.x,self.engine.player.x)
+            if nearest_enemy_pos:
+                return self.on_index_selected(nearest_enemy_pos[0],nearest_enemy_pos[1])
+            else:
+                self.engine.message_log.add_message("No enemies in the area.", colors.impossible)
         elif key in CONFIRM_KEYS:
             return self.on_index_selected(*self.engine.mouse_location)
         return super().ev_keydown(event)
@@ -364,7 +370,7 @@ class SingleRangedAttackHandler(SelectIndexHandler):
         super().__init__(engine)
 
         self.callback = callback
-
+    
     def on_index_selected(self, x: int, y: int) -> Optional[Action]:
         return self.callback((x, y))
 
@@ -442,10 +448,19 @@ class MainGameEventHandler(EventHandler):
             return CharacterScreenEventHandler(self.engine)
         elif key == tcod.event.KeySym.l:
             return LookHandler(self.engine)
+        elif key == tcod.event.KeySym.h:
+            for item in self.engine.player.inventory.items:
+                if item.name == "Nano patch":
+                    try:
+                        item.consumable.activate(Action(self.engine.player))
+                    except exceptions.Impossible as exc:
+                        self.engine.message_log.add_message(exc.args[0], colors.impossible)
+                    return
+            self.engine.message_log.add_message("You don't have any Nano patches.", colors.impossible)
         elif key in RANGED_ATTACK_KEYS:
             if player.fighter.can_ranged_attack:
                 return SingleRangedAttackHandler(self.engine, lambda xy:RangedAttackAction(player, xy))
-
+        
         # No valid key was pressed
         return action
 

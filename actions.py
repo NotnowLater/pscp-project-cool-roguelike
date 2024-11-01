@@ -124,9 +124,12 @@ class RangedAttackAction(Action):
     def __init__(self, entity: Actor, target_xy: Optional[Tuple[int, int]] = None) -> None:
 
         self.entity = entity
+        self.target_xy = target_xy
         self.target = entity.game_map.get_actor_at(*target_xy)
 
     def perform(self) -> None:
+        if not self.engine.game_map.visible[self.target_xy]:
+            raise exceptions.Impossible("You cannot target an area that you cannot see.")
         if not self.target:
             raise exceptions.Impossible("No target to attack at.")
         target_fighter = self.target.fighter

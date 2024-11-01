@@ -148,11 +148,12 @@ item_chance: Dict[int, List[Tuple[Entity, int]]] = {
 
 #(Floor, Enemy)
 enemy_chances: Dict[int, List[Tuple[Entity, int]]] = {
-    0: [(entity_factory.beam_turret, 50),(entity_factory.crew, 3),(entity_factory.item_box, 1)],
+    0: [(entity_factory.janitor, 50),(entity_factory.crew, 3),(entity_factory.item_box, 1)],
     2: [(entity_factory.crew, 15),],
     3: [(entity_factory.security, 20),(entity_factory.item_box, 4)],
-    5: [(entity_factory.crew, 20), (entity_factory.error_clone02, 10), (entity_factory.item_box, 5)],
-    7: [(entity_factory.error_clone01, 40), (entity_factory.error_clone02, 20)],
+    5: [(entity_factory.crew, 20), (entity_factory.item_box, 5), (entity_factory.security_smg, 25),(entity_factory.janitor, 0)],
+    6: [(entity_factory.combat_droid, 20),(entity_factory.security, 30), (entity_factory.security_smg, 30)],
+    7: [(entity_factory.combat_droid, 30)],
     8: [(entity_factory.human_kimera, 20)]
 }
 
