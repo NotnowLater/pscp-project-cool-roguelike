@@ -40,6 +40,7 @@ max_special_rooms_by_floor = [
     (1, 3),
     (4, 4),
     (6, 5),
+    (8, 7),
 ]
 
 #(Floor, Chance)
@@ -50,6 +51,7 @@ special_room_appear_chance: Dict = {
     4: 0.24,
     5: 0.3,
     7: 0.37,
+    9: 0.4,
 }
 
 #(Floor, Max Monsters)
@@ -148,7 +150,7 @@ item_chance: Dict[int, List[Tuple[Entity, int]]] = {
 
 #(Floor, Enemy)
 enemy_chances: Dict[int, List[Tuple[Entity, int]]] = {
-    0: [(entity_factory.janitor, 50),(entity_factory.crew, 3),(entity_factory.item_box, 1)],
+    0: [(entity_factory.security, 50),(entity_factory.crew, 3),(entity_factory.item_box, 1)],
     2: [(entity_factory.crew, 15),],
     3: [(entity_factory.security, 20),(entity_factory.item_box, 4)],
     5: [(entity_factory.crew, 20), (entity_factory.item_box, 5), (entity_factory.security_smg, 25),(entity_factory.janitor, 0)],

@@ -165,9 +165,9 @@ security = Actor(
     color=(255, 255, 255), 
     name="Security", 
     ai_class=HostileRangedEnemy,equipment=Equipment(weapon=pistol, armor=chain_mail), 
-    fighter=Fighter(hp=16, agility=8, strength=8, ammo=3),
+    fighter=Fighter(hp=16, agility=8, strength=8, ammo=6),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=100),
+    level=Level(xp_given=80),
     item_drop_chance = 0.24
     )
 
@@ -176,9 +176,9 @@ security_smg = Actor(
     color=(255, 255, 255), 
     name="Security", 
     ai_class=HostileRangedEnemy,equipment=Equipment(weapon=smg, armor=chain_mail), 
-    fighter=Fighter(hp=16, agility=8, strength=8, ammo=3),
+    fighter=Fighter(hp=16, agility=8, strength=8, ammo=6),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=120),
+    level=Level(xp_given=100),
     item_drop_chance = 0.3
     )
 
