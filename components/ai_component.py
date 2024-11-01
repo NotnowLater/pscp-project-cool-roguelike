@@ -119,12 +119,12 @@ class HostileRangedEnemy(BaseAI):
         # If the player can see this entity thats mean there is a clear los to player, so shoot at the player.
         if self.engine.game_map.visible[self.entity.x, self.entity.y]:
             # Shoot if actually have ammo, otherwise just melee attack the enemy.
-            if distance > 4:
+            if distance <= 1:
+                return MeleeAction(self.entity, dx, dy).perform()
+            elif distance > 4 or not self.entity.fighter.ammo:
                 self.path = self.get_path_to(target.x, target.y) 
             elif self.entity.fighter.ammo >= self.entity.fighter.ranged_attack_shot:
                 return RangedAttackAction(self.entity, target_xy=(target.x, target.y)).perform()
-            elif distance <= 1:
-                return MeleeAction(self.entity, dx, dy).perform()
             # self.path = self.get_path_to(target.x, target.y)
         # If Isn't close enough to player, move to player.
         if self.path:

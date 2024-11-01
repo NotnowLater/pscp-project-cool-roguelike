@@ -24,8 +24,10 @@ max_items_by_floor = [
 max_items_for_floor_by_floor = [
     (1, 3),
     (3, 4),
-    (4, 6), 
-    (5, 10),
+    (4, 5),
+    (5, 6),
+    (7, 7), 
+    (10, 10),
 ]
 
 #(Floor, Max Monsters)
@@ -39,33 +41,37 @@ max_monsters_by_floor = [
 max_special_rooms_by_floor = [
     (1, 3),
     (4, 4),
-    (6, 5),
-    (8, 7),
+    (7, 5),
+    (9, 6),
+    (14, 7),
 ]
 
 #(Floor, Chance)
 special_room_appear_chance: Dict = {
     0: 0.05,
-    2: 0.06,
-    3: 0.12,
+    2: 0.09,
+    3: 0.14,
     4: 0.24,
     5: 0.3,
-    7: 0.37,
-    9: 0.4,
+    7: 0.34,
+    9: 0.38,
 }
 
 #(Floor, Max Monsters)
 special_room_type_chance: Dict[int, List[Tuple[int, int]]] = {
     0: [(0, 5),(1, 5)],
-    2: [(2, 5),(12, 3),(6, 2),(10, 1),(16, 2)],
-    3: [(3, 4),(4, 5),(8, 3),(9, 1),(11, 2),(13, 3),(15, 2)],
-    4: [(5, 3),(7, 3),(14, 4)]
+    2: [(2, 5),(12, 3),(6, 2),(16, 2)],
+    3: [(3, 4),(4, 5),(8, 3),(9, 1),(11, 2),(13, 3),(15, 2),(10, 2),(7, 3),(18,2)],
+    4: [(1, 0),(3, 0),(4, 0),(6, 0),(7, 0),(10, 0),(15, 0),(12, 0),(16, 0),(2, 0),(0, 0),
+        (5, 3),(14, 4)],
+    5: [(17,2),(19,3),(20,1),(21,3),(22,1)],
+    6: [(5, 0),(11, 0),(13, 0),(14, 0),(18, 0)]
 }
 
 #(Type, [Min_x ,Max_x, Min_y, Max_y, [(Entity,(pos_x,pos_y))]]])
 #        --------Room size----------  -----Entity in Room-----
 special_room_attribute: Dict = {
-    0: (7,7,7,7,[(entity_factory.item_box,(3,3))],[]),
+    0: (7,7,7,7,[(entity_factory.item_box,(3,3))]),
     1: (10,10,10,10,[(entity_factory.table,(3,3)),(entity_factory.table,(7,3)),
                      (entity_factory.table,(3,6)),(entity_factory.table,(7,6)),
                      (entity_factory.janitor,(3,4)),(entity_factory.janitor,(7,4)),
@@ -126,12 +132,31 @@ special_room_attribute: Dict = {
                      ],[(tile_types.wall2,(4,4)),(tile_types.wall2,(5,4)),(tile_types.wall2,(6,4)),
                         (tile_types.wall2,(4,5)),(tile_types.wall2,(6,5)),(tile_types.wall2,(4,6)),
                         (tile_types.wall2,(5,6)),(tile_types.wall2,(6,6))]),
-    17: (10,10,10,10,[(entity_factory.crew,(5,5))],[(tile_types.wall2,(5,5))]),
+    17: (10,10,10,10,[(entity_factory.bandage,(8,2)),(entity_factory.ammo20,(2,8)),
+                      (entity_factory.error_clone01,(8,5)),(entity_factory.error_clone01,(5,2)),(entity_factory.error_clone01,(2,5))
+                     ],[(tile_types.wall2,(4,4)),(tile_types.wall2,(5,4)),(tile_types.wall2,(6,4)),
+                        (tile_types.wall2,(4,5)),(tile_types.wall2,(6,5)),(tile_types.wall2,(4,6)),
+                        (tile_types.wall2,(5,6)),(tile_types.wall2,(6,6))]),
+    18: (10,10,10,10,[(entity_factory.bandage,(5,5)),(entity_factory.ammo20,(7,2))],[(tile_types.wall2,(2,2)),
+                    (tile_types.wall2,(8,2)),(tile_types.wall2,(2,8)),(tile_types.wall2,(8,8))]),
+    19: (10,10,10,10,[(entity_factory.item_box,(8,4)),(entity_factory.item_box,(8,6)),
+                      (entity_factory.bandage,(8,5))
+                     ],[(tile_types.wall2,(4,4)),(tile_types.wall2,(5,4)),(tile_types.wall2,(6,4)),
+                        (tile_types.wall2,(4,5)),(tile_types.wall2,(6,5)),(tile_types.wall2,(4,6)),
+                        (tile_types.wall2,(5,6)),(tile_types.wall2,(6,6))]),
+    20: (10,10,10,10,[(entity_factory.ammo20,(1,1)),(entity_factory.ammo20,(9,9))],
+                        [(tile_types.wall2,(4,4)),(tile_types.wall2,(5,4)),(tile_types.wall2,(6,4)),
+                        (tile_types.wall2,(4,5)),(tile_types.wall2,(6,5)),(tile_types.wall2,(4,6)),
+                        (tile_types.wall2,(5,6)),(tile_types.wall2,(6,6))]),
+    21: (6,6,6,6,[(entity_factory.ammo20,(2,3)),(entity_factory.bandage,(4,3)),(entity_factory.item_box,(3,3))],[(tile_types.wall2,(2,2)),
+                    (tile_types.wall2,(4,2)),(tile_types.wall2,(2,4)),(tile_types.wall2,(4,4))]),
+    22: (6,6,6,6,[(entity_factory.ammo20,(3,3))],[(tile_types.wall2,(2,2)),
+                    (tile_types.wall2,(4,2)),(tile_types.wall2,(2,4)),(tile_types.wall2,(4,4))]),
 }
 
 #(Type, Item in Box)
 item_box_chance: Dict[int, List[Tuple[Entity, int]]] = {
-    0: [(entity_factory.bandage, 19), (entity_factory.ammo20, 12),
+    0: [(entity_factory.bandage, 18), (entity_factory.ammo20, 13),
         (entity_factory.flash_grenade, 12),(entity_factory.explosive_grenade, 5),
         (entity_factory.sword, 4),(entity_factory.chain_mail, 4),
         (entity_factory.dagger, 20),(entity_factory.leather_armor, 15),(entity_factory.pistol, 9)],
@@ -143,20 +168,27 @@ item_box_chance: Dict[int, List[Tuple[Entity, int]]] = {
 #(Floor, Item)
 item_chance: Dict[int, List[Tuple[Entity, int]]] = {
     0: [(entity_factory.bandage, 50)],
-    2: [(entity_factory.flash_grenade, 10),(entity_factory.ammo20, 8)],
-    3: [(entity_factory.ammo20, 12)],
+    2: [(entity_factory.flash_grenade, 10),(entity_factory.ammo20, 10)],
+    3: [(entity_factory.ammo20, 23)],
     4: [(entity_factory.explosive_grenade, 10)],
+    5: [(entity_factory.ammo20, 33)],
 }
 
 #(Floor, Enemy)
 enemy_chances: Dict[int, List[Tuple[Entity, int]]] = {
-    0: [(entity_factory.security, 50),(entity_factory.crew, 3),(entity_factory.item_box, 1)],
-    2: [(entity_factory.crew, 15),],
+    0: [(entity_factory.janitor, 50),(entity_factory.crew, 1),(entity_factory.item_box, 1)],
+    2: [(entity_factory.crew, 15)],
     3: [(entity_factory.security, 20),(entity_factory.item_box, 4)],
-    5: [(entity_factory.crew, 20), (entity_factory.item_box, 5), (entity_factory.security_smg, 25),(entity_factory.janitor, 0)],
-    6: [(entity_factory.combat_droid, 20),(entity_factory.security, 30), (entity_factory.security_smg, 30)],
-    7: [(entity_factory.combat_droid, 30)],
-    8: [(entity_factory.human_kimera, 20)]
+    4: [(entity_factory.crew, 20), (entity_factory.item_box, 5), (entity_factory.security_smg, 25),(entity_factory.janitor, 0)],
+    5: [(entity_factory.combat_droid, 18),(entity_factory.security, 30), (entity_factory.security_smg, 30)],
+    6: [(entity_factory.combat_droid, 28),(entity_factory.crew, 0)],
+    #7 : New Item box
+    8: [(entity_factory.error_clone01, 20),(entity_factory.error_clone02, 20)],
+    9: [(entity_factory.marine_ba, 20),(entity_factory.marine_sa, 20)],
+    10: [(entity_factory.marine_ap, 20),(entity_factory.marine_la, 20)],
+    11: [(entity_factory.beam_turret, 20),(entity_factory.pulse_turret, 20)],
+    12: [(entity_factory.human_kimera, 20)],
+    13: [(entity_factory.material_kimera, 20)],
 }
 
 def get_max_value_for_floor(

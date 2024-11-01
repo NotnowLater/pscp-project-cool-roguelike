@@ -389,7 +389,6 @@ class AreaRangedAttackHandler(SelectIndexHandler):
         self.radius = radius
         self.callback = callback
         self.color = color
-        print(callback)
 
     def on_render(self, console: tcod.Console) -> None:
         """Highlight the tile under the cursor."""

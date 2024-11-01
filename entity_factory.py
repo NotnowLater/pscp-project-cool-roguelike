@@ -156,7 +156,7 @@ crew = Actor(
     ai_class=HostileEnemy,equipment=Equipment(weapon=dagger, armor=leather_armor), 
     fighter=Fighter(hp=12, agility=6, strength=8, ammo=0),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=50),
+    level=Level(xp_given=40),
     item_drop_chance = 0.16
     )
 
@@ -167,7 +167,7 @@ security = Actor(
     ai_class=HostileRangedEnemy,equipment=Equipment(weapon=pistol, armor=chain_mail), 
     fighter=Fighter(hp=16, agility=8, strength=8, ammo=6),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=80),
+    level=Level(xp_given=55),
     item_drop_chance = 0.24
     )
 
@@ -178,7 +178,7 @@ security_smg = Actor(
     ai_class=HostileRangedEnemy,equipment=Equipment(weapon=smg, armor=chain_mail), 
     fighter=Fighter(hp=16, agility=8, strength=8, ammo=6),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=100),
+    level=Level(xp_given=60),
     item_drop_chance = 0.3
     )
 
@@ -189,7 +189,7 @@ combat_droid = Actor(
     ai_class=HostileRangedEnemy,equipment=Equipment(weapon=smg), 
     fighter=Fighter(hp=20, agility=6, strength=4, ammo=100),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=140),
+    level=Level(xp_given=70),
     item_drop_chance = 0.3
     )
 
@@ -200,7 +200,7 @@ marine_sa = Actor(
     ai_class=HostileRangedEnemy,equipment=Equipment(weapon=carbine_ba, armor=combat_armor),
     fighter=Fighter(hp=30, agility=8, strength=12, ammo=100),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=160),
+    level=Level(xp_given=140),
     item_drop_chance = 0.3
     )
 
@@ -211,7 +211,7 @@ marine_ba = Actor(
     ai_class=HostileRangedEnemy,equipment=Equipment(weapon=carbine_sa, armor=combat_armor), 
     fighter=Fighter(hp=30, agility=8, strength=12, ammo=100),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=170),
+    level=Level(xp_given=150),
     item_drop_chance = 0.3
     )
 
@@ -222,7 +222,7 @@ marine_ap = Actor(
     ai_class=HostileRangedEnemy,equipment=Equipment(weapon=rifle_ap, armor=combat_armor), 
     fighter=Fighter(hp=30, agility=10, strength=10, ammo=100),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=180),
+    level=Level(xp_given=160),
     item_drop_chance = 0.3
     )
 
@@ -233,7 +233,7 @@ marine_la = Actor(
     ai_class=HostileRangedEnemy,equipment=Equipment(weapon=rifle_laser, armor=combat_armor), 
     fighter=Fighter(hp=30, agility=10, strength=10, ammo=100),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=200),
+    level=Level(xp_given=170),
     item_drop_chance = 0.28
     )
 
@@ -264,9 +264,9 @@ error_clone01 = Actor(
     color=(255, 255, 255), 
     name="Failed Clone", 
     ai_class=HostileEnemy,equipment=Equipment(weapon=dagger, armor=chain_mail),
-    fighter=Fighter(hp=25, agility=10, strength=10, ammo=1),
+    fighter=Fighter(hp=25, agility=10, strength=10, ammo=0),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=150),
+    level=Level(xp_given=100),
     item_drop_chance = 0.32
     )
 error_clone02 = Actor(
@@ -274,7 +274,7 @@ error_clone02 = Actor(
     color=(255, 255, 255), 
     name="Failed Clone", 
     ai_class=HostileEnemy,equipment=Equipment(weapon=sword, armor=leather_armor), 
-    fighter=Fighter(hp=50, agility=10, strength=8, ammo=1),
+    fighter=Fighter(hp=50, agility=10, strength=8, ammo=0),
     inventory=Inventory(capacity=0),
     level=Level(xp_given=100),
     item_drop_chance = 0.32
