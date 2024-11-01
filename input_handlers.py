@@ -253,7 +253,7 @@ class LevelUpEventHandler(AskUserEventHandler):
         console.print(
             x=x + 2,
             y=3,
-            string=f"[+{int(self.engine.player.fighter.max_hp / 2) + 4} HP, from {self.engine.player.fighter.max_hp}]",
+            string=f"[+{int(self.engine.player.fighter.max_hp / 4) + 2} HP, from {self.engine.player.fighter.max_hp}]",
             fg=colors.health_recovered
         )
         console.print(
@@ -274,10 +274,10 @@ class LevelUpEventHandler(AskUserEventHandler):
 
         if 0 <= index <= 1:
             if index == 0:
-                player.level.increase_max_hp(int(player.fighter.max_hp / 2) + 4)
+                player.level.increase_max_hp(int(player.fighter.max_hp / 4) + 2)
                 player.level.increase_attack(2)
             elif index == 1:
-                player.level.increase_max_hp(int(player.fighter.max_hp / 2) + 4)
+                player.level.increase_max_hp(int(player.fighter.max_hp / 4) + 2)
                 player.level.increase_dv(2)
         else:
             self.engine.message_log.add_message("Invalid entry.", colors.invalid)

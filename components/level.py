@@ -56,8 +56,6 @@ class Level(BaseComponent):
 
         self.engine.message_log.add_message("Your health improves!")
 
-        self.increase_level()
-
     def increase_attack(self, amount: int = 1) -> None:
         self.parent.fighter.strength += amount
 

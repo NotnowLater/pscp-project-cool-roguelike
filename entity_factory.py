@@ -1,6 +1,6 @@
 """ A Factory that hold all entities definitions that are use to spawn the entity. """
 
-from components.ai_component import HostileEnemy, HostileRangedEnemy, StaticEnemy
+from components.ai_component import HostileEnemy, HostileRangedEnemy, StaticEnemy, TurretEnemy
 from components.fighter_component import Fighter
 from components import consumable, equippable
 from components.equipment import Equipment
@@ -145,7 +145,7 @@ janitor = Actor(
     equipment=Equipment(weapon=mop), 
     fighter=Fighter(hp=6, agility=6, strength=7, ammo=0),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=666),
+    level=Level(xp_given=30),
     item_drop_chance = 0.3
     )
 
@@ -241,7 +241,7 @@ beam_turret = Actor(
     char="♣", 
     color=(255, 255, 255), 
     name="Beam Turret", 
-    ai_class=HostileRangedEnemy,equipment=Equipment(weapon=beam_t), 
+    ai_class=TurretEnemy,equipment=Equipment(weapon=beam_t), 
     fighter=Fighter(hp=50, agility=0, strength=0, ammo=500),
     inventory=Inventory(capacity=0),
     level=Level(xp_given=140),
@@ -252,7 +252,7 @@ pulse_turret = Actor(
     char="♣", 
     color=(255, 255, 255), 
     name="Pulse Turret", 
-    ai_class=HostileRangedEnemy,equipment=Equipment(weapon=pulse_t), 
+    ai_class=TurretEnemy,equipment=Equipment(weapon=pulse_t), 
     fighter=Fighter(hp=50, agility=0, strength=0, ammo=1000),
     inventory=Inventory(capacity=0),
     level=Level(xp_given=140),
@@ -282,7 +282,7 @@ error_clone02 = Actor(
 human_kimera = Actor(
     char="•",
     color=(255, 255, 255),
-    name="human_kimera",
+    name="human kimera",
     ai_class=HostileEnemy,equipment=Equipment(weapon=sword, armor=leather_armor),
     fighter=Fighter(hp=60, agility=15, strength=10, ammo=0),
     inventory=Inventory(capacity=0),
@@ -292,7 +292,7 @@ human_kimera = Actor(
 material_kimera = Actor(
     char="◘",
     color=(255, 255, 255),
-    name="material_kimera",
+    name="material kimera",
     ai_class=HostileEnemy,equipment=Equipment(weapon=dagger),
     fighter=Fighter(hp=30, agility=25, strength=14, ammo=1),
     inventory=Inventory(capacity=0),

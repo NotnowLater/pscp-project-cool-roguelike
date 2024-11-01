@@ -131,6 +131,22 @@ class HostileRangedEnemy(BaseAI):
         # Wait if can't find a path to player
         return WaitAction(self.entity).perform()
 
+class TurretEnemy(BaseAI):
+    def __init__(self, entity: Actor) -> None:
+        super().__init__(entity)
+        self.path: List[Tuple[int, int]] = []
+
+    def perform(self) -> None:
+        target = self.engine.player
+        dx = target.x - self.entity.x
+        dy = target.y - self.entity.y
+        # If the player can see this entity thats mean there is a clear los to player, so shoot at the player.
+        if self.engine.game_map.visible[self.entity.x, self.entity.y]:
+            # Shoot if actually have ammo, otherwise just melee attack the enemy. 
+            if self.entity.fighter.ammo >= self.entity.fighter.ranged_attack_shot:
+                return RangedAttackAction(self.entity, target_xy=(target.x, target.y)).perform()
+        return
+
 class StaticEnemy(BaseAI):
     def __init__(self, entity: Actor) -> None:
         super().__init__(entity)

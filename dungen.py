@@ -55,8 +55,8 @@ special_room_appear_chance: Dict = {
 #(Floor, Max Monsters)
 special_room_type_chance: Dict[int, List[Tuple[int, int]]] = {
     0: [(0, 5),(1, 5)],
-    2: [(2, 5),(12, 3),(6, 2),(10, 1),(15, 2),(16, 2)],
-    3: [(3, 4),(4, 5),(8, 3),(9, 1),(11, 2),(13, 3)],
+    2: [(2, 5),(12, 3),(6, 2),(10, 1),(16, 2)],
+    3: [(3, 4),(4, 5),(8, 3),(9, 1),(11, 2),(13, 3),(15, 2)],
     4: [(5, 3),(7, 3),(14, 4)]
 }
 
@@ -148,11 +148,12 @@ item_chance: Dict[int, List[Tuple[Entity, int]]] = {
 
 #(Floor, Enemy)
 enemy_chances: Dict[int, List[Tuple[Entity, int]]] = {
-    0: [(entity_factory.janitor, 50),(entity_factory.crew, 3),(entity_factory.item_box, 1)],
+    0: [(entity_factory.beam_turret, 50),(entity_factory.crew, 3),(entity_factory.item_box, 1)],
     2: [(entity_factory.crew, 15),],
-    3: [(entity_factory.security, 20),(entity_factory.item_box, 4),((entity_factory.material_kimera, 100))],
-    5: [(entity_factory.crew, 30), (entity_factory.error_clone02, 10), (entity_factory.item_box, 5),(entity_factory.human_kimera, 20),(entity_factory.material_kimera, 80)],
-    7: [(entity_factory.crew, 20),  (entity_factory.error_clone01, 40), (entity_factory.error_clone02, 20),(entity_factory.human_kimera, 40),(entity_factory.material_kimera, 60)],
+    3: [(entity_factory.security, 20),(entity_factory.item_box, 4)],
+    5: [(entity_factory.crew, 20), (entity_factory.error_clone02, 10), (entity_factory.item_box, 5)],
+    7: [(entity_factory.error_clone01, 40), (entity_factory.error_clone02, 20)],
+    8: [(entity_factory.human_kimera, 20)]
 }
 
 def get_max_value_for_floor(
