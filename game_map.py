@@ -6,6 +6,7 @@ from typing import Iterable, Iterator, Optional, TYPE_CHECKING
 
 import numpy as np
 from tcod.console import Console
+from components.ai_component import StaticEnemy
 
 import tile_types
 
@@ -62,7 +63,7 @@ class GameMap:
         min_distance = float("inf")
         nearest_enemy_pos = None
         for entity in self.entities:
-            if entity is not self.engine.player and hasattr(entity, "fighter") and entity.ai != None and self.engine.game_map.visible[entity.x,entity.y]:
+            if entity is not self.engine.player and hasattr(entity, "fighter") and entity.ai != None and not isinstance(entity.ai, StaticEnemy) and self.engine.game_map.visible[entity.x,entity.y]:
                 distance = ((entity.x - player_x) ** 2 + (entity.y - player_y) ** 2) ** 0.5
                 if distance < min_distance:
                     min_distance = distance

@@ -453,6 +453,7 @@ class MainGameEventHandler(EventHandler):
                 if item.name == "Nano patch":
                     try:
                         item.consumable.activate(Action(self.engine.player))
+                        self.engine.handle_enemy_turn()
                     except exceptions.Impossible as exc:
                         self.engine.message_log.add_message(exc.args[0], colors.impossible)
                     return
