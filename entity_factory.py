@@ -172,7 +172,7 @@ security = Actor(
     )
 
 security_smg = Actor(
-    char="♣", 
+    char="♠", 
     color=(255, 255, 255), 
     name="Security", 
     ai_class=HostileRangedEnemy,equipment=Equipment(weapon=smg, armor=chain_mail), 
@@ -183,7 +183,7 @@ security_smg = Actor(
     )
 
 combat_droid = Actor(
-    char="C", 
+    char="♂", 
     color=(255, 255, 255), 
     name="Combat Droid", 
     ai_class=HostileRangedEnemy,equipment=Equipment(weapon=smg), 
@@ -194,7 +194,7 @@ combat_droid = Actor(
     )
 
 marine_sa = Actor(
-    char="M", 
+    char="♀", 
     color=(255, 255, 255), 
     name="Assault Marine", 
     ai_class=HostileRangedEnemy,equipment=Equipment(weapon=carbine_ba, armor=combat_armor),
@@ -205,7 +205,7 @@ marine_sa = Actor(
     )
 
 marine_ba = Actor(
-    char="M", 
+    char="♪", 
     color=(255, 255, 255), 
     name="Support Marine", 
     ai_class=HostileRangedEnemy,equipment=Equipment(weapon=carbine_sa, armor=combat_armor), 
@@ -216,7 +216,7 @@ marine_ba = Actor(
     )
 
 marine_ap = Actor(
-    char="M", 
+    char="♫", 
     color=(255, 255, 255), 
     name="Marine Sharpshooter", 
     ai_class=HostileRangedEnemy,equipment=Equipment(weapon=rifle_ap, armor=combat_armor), 
@@ -227,7 +227,7 @@ marine_ap = Actor(
     )
 
 marine_la = Actor(
-    char="M", 
+    char="☼", 
     color=(255, 255, 255), 
     name="Marine Laser Sharpshooter", 
     ai_class=HostileRangedEnemy,equipment=Equipment(weapon=rifle_laser, armor=combat_armor), 
@@ -238,7 +238,7 @@ marine_la = Actor(
     )
 
 beam_turret = Actor(
-    char="T", 
+    char="►", 
     color=(255, 255, 255), 
     name="Beam Turret", 
     ai_class=TurretEnemy,equipment=Equipment(weapon=beam_t), 
@@ -249,7 +249,7 @@ beam_turret = Actor(
     )
 
 pulse_turret = Actor(
-    char="T", 
+    char="◄", 
     color=(255, 255, 255), 
     name="Pulse Turret", 
     ai_class=TurretEnemy,equipment=Equipment(weapon=pulse_t), 

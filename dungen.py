@@ -25,7 +25,7 @@ max_items_for_floor_by_floor = [
     (1, 3),
     (3, 4),
     (4, 5),
-    (5, 6),
+    (6, 6),
     (7, 7), 
     (10, 10),
 ]
@@ -71,7 +71,7 @@ special_room_type_chance: Dict[int, List[Tuple[int, int]]] = {
 #(Type, [Min_x ,Max_x, Min_y, Max_y, [(Entity,(pos_x,pos_y))]]])
 #        --------Room size----------  -----Entity in Room-----
 special_room_attribute: Dict = {
-    0: (7,7,7,7,[(entity_factory.item_box,(3,3))]),
+    0: (7,7,7,7,[(entity_factory.item_box,(3,3))],[]),
     1: (10,10,10,10,[(entity_factory.table,(3,3)),(entity_factory.table,(7,3)),
                      (entity_factory.table,(3,6)),(entity_factory.table,(7,6)),
                      (entity_factory.janitor,(3,4)),(entity_factory.janitor,(7,4)),
@@ -180,8 +180,8 @@ enemy_chances: Dict[int, List[Tuple[Entity, int]]] = {
     2: [(entity_factory.crew, 15)],
     3: [(entity_factory.security, 20),(entity_factory.item_box, 4)],
     4: [(entity_factory.crew, 20), (entity_factory.item_box, 5), (entity_factory.security_smg, 25),(entity_factory.janitor, 0)],
-    5: [(entity_factory.combat_droid, 18),(entity_factory.security, 30), (entity_factory.security_smg, 30)],
-    6: [(entity_factory.combat_droid, 28),(entity_factory.crew, 0)],
+    5: [(entity_factory.combat_droid, 20),(entity_factory.security, 30), (entity_factory.security_smg, 30)],
+    6: [(entity_factory.combat_droid, 32),(entity_factory.crew, 0)],
     #7 : New Item box
     8: [(entity_factory.error_clone01, 20),(entity_factory.error_clone02, 20)],
     9: [(entity_factory.marine_ba, 20),(entity_factory.marine_sa, 20)],
