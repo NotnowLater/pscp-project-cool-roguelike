@@ -37,6 +37,14 @@ bandage = Item(
     weight=2,
 )
 
+bandage2 = Item(
+    char="!",
+    color=(251, 243, 0),
+    name="Nano patch++",
+    consumable=consumable.HealingConsumable(amount=180),
+    weight=3,
+)
+
 ammo20 = Item(
     char="!",
     color=(0, 127, 255),
@@ -305,6 +313,16 @@ item_box = Actor(
     name="Item box", 
     ai_class=StaticEnemy,equipment=Equipment(), 
     fighter=Fighter(hp=14, agility=0, strength=0, ammo=0),
+    inventory=Inventory(capacity=0),
+    level=Level(xp_given=0),
+    item_drop_chance = 0
+    )
+item_box2 = Actor(
+    char="ß", 
+    color=(255, 255, 255), 
+    name="Item box", 
+    ai_class=StaticEnemy,equipment=Equipment(), 
+    fighter=Fighter(hp=24, agility=0, strength=0, ammo=1),
     inventory=Inventory(capacity=0),
     level=Level(xp_given=0),
     item_drop_chance = 0

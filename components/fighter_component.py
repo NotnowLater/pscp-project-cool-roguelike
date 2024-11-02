@@ -167,7 +167,7 @@ class Fighter(BaseComponent):
                 death_message = f"{self.parent.name} is destroyed!"
                 death_msg_color = colors.enemy_die
                 from dungen import item_box_drop_item
-                item_box_drop_item(self.parent, self.engine.game_map, 0)
+                item_box_drop_item(self.parent, self.engine.game_map, self.parent.fighter.ammo)
                 self.engine.game_map.entities.remove(self.parent)
                 self.engine.message_log.add_message(death_message, death_msg_color)
                 return
