@@ -69,16 +69,16 @@ chain_mail = Item(
 )
 
 combat_jumpsuit = Item(
-    char="[",
-    color=(0, 191, 255),
+    char="{",
+    color=(160, 86, 221),
     name="Combat Jumpsuit",
     equippable=equippable.CombatJumpSuit(),
     weight=20,
 )
 
 combat_armor = Item(
-    char="[",
-    color=(0, 191, 255),
+    char="{",
+    color=(255, 218, 0),
     name="Combat Armor",
     equippable=equippable.CombatArmor(),
     weight=24,
@@ -90,27 +90,27 @@ pistol = Item(
 )
 
 smg = Item(
-    char=";", color=(139, 69, 19), name="NK-2 Sub Machine Gun", equippable=equippable.SMG(),
+    char=";", color=(0, 191, 255), name="NK-2 Sub Machine Gun", equippable=equippable.SMG(),
     weight=6,
 )
 
 carbine_sa = Item(
-    char=";", color=(139, 69, 19), name="NK-5 Semi-Auto Carbine", equippable=equippable.CarbineSA(),
+    char=";", color=(88, 88, 88), name="NK-5 Semi-Auto Carbine", equippable=equippable.CarbineSA(),
     weight=8,
 )
 
 carbine_ba = Item(
-    char=";", color=(139, 69, 19), name="NK-6 Brust Carbine", equippable=equippable.CarbineBA(),
+    char=";", color=(255, 218, 0), name="NK-6 Burst Carbine", equippable=equippable.CarbineBA(),
     weight=8,
 )
 
 rifle_ap = Item(
-    char=";", color=(139, 69, 19), name="NK-9 Anti Material Rifle", equippable=equippable.RifleAP(),
+    char=";", color=(160, 86, 221), name="NK-9 Anti Material Rifle", equippable=equippable.RifleAP(),
     weight=12,
 )
 
 rifle_laser = Item(
-    char=";", color=(139, 69, 19), name="NK-11 Laser Rifle", equippable=equippable.RifleLaser(),
+    char=";", color=(255, 0, 0), name="NK-11 Laser Rifle", equippable=equippable.RifleLaser(),
     weight=12,
 )
 

@@ -190,5 +190,118 @@ AAAAAAAAAAAAAAAAAAAE
  ii iiiiiiiiii                   
 ii  i ii iii i                   
       i i i i i                  
+""",
+"Combat Jumpsuit":"""
+           x][ ][x           
+       [[XeYUU UUYeX]]       
+       [XxeXYUUUYXexX]       
+       XYYYXXYYYXYYYYX       
+       [IIzxXYYYXxzII]       
+      [x-x YXYYYXe x-x]      
+      [x-x eXYYYXe x-x]      
+       xxx eeWYWee xxx       
+       [x] eeWYWee [x]       
+       [ ]  eeWee  [ ]       
+            I---I            
+          q eeeee p          
+          qqeeeeepp          
+          qqxeeexpp          
+          YqxxexxpY          
+           p-] [-q           
+           qxx xxp           
+           [0x x0]           
+           [Ho oH]           
+           [Hx xH]           
+            px xq            
+            px xq            
+            ww ww            
+""",
+"Combat Armor":"""
+ [  AA][ ][AA  ] 
+ []XaYUU UUYaX[] 
+ [MxoXYUUUYXoxM] 
+[MYYYX[---]YYYYM]
+[B+Iv[--X--]vI+B]
+[Bob Y[---]Y doB]
+[B+b aX[-]Xa d+B]
+ J-J aaW-Waa J-J 
+ [M] aaW+Waa [M] 
+ I I  aaWaa  I I 
+      I---I      
+      [MVM]      
+    Eqe+M+epE    
+    Eqoe+eopE    
+    EqxxexxpE    
+     [v] [v]     
+     [v] [v]     
+     iex xei     
+     [Eo oE]     
+     iEU UEi     
+      pU Uq      
+      po oq      
+      MM MM      
+""",
+"NK-2 Sub Machine Gun":"""    
+               EXXX           
+  m         XXXXXXXX      XXA 
+ XXAAA--AAAAAAAAAAAXXAAAAAAAAX
+XXXXAAAAAAAAAAAAAAAAAAAAAAAAAX
+ XXXMMMMMMAAAAAAAAAAAAAAAAAAAX
+ XXXAAAAAAAAAAxxxxxxxxxxxxxxxX
+ [XXAAAAAAAAAxxxxxxxxxxXxxxxX 
+             XAAA    XXXXX    
+              XX-----XXXX     
+               X      XX      
+               XX     XX      
+                X     XXX     
+                XX----XXXX    
+                 XXXXXXXXX    
+""",
+"NK-5 Semi-Auto Carbine":"""
+        X                               
+        Xxm          XXXXXXXX           
+      MMMMMMMMM--AAAAAAAAAAAXXAAAAAAAXx]
+XxxxxxMMMMMMMMMAAAAAAAAAAAAAAA--------x]
+       MMMMMMMMAAAAAAAAxxxxxxxxxxxxxxXx]
+               AAAAAAAxxxxxxxxxxXxxxX x]
+                     XAAA    XXX       ]
+                      XX     XXX        
+                       XXX----XX        
+                         XXXXXXXX       
+""",
+"NK-6 Burst Carbine":"""
+               vXXX                    
+                XX                     
+   MMMMMMMMMNNAAAvvAAAAAXXAAAAAAAXxv VV
+XXXMMMMMM--------AvvAAAAAAAAAAAAAAxvvXV
+    MMMMMMMMAAAAAAAvvxxxxxxxxxxxxXX    
+            xxxxxxxxvvAAATAAXAAAX      
+                -XAAAvvXXTX  XXX       
+                      XXXXm  XXXX      
+                      XXXX mmXXXXX     
+                             XXXXXx    
+                               XXXx    
+""",
+"NK-9 Anti Material Rifle":"""
+                      OAAAAA]             
+                         I I              
+                  /xxxxAAAAAAAAAAAAAA     
+XXXXX---------xxxxNNNNNN     N----AAAxxxx]
+              xxOxxxxxXXXXAAOoxxxxxx  AA ]
+                xxx       AAoox]  xxx   A]
+                           xx] xxxx--x    
+                           xx]    x-o-x   
+                                   xxxxx  
+""",
+"NK-11 Laser Rifle":""""
+                  /------             
+//AAAAA/AAA/AAAAAAAAAAAAAA  AAAAA     
+  -----[AAAAAAAAAAAA-----AA0I---IA]   
+  -----[AAAAAAAAAAAAA-----0O0AAAAA]-A]
+//AAAA/AAA/AAAA---AAAAAAAAA0AAAAAA--A]
+             AA-O-AAAA  AAAA         ]
+              A-AA    A+AAAAA         
+              Aa         AAAAA        
+                          AAAAA       
 """
 }
