@@ -190,6 +190,17 @@ security_smg = Actor(
     item_drop_chance = 0.3
     )
 
+security_op = Actor(
+    char="‼", 
+    color=(255, 255, 255), 
+    name="Security", 
+    ai_class=HostileEnemy,equipment=Equipment(armor=chain_mail), 
+    fighter=Fighter(hp=50, agility=8, strength=30, ammo=0),
+    inventory=Inventory(capacity=0),
+    level=Level(xp_given=80),
+    item_drop_chance = 0.18
+    )
+
 combat_droid = Actor(
     char="♂", 
     color=(255, 255, 255), 
@@ -262,6 +273,17 @@ pulse_turret = Actor(
     name="Pulse Turret", 
     ai_class=TurretEnemy,equipment=Equipment(weapon=pulse_t), 
     fighter=Fighter(hp=50, agility=0, strength=0, ammo=1000),
+    inventory=Inventory(capacity=0),
+    level=Level(xp_given=140),
+    item_drop_chance = 0.0
+    )
+
+sniper_drone = Actor(
+    char="¶", 
+    color=(255, 255, 255), 
+    name="Sniper Drone", 
+    ai_class=HostileEnemy,equipment=Equipment(weapon=rifle_ap), 
+    fighter=Fighter(hp=5, agility=22, strength=20, ammo=300),
     inventory=Inventory(capacity=0),
     level=Level(xp_given=140),
     item_drop_chance = 0.0

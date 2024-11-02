@@ -268,8 +268,10 @@ enemy_chances: Dict[int, List[Tuple[Entity, int]]] = {
     8: [(entity_factory.marine_ba, 20),(entity_factory.marine_sa, 20)],
     9: [(entity_factory.marine_ap, 20),(entity_factory.marine_la, 20)],
     10: [(entity_factory.beam_turret, 20),(entity_factory.pulse_turret, 20)],
-    11: [(entity_factory.human_kimera, 20)],
-    12: [(entity_factory.material_kimera, 20)],
+    11: [(entity_factory.human_kimera, 20),(entity_factory.security_op, 1)],
+    12: [(entity_factory.material_kimera, 20),(entity_factory.security_op, 2)],
+    13: [(entity_factory.security_op, 30)],
+    14: [(entity_factory.sniper_drone, 15)],
 }
 
 def get_max_value_for_floor(
