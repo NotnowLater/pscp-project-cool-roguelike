@@ -21,6 +21,7 @@ if TYPE_CHECKING:
 class Engine:
     game_map: GameMap
     game_world: GameWorld
+    station_destroyed: bool = False
 
     def __init__(self, player: Actor):
         self.message_log = MessageLog()

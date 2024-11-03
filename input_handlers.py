@@ -420,15 +420,13 @@ class MainGameEventHandler(EventHandler):
 
         player = self.engine.player
 
-        if key == tcod.event.KeySym.PERIOD and modifier & (
-            tcod.event.KMOD_LSHIFT | tcod.event.KMOD_RSHIFT
-        ):
-            return TakeStairsAction(player)
-
         if key in MOVE_KEYS:
             dx, dy = MOVE_KEYS[key]
             action = BumpAction(player, dx, dy)
-
+        elif key == tcod.event.KeySym.PERIOD and modifier & (
+            tcod.event.KMOD_LSHIFT | tcod.event.KMOD_RSHIFT
+        ):
+            return TakeStairsAction(player)
         elif key in WAIT_KEYS:
             action = WaitAction(player)
 
@@ -460,7 +458,16 @@ class MainGameEventHandler(EventHandler):
         elif key in RANGED_ATTACK_KEYS:
             if player.fighter.can_ranged_attack:
                 return SingleRangedAttackHandler(self.engine, lambda xy:RangedAttackAction(player, xy))
-        
+        if self.engine.station_destroyed:
+            import endscreen
+            endd = endscreen.EndScreen(
+                self.engine.player.fighter.max_hp,
+                self.engine.player.fighter.strength,
+                self.engine.player.fighter.agility,
+                self.engine.player.level.current_level,
+                self.engine.player.level.total_xp,
+                )
+            return endd
         # No valid key was pressed
         return action
 
