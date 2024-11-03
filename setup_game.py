@@ -46,7 +46,7 @@ def new_game() -> Engine:
     engine.update_fov()
 
     engine.message_log.add_message(
-        "Hello and welcome, adventurer, to yet another dungeon!", colors.welcome_text
+        "Greetings, Solider, Your Mission is to destroy this station.", colors.welcome_text
     )
 
     # dagger = copy.deepcopy(entity_factory.dagger)
@@ -144,7 +144,9 @@ class MainMenu(input_handlers.BaseEventHandler):
                 traceback.print_exc()  # Print to stderr.
                 return input_handlers.PopupMessage(self, f"Failed to load save:\n{exc}")
         elif event.sym == tcod.event.KeySym.n:
-            audiobrain.main_bgm.stop()
             # self.main_menu_snd.stop()
+            audiobrain.main_bgm.stop()
             return input_handlers.MainGameEventHandler(new_game())
+            # import endscreen
+            # return endscreen.EndScreen()
         return None

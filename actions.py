@@ -48,8 +48,16 @@ class TakeStairsAction(Action):
             )
         elif (self.entity.x, self.entity.y) == self.engine.game_map.endswitch_location:
             self.engine.message_log.add_message(
-                "You activated the final switch.", colors.descend
+                "You activated the self destruct switch...", colors.descend
             )
+            import endscreen
+            return endscreen.EndScreen(
+                self.engine.player.fighter.max_hp,
+                self.engine.player.fighter.strength,
+                self.engine.player.fighter.agility,
+                self.engine.player.level.current_level,
+                self.engine.player.level.total_xp,
+                )
         else:
             raise exceptions.Impossible("There are no stairs here.")
 
