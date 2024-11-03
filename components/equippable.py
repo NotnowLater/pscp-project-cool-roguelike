@@ -55,6 +55,10 @@ class Sword(Equippable):
     def __init__(self) -> None:
         super().__init__(equipment_type=EquipmentType.WEAPON, attack_die=2, attack_roll=4, atk_snd_id="knife_1")
 
+class Scythe(Equippable):
+    def __init__(self) -> None:
+        super().__init__(equipment_type=EquipmentType.WEAPON, attack_die=4, attack_roll=5, atk_snd_id="knife_1")
+
 class Mop(Equippable):
     def __init__(self) -> None:
         super().__init__(

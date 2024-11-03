@@ -25,7 +25,7 @@ explosive_grenade = Item(
     char="~",
     color=(255, 0, 0),
     name="Explosive grenade",
-    consumable=consumable.ExplosiveConsumable(damage=12, radius=3),
+    consumable=consumable.ExplosiveConsumable(damage=20, radius=3),
     weight=3,
 )
 
@@ -59,6 +59,8 @@ dagger = Item(
 )
 
 sword = Item(char="/", color=(0, 191, 255), name="Razorblade", equippable=equippable.Sword(), weight=4,)
+
+scythe = Item(char="/", color=(160, 86, 221), name="Galactic Scythe", equippable=equippable.Scythe(), weight=8,)
 
 leather_armor = Item(
     char="[",
@@ -153,7 +155,7 @@ janitor = Actor(
     equipment=Equipment(weapon=mop), 
     fighter=Fighter(hp=6, agility=6, strength=7, ammo=0),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=30),
+    level=Level(xp_given=25),
     item_drop_chance = 0.3
     )
 
@@ -175,7 +177,7 @@ security = Actor(
     ai_class=HostileRangedEnemy,equipment=Equipment(weapon=pistol, armor=chain_mail), 
     fighter=Fighter(hp=16, agility=8, strength=8, ammo=6),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=55),
+    level=Level(xp_given=45),
     item_drop_chance = 0.24
     )
 
@@ -186,7 +188,7 @@ security_smg = Actor(
     ai_class=HostileRangedEnemy,equipment=Equipment(weapon=smg, armor=chain_mail), 
     fighter=Fighter(hp=16, agility=8, strength=8, ammo=6),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=60),
+    level=Level(xp_given=50),
     item_drop_chance = 0.3
     )
 
@@ -195,10 +197,32 @@ security_op = Actor(
     color=(255, 255, 255), 
     name="Security", 
     ai_class=HostileEnemy,equipment=Equipment(armor=chain_mail), 
-    fighter=Fighter(hp=50, agility=8, strength=30, ammo=0),
+    fighter=Fighter(hp=80, agility=8, strength=42, ammo=0),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=80),
+    level=Level(xp_given=100),
     item_drop_chance = 0.18
+    )
+
+security_laser = Actor(
+    char="▬", 
+    color=(255, 255, 255), 
+    name="Security", 
+    ai_class=HostileRangedEnemy,equipment=Equipment(weapon=rifle_laser, armor=chain_mail), 
+    fighter=Fighter(hp=80, agility=9, strength=60, ammo=6),
+    inventory=Inventory(capacity=0),
+    level=Level(xp_given=105),
+    item_drop_chance = 0.19
+    )
+
+security_scythe = Actor(
+    char="↨", 
+    color=(255, 255, 255), 
+    name="Security", 
+    ai_class=HostileEnemy,equipment=Equipment(weapon=scythe, armor=chain_mail), 
+    fighter=Fighter(hp=88, agility=16, strength=89, ammo=0),
+    inventory=Inventory(capacity=0),
+    level=Level(xp_given=120),
+    item_drop_chance = 0.4
     )
 
 combat_droid = Actor(
@@ -208,7 +232,7 @@ combat_droid = Actor(
     ai_class=HostileRangedEnemy,equipment=Equipment(weapon=smg), 
     fighter=Fighter(hp=20, agility=6, strength=4, ammo=100),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=70),
+    level=Level(xp_given=55),
     item_drop_chance = 0.3
     )
 
@@ -217,10 +241,10 @@ marine_sa = Actor(
     color=(255, 255, 255), 
     name="Assault Marine", 
     ai_class=HostileRangedEnemy,equipment=Equipment(weapon=carbine_ba, armor=combat_armor),
-    fighter=Fighter(hp=30, agility=8, strength=12, ammo=100),
+    fighter=Fighter(hp=30, agility=8, strength=18, ammo=100),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=140),
-    item_drop_chance = 0.3
+    level=Level(xp_given=60),
+    item_drop_chance = 0.32
     )
 
 marine_ba = Actor(
@@ -228,9 +252,9 @@ marine_ba = Actor(
     color=(255, 255, 255), 
     name="Support Marine", 
     ai_class=HostileRangedEnemy,equipment=Equipment(weapon=carbine_sa, armor=combat_armor), 
-    fighter=Fighter(hp=30, agility=8, strength=12, ammo=100),
+    fighter=Fighter(hp=30, agility=8, strength=18, ammo=100),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=150),
+    level=Level(xp_given=60),
     item_drop_chance = 0.3
     )
 
@@ -239,10 +263,10 @@ marine_ap = Actor(
     color=(255, 255, 255), 
     name="Marine Sharpshooter", 
     ai_class=HostileRangedEnemy,equipment=Equipment(weapon=rifle_ap, armor=combat_armor), 
-    fighter=Fighter(hp=30, agility=10, strength=10, ammo=100),
+    fighter=Fighter(hp=30, agility=10, strength=16, ammo=100),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=160),
-    item_drop_chance = 0.3
+    level=Level(xp_given=70),
+    item_drop_chance = 0.2
     )
 
 marine_la = Actor(
@@ -250,10 +274,10 @@ marine_la = Actor(
     color=(255, 255, 255), 
     name="Marine Laser Sharpshooter", 
     ai_class=HostileRangedEnemy,equipment=Equipment(weapon=rifle_laser, armor=combat_armor), 
-    fighter=Fighter(hp=30, agility=10, strength=10, ammo=100),
+    fighter=Fighter(hp=32, agility=10, strength=20, ammo=100),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=170),
-    item_drop_chance = 0.28
+    level=Level(xp_given=75),
+    item_drop_chance = 0.1
     )
 
 beam_turret = Actor(
@@ -261,9 +285,9 @@ beam_turret = Actor(
     color=(255, 255, 255), 
     name="Beam Turret", 
     ai_class=TurretEnemy,equipment=Equipment(weapon=beam_t), 
-    fighter=Fighter(hp=50, agility=0, strength=0, ammo=500),
+    fighter=Fighter(hp=50, agility=0, strength=18, ammo=500),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=140),
+    level=Level(xp_given=100),
     item_drop_chance = 0.0
     )
 
@@ -272,9 +296,9 @@ pulse_turret = Actor(
     color=(255, 255, 255), 
     name="Pulse Turret", 
     ai_class=TurretEnemy,equipment=Equipment(weapon=pulse_t), 
-    fighter=Fighter(hp=50, agility=0, strength=0, ammo=1000),
+    fighter=Fighter(hp=50, agility=0, strength=18, ammo=1000),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=140),
+    level=Level(xp_given=100),
     item_drop_chance = 0.0
     )
 
@@ -285,7 +309,7 @@ sniper_drone = Actor(
     ai_class=HostileEnemy,equipment=Equipment(weapon=rifle_ap), 
     fighter=Fighter(hp=5, agility=22, strength=20, ammo=300),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=140),
+    level=Level(xp_given=90),
     item_drop_chance = 0.0
     )
 
@@ -296,7 +320,7 @@ error_clone01 = Actor(
     ai_class=HostileEnemy,equipment=Equipment(weapon=dagger, armor=chain_mail),
     fighter=Fighter(hp=25, agility=10, strength=10, ammo=0),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=100),
+    level=Level(xp_given=70),
     item_drop_chance = 0.32
     )
 error_clone02 = Actor(
@@ -304,9 +328,9 @@ error_clone02 = Actor(
     color=(255, 255, 255), 
     name="Failed Clone", 
     ai_class=HostileEnemy,equipment=Equipment(weapon=sword, armor=leather_armor), 
-    fighter=Fighter(hp=50, agility=10, strength=8, ammo=0),
+    fighter=Fighter(hp=50, agility=12, strength=11, ammo=0),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=100),
+    level=Level(xp_given=75),
     item_drop_chance = 0.32
     )
 human_kimera = Actor(
@@ -316,7 +340,7 @@ human_kimera = Actor(
     ai_class=HostileEnemy,equipment=Equipment(weapon=sword, armor=leather_armor),
     fighter=Fighter(hp=60, agility=15, strength=10, ammo=0),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=170),
+    level=Level(xp_given=80),
     item_drop_chance= 0.3
     )
 material_kimera = Actor(
@@ -324,9 +348,9 @@ material_kimera = Actor(
     color=(255, 255, 255),
     name="material kimera",
     ai_class=HostileEnemy,equipment=Equipment(weapon=dagger),
-    fighter=Fighter(hp=30, agility=25, strength=14, ammo=1),
+    fighter=Fighter(hp=30, agility=25, strength=14, ammo=0),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=50),
+    level=Level(xp_given=80),
     item_drop_chance=0.1
     )
 item_box = Actor(
@@ -338,6 +362,16 @@ item_box = Actor(
     inventory=Inventory(capacity=0),
     level=Level(xp_given=0),
     item_drop_chance = 0
+    )
+combat_droid_v2 = Actor(
+    char="§", 
+    color=(255, 255, 255), 
+    name="Combat Droid V2", 
+    ai_class=HostileRangedEnemy,equipment=Equipment(weapon=rifle_laser), 
+    fighter=Fighter(hp=55, agility=6, strength=60, ammo=100),
+    inventory=Inventory(capacity=0),
+    level=Level(xp_given=85),
+    item_drop_chance = 0.3
     )
 item_box2 = Actor(
     char="ß", 

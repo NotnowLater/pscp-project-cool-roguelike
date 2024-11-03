@@ -264,7 +264,7 @@ class LevelUpEventHandler(AskUserEventHandler):
         console.print(
             x=x + 1,
             y=5,
-            string=f"B] AGI [+2 AGI, from {self.engine.player.fighter.agility}]",
+            string=f"B] AGI [+1 AGI, from {self.engine.player.fighter.agility}]",
         )
 
     def ev_keydown(self, event: tcod.event.KeyDown) -> Optional[ActionOrHandler]:
@@ -278,7 +278,7 @@ class LevelUpEventHandler(AskUserEventHandler):
                 player.level.increase_attack(2)
             elif index == 1:
                 player.level.increase_max_hp(int(player.fighter.max_hp / 5) + 2)
-                player.level.increase_dv(2)
+                player.level.increase_dv(1)
         else:
             self.engine.message_log.add_message("Invalid entry.", colors.invalid)
 
@@ -598,6 +598,7 @@ class InventoryEventHandler(AskUserEventHandler):
                             else:
                                 log_console.print(45, 32, f'"Melee ATK:"{item.equippable.attack_base+self.engine.player.fighter.attack_damage_bonus}-{((item.equippable.attack_roll+1)*(item.equippable.attack_die+1))+self.engine.player.fighter.attack_damage_bonus}')
                                 log_console.print(45, 34, f'"Range ATK:"{item.equippable.ranged_attack_base+self.engine.player.fighter.attack_damage_bonus}-{((item.equippable.ranged_attack_roll)*(item.equippable.ranged_attack_die))+self.engine.player.fighter.attack_damage_bonus}')
+                                log_console.print(45, 36, f'"Bullets per Shot:"{item.equippable.ranged_attack_shot}')
                                 log_console.print(46, 42, "[Range Weapon]")
                         else:
                             log_console.print(45, 32, f'"DEF:+"{item.equippable.defense}')

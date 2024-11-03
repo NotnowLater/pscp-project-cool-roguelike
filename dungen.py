@@ -25,9 +25,14 @@ max_items_for_floor_by_floor = [
     (1, 3),
     (3, 4),
     (4, 5),
-    (6, 6),
-    (7, 7), 
-    (10, 10),
+    (5, 6),
+    (6, 7),
+    (7, 8), 
+    (8, 10), 
+    (10, 11),
+    (11, 12),
+    (15, 13),
+    (17, 14),
 ]
 
 #(Floor, Max Monsters)
@@ -35,6 +40,11 @@ max_monsters_by_floor = [
     (1, 3),
     (4, 4),
     (6, 5),
+    (10, 6),
+    (11, 7),
+    (15, 8),
+    (17, 9),
+    (19, 9),
 ]
 
 #(Floor, Max special rooms)
@@ -42,31 +52,40 @@ max_special_rooms_by_floor = [
     (1, 3),
     (4, 4),
     (6, 5),
-    (9, 6),
-    (14, 7),
+    (8, 6),
+    (9, 7),
+    (17, 8),
 ]
 
 #(Floor, Chance)
 special_room_appear_chance: Dict = {
     0: 0.05,
-    2: 0.09,
-    3: 0.14,
+    2: 0.1,
+    3: 0.15,
     4: 0.24,
     5: 0.3,
-    7: 0.34,
-    9: 0.38,
+    7: 0.33,
+    8: 0.335,
+    9: 0.35,
+    11: 0.36,
+    15: 0.37,
+    18: 0.39,
 }
 
 #(Floor, Max Monsters)
 special_room_type_chance: Dict[int, List[Tuple[int, int]]] = {
     0: [(0, 5),(1, 5)],
     2: [(2, 5),(12, 3),(6, 2),(16, 2)],
-    3: [(3, 4),(4, 5),(8, 3),(9, 1),(11, 2),(13, 3),(15, 2),(10, 2),(7, 3),(18,2)],
+    3: [(3, 4),(4, 5),(8, 2),(9, 1),(11, 2),(13, 3),(15, 2),(10, 2),(7, 3),(18,2)],
     4: [(1, 0),(3, 0),(4, 0),(6, 0),(7, 0),(10, 0),(15, 0),(12, 0),(16, 0),(2, 0),(0, 0),
-        (5, 3),(14, 4)],
+        (5, 2),(14, 2)],
     5: [(17,2),(19,3),(20,1),(21,1),(22,1),(23,2),(24,1),(25,1),(26,1),(27,2),(28,1),(29,2),(30,3),(31,2),
         (32,1),(33,2),(34,2),(35,1),(36,1),(37,1),(38,2),(39,1)],
-    6: [(5, 0),(11, 0),(13, 0),(14, 0),(18, 0),(36, 0),(40,1)]
+    6: [(5, 0),(11, 0),(13, 0),(14, 0),(18, 0),(36, 0),(40,1)],
+    8: [(17, 0),(19,0),(20,0)],
+    9: [(33, 2)],
+    10: [(23,0),(24,0),(25,0),(26,0),(27,0),(28,0),(29,0),(30,0),(31,0),(32,0),(33,0),(34,0),(35,0),(36,0),(37,0),(38,0),(39,0),(40,0),(41,0),
+         (41,2),(43,2),(44,1),(45,2),(46,2),(47,1),(48,1),(49,1),(50,2),(51,2),(52,1),(53,1),(54,2),(55,2),(56,3)]
 }
 
 #(Type, [Min_x ,Max_x, Min_y, Max_y, [(Entity,(pos_x,pos_y))]]])
@@ -92,7 +111,8 @@ special_room_attribute: Dict = {
                      (entity_factory.table,(6,4)),(entity_factory.table,(4,6)),
                      (entity_factory.table,(6,6)), (entity_factory.table,(4,5)),
                      (entity_factory.table,(6,5)), (entity_factory.table,(5,4)),
-                     (entity_factory.table,(5,6))],[]),
+                     (entity_factory.table,(5,6))],[(tile_types.wall2,(2,2)),
+                    (tile_types.wall2,(8,2)),(tile_types.wall2,(2,8)),(tile_types.wall2,(8,8))]),
     7: (10,10,10,10,[(entity_factory.janitor,(4,4)),(entity_factory.janitor,(5,4)),
                      (entity_factory.janitor,(6,4)),(entity_factory.janitor,(4,5)),
                      (entity_factory.janitor,(6,5)), (entity_factory.janitor,(4,6)),
@@ -231,6 +251,70 @@ special_room_attribute: Dict = {
                       (entity_factory.error_clone01,(5,8)),(entity_factory.error_clone01,(6,8)),
                       (entity_factory.error_clone01,(7,8)),(entity_factory.error_clone01,(8,8))],
                       []),
+    41: (10,10,10,10,[(entity_factory.combat_droid,(6,3)),(entity_factory.combat_droid,(8,2)),(entity_factory.bandage,(6,5)),
+                      (entity_factory.table,(8,5)),(entity_factory.combat_droid,(7,7)),(entity_factory.combat_droid,(3,8)),
+                      (entity_factory.table,(2,4)),(entity_factory.table,(3,4)),(entity_factory.table,(2,5)),
+                      (entity_factory.table,(3,5)),(entity_factory.table,(2,6)),(entity_factory.table,(3,6))],
+                      [(tile_types.wall2,(5,5))]),
+    42: (10,10,10,10,[(entity_factory.item_box2,(2,2)),(entity_factory.item_box2,(8,2)),
+                     (entity_factory.item_box2,(2,8)),(entity_factory.item_box2,(8,8)),(entity_factory.security_op,(2,5)),(entity_factory.security_op,(8,5)),
+                     ],[(tile_types.wall2,(5,5))]),
+    43: (10,10,10,10,[(entity_factory.security_op,(3,3)),(entity_factory.material_kimera,(7,7)),(entity_factory.material_kimera,(7,5)),(entity_factory.material_kimera,(7,3))
+                     ],[(tile_types.wall2,(5,5))]),
+    44: (10,10,10,10,[(entity_factory.item_box2,(3,5)),(entity_factory.table,(5,4)),(entity_factory.pulse_turret,(2,2)),(entity_factory.pulse_turret,(8,8)),
+                      (entity_factory.table,(6,4)),(entity_factory.table,(6,5)),(entity_factory.bandage,(2,8)),(entity_factory.pulse_turret,(8,2))
+                     ],[(tile_types.wall2,(5,5))]),
+    45: (10,10,10,10,[(entity_factory.security_op,(8,2)),(entity_factory.security_op,(8,5)),
+                      (entity_factory.security_op,(8,8)),
+                     ],[(tile_types.wall2,(4,4)),(tile_types.wall2,(5,4)),(tile_types.wall2,(6,4)),
+                        (tile_types.wall2,(4,5)),(tile_types.wall2,(6,5)),(tile_types.wall2,(4,6)),
+                        (tile_types.wall2,(5,6)),(tile_types.wall2,(6,6))]),
+    46: (10,10,10,10,[(entity_factory.security_op,(2,2)),(entity_factory.security_op,(5,8)),(entity_factory.pulse_turret,(2,6)),
+                      (entity_factory.security_op,(8,2)),(entity_factory.item_box2,(8,5)),(entity_factory.bandage,(8,6)),
+                     ],[(tile_types.wall2,(4,4)),(tile_types.wall2,(5,4)),(tile_types.wall2,(6,4)),
+                        (tile_types.wall2,(4,5)),(tile_types.wall2,(6,5)),(tile_types.wall2,(4,6)),
+                        (tile_types.wall2,(5,6)),(tile_types.wall2,(6,6))]),
+    47: (10,10,10,10,[(entity_factory.bandage,(5,1)),
+                      (entity_factory.sniper_drone,(8,2)),(entity_factory.item_box2,(8,7))
+                     ],[(tile_types.wall2,(4,4)),(tile_types.wall2,(5,4)),(tile_types.wall2,(6,4)),
+                        (tile_types.wall2,(4,5)),(tile_types.wall2,(6,5)),(tile_types.wall2,(4,6)),
+                        (tile_types.wall2,(5,6)),(tile_types.wall2,(6,6))]),
+    48: (10,10,10,10,[(entity_factory.bandage,(8,2)),(entity_factory.ammo20,(2,8)),
+                      (entity_factory.material_kimera,(8,5)),(entity_factory.material_kimera,(5,2)),(entity_factory.material_kimera,(2,5))
+                     ],[(tile_types.wall2,(4,4)),(tile_types.wall2,(5,4)),(tile_types.wall2,(6,4)),
+                        (tile_types.wall2,(4,5)),(tile_types.wall2,(6,5)),(tile_types.wall2,(4,6)),
+                        (tile_types.wall2,(5,6)),(tile_types.wall2,(6,6))]),
+    49: (10,10,10,10,[(entity_factory.bandage,(5,5)),(entity_factory.ammo20,(7,2)),(entity_factory.security_op,(5,7))],[(tile_types.wall2,(2,2)),
+                    (tile_types.wall2,(8,2)),(tile_types.wall2,(2,8)),(tile_types.wall2,(8,8))]),
+    50: (10,10,10,10,[(entity_factory.item_box2,(8,4)),(entity_factory.item_box2,(8,6)),
+                      (entity_factory.bandage,(8,5)),(entity_factory.beam_turret,(2,2)),(entity_factory.beam_turret,(8,2)),(entity_factory.beam_turret,(2,8)),(entity_factory.bandage,(8,8))
+                     ],[(tile_types.wall2,(4,4)),(tile_types.wall2,(5,4)),(tile_types.wall2,(6,4)),
+                        (tile_types.wall2,(4,5)),(tile_types.wall2,(6,5)),(tile_types.wall2,(4,6)),
+                        (tile_types.wall2,(5,6)),(tile_types.wall2,(6,6))]),
+    51: (10,10,10,10,[(entity_factory.item_box,(1,1)),(entity_factory.ammo20,(9,9)),(entity_factory.item_box,(2,1)),(entity_factory.sniper_drone,(8,2)),
+                      (entity_factory.sniper_drone,(2,8))],
+                        [(tile_types.wall2,(4,4)),(tile_types.wall2,(5,4)),(tile_types.wall2,(6,4)),
+                        (tile_types.wall2,(4,5)),(tile_types.wall2,(6,5)),(tile_types.wall2,(4,6)),
+                        (tile_types.wall2,(5,6)),(tile_types.wall2,(6,6))]),
+    52: (4,4,4,4,[(entity_factory.beam_turret,(2,2))],[]),
+    53: (4,4,4,4,[(entity_factory.sniper_drone,(2,2))],[]),
+    54: (10,10,10,10,[(entity_factory.item_box2,(5,5)),(entity_factory.table,(4,4)),
+                     (entity_factory.table,(6,4)),(entity_factory.table,(4,6)),
+                     (entity_factory.table,(6,6)), (entity_factory.table,(4,5)),
+                     (entity_factory.table,(6,5)), (entity_factory.table,(5,4)),
+                     (entity_factory.table,(5,6)),(entity_factory.beam_turret,(2,5)),(entity_factory.beam_turret,(8,5)),(entity_factory.bandage,(8,3))
+                     ],[(tile_types.wall2,(2,2)),(tile_types.wall2,(8,2)),(tile_types.wall2,(2,8)),(tile_types.wall2,(8,8))]),
+    55: (10,10,10,10,[(entity_factory.item_box2,(5,5)),(entity_factory.item_box,(4,4)),
+                     (entity_factory.item_box,(6,4)),(entity_factory.item_box,(4,6)),
+                     (entity_factory.item_box,(6,6)), (entity_factory.item_box,(4,5)),
+                     (entity_factory.item_box,(6,5)), (entity_factory.item_box,(5,4)),
+                     (entity_factory.item_box,(5,6))],
+                     [(tile_types.wall2,(2,2)),(tile_types.wall2,(8,2)),(tile_types.wall2,(2,8)),(tile_types.wall2,(8,8))]),
+    56: (10,10,10,10,[(entity_factory.beam_turret,(4,4)),(entity_factory.beam_turret,(5,4)),
+                     (entity_factory.beam_turret,(6,4)),(entity_factory.beam_turret,(4,5)),
+                     (entity_factory.beam_turret,(6,5)), (entity_factory.beam_turret,(4,6)),
+                     (entity_factory.beam_turret,(5,6)), (entity_factory.beam_turret,(6,6)),(entity_factory.bandage2,(5,8))
+                     ],[(tile_types.wall2,(5,5))]),
 }
 
 #(Type, Item in Box)
@@ -251,27 +335,34 @@ item_chance: Dict[int, List[Tuple[Entity, int]]] = {
     0: [(entity_factory.bandage, 50)],
     2: [(entity_factory.flash_grenade, 10),(entity_factory.ammo20, 10)],
     3: [(entity_factory.ammo20, 23)],
-    4: [(entity_factory.explosive_grenade, 10)],
-    5: [(entity_factory.ammo20, 33)],
+    4: [(entity_factory.explosive_grenade, 6)],
+    5: [(entity_factory.ammo20, 24)],
+    7: [(entity_factory.ammo20, 35)],
+    11: [(entity_factory.ammo20, 19),(entity_factory.bandage2, 1)],
+    14: [(entity_factory.bandage2, 3)],
 }
 
 #(Floor, Enemy)
 enemy_chances: Dict[int, List[Tuple[Entity, int]]] = {
     0: [(entity_factory.janitor, 50),(entity_factory.crew, 1),(entity_factory.item_box, 1)],
-    2: [(entity_factory.crew, 15)],
-    3: [(entity_factory.security, 20),(entity_factory.item_box, 4)],
+    2: [(entity_factory.crew, 20)],
+    3: [(entity_factory.security, 20),(entity_factory.item_box, 4),(entity_factory.janitor, 35)],
     4: [(entity_factory.crew, 20), (entity_factory.item_box, 5), (entity_factory.security_smg, 25),(entity_factory.janitor, 0)],
     5: [(entity_factory.combat_droid, 20),(entity_factory.security, 30), (entity_factory.security_smg, 30)],
     6: [(entity_factory.combat_droid, 32),(entity_factory.crew, 0)],
-    #7 : New Item box
-    7: [(entity_factory.error_clone01, 20),(entity_factory.error_clone02, 20)],
-    8: [(entity_factory.marine_ba, 20),(entity_factory.marine_sa, 20)],
-    9: [(entity_factory.marine_ap, 20),(entity_factory.marine_la, 20)],
-    10: [(entity_factory.beam_turret, 20),(entity_factory.pulse_turret, 20)],
-    11: [(entity_factory.human_kimera, 20),(entity_factory.security_op, 1)],
-    12: [(entity_factory.material_kimera, 20),(entity_factory.security_op, 2)],
+    7: [(entity_factory.error_clone01, 20),(entity_factory.error_clone02, 20),(entity_factory.item_box, 6),(entity_factory.item_box2, 1)],
+    8: [(entity_factory.marine_ba, 20),(entity_factory.marine_sa, 20),(entity_factory.security, 0)],
+    9: [(entity_factory.marine_ap, 20),(entity_factory.marine_la, 20),(entity_factory.item_box2, 3),(entity_factory.security_smg, 0)],
+    10: [(entity_factory.beam_turret, 20),(entity_factory.pulse_turret, 20),(entity_factory.combat_droid, 0)],
+    11: [(entity_factory.human_kimera, 20),(entity_factory.security_op, 1),(entity_factory.item_box, 1),(entity_factory.item_box2, 5),(entity_factory.error_clone01, 0)],
+    12: [(entity_factory.material_kimera, 20),(entity_factory.security_op, 2),(entity_factory.error_clone02, 0)],
     13: [(entity_factory.security_op, 30)],
-    14: [(entity_factory.sniper_drone, 15)],
+    14: [(entity_factory.sniper_drone, 15),(entity_factory.marine_ba, 10)],
+    15: [(entity_factory.sniper_drone, 20),(entity_factory.material_kimera, 30),(entity_factory.security_op, 35),(entity_factory.item_box2, 6),(entity_factory.marine_ba, 5),(entity_factory.marine_sa, 10)],
+    16: [(entity_factory.combat_droid_v2, 30),(entity_factory.marine_ba, 0),(entity_factory.marine_sa, 0),(entity_factory.marine_ap, 10),(entity_factory.marine_la, 10)],
+    17: [(entity_factory.security_laser, 25),(entity_factory.marine_ap, 0),(entity_factory.marine_la, 0),(entity_factory.beam_turret, 10),(entity_factory.pulse_turret, 10)],
+    18: [(entity_factory.security_scythe, 25),(entity_factory.beam_turret, 0),(entity_factory.pulse_turret, 0),(entity_factory.human_kimera, 0),(entity_factory.material_kimera, 0),(entity_factory.security_op, 20)],
+    19: [(entity_factory.security_scythe, 25),(entity_factory.beam_turret, 0),(entity_factory.pulse_turret, 0),(entity_factory.security_op, 10)]
 }
 
 def get_max_value_for_floor(
