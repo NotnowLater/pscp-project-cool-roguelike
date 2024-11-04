@@ -173,7 +173,7 @@ class RifleLaser(Equippable):
             ranged_attack_base=4,
             ranged_tohit=2,
             ranged_attack_shot=1,
-            atk_snd_id="gun_1",
+            atk_snd_id="gun_2",
             )
    
 class TurretBeam(Equippable):

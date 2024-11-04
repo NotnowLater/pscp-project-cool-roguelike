@@ -460,6 +460,8 @@ class MainGameEventHandler(EventHandler):
                 return SingleRangedAttackHandler(self.engine, lambda xy:RangedAttackAction(player, xy))
         if self.engine.station_destroyed:
             import endscreen
+            import audiobrain
+            audiobrain.boom.play()
             endd = endscreen.EndScreen(
                 self.engine.player.fighter.max_hp,
                 self.engine.player.fighter.strength,
@@ -545,7 +547,7 @@ def print_center_text(log_console, text, console_width, console_height, x_offset
 item_description = {"Nano patch":"Recover 60 HP",
                     "Nano patch++":"Recover 180 HP",
                     "Flash grenade":"Grants blindness to enemies in a\n\n      radius for 10 turns",
-                    "Explosive grenade":"Deals 12 damage to all enemies\n\n      within a radius(including yourself)",
+                    "Explosive grenade":"Deals 20 damage to all enemies\n\n      within a radius(including yourself)",
                     "Box of 20 Ammo":"Gain 20 ammo"
                     }
 

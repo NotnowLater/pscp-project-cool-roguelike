@@ -6,6 +6,7 @@ from typing import TYPE_CHECKING
 
 from components.base_component import BaseComponent
 from render_order import RenderOrder
+import audiobrain
 
 import colors
 
@@ -162,6 +163,7 @@ class Fighter(BaseComponent):
         if self.engine.player is self.parent:
            death_message = "You died!"
            death_msg_color = colors.player_die
+           audiobrain.game_over.play()
         else:
             if self.parent.name == "Item box":
                 death_message = f"{self.parent.name} is destroyed!"

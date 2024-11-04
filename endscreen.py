@@ -23,7 +23,7 @@ class EndScreen(input_handlers.BaseEventHandler):
     pxp :int
     plv :int
 
-    def __init__(self, pmax: int = 0, pstr: int = 0, pagi: int = 0, pxp: int = 0, plv: int = 0) -> None:
+    def __init__(self, pmax: int = 0, pstr: int = 0, pagi: int = 0, plv: int = 0, pxp: int = 0) -> None:
         super().__init__()
         self.pmax_hp = pmax
         self.pstr = pstr

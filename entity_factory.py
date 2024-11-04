@@ -199,7 +199,7 @@ security_op = Actor(
     ai_class=HostileEnemy,equipment=Equipment(armor=chain_mail), 
     fighter=Fighter(hp=70, agility=8, strength=29, ammo=0),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=100),
+    level=Level(xp_given=95),
     item_drop_chance = 0.18
     )
 
@@ -208,9 +208,9 @@ security_laser = Actor(
     color=(255, 255, 255), 
     name="Security", 
     ai_class=HostileRangedEnemy,equipment=Equipment(weapon=rifle_laser, armor=chain_mail), 
-    fighter=Fighter(hp=60, agility=9, strength=33, ammo=6),
+    fighter=Fighter(hp=55, agility=8, strength=33, ammo=6),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=105),
+    level=Level(xp_given=100),
     item_drop_chance = 0.19
     )
 
@@ -219,10 +219,10 @@ security_scythe = Actor(
     color=(255, 255, 255), 
     name="Security", 
     ai_class=HostileEnemy,equipment=Equipment(weapon=scythe, armor=chain_mail), 
-    fighter=Fighter(hp=60, agility=7, strength=28, ammo=0),
+    fighter=Fighter(hp=55, agility=7, strength=28, ammo=0),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=110),
-    item_drop_chance = 0.4
+    level=Level(xp_given=100),
+    item_drop_chance = 0.3
     )
 
 combat_droid = Actor(
@@ -285,9 +285,9 @@ beam_turret = Actor(
     color=(255, 255, 255), 
     name="Beam Turret", 
     ai_class=TurretEnemy,equipment=Equipment(weapon=beam_t), 
-    fighter=Fighter(hp=45, agility=0, strength=19, ammo=500),
+    fighter=Fighter(hp=38, agility=0, strength=20, ammo=500),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=90),
+    level=Level(xp_given=60),
     item_drop_chance = 0.0
     )
 
@@ -296,9 +296,9 @@ pulse_turret = Actor(
     color=(255, 255, 255), 
     name="Pulse Turret", 
     ai_class=TurretEnemy,equipment=Equipment(weapon=pulse_t), 
-    fighter=Fighter(hp=45, agility=0, strength=19, ammo=1000),
+    fighter=Fighter(hp=38, agility=0, strength=20, ammo=1000),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=90),
+    level=Level(xp_given=60),
     item_drop_chance = 0.0
     )
 
@@ -307,9 +307,9 @@ sniper_drone = Actor(
     color=(255, 255, 255), 
     name="Sniper Drone", 
     ai_class=HostileEnemy,equipment=Equipment(weapon=rifle_ap), 
-    fighter=Fighter(hp=5, agility=30, strength=21, ammo=300),
+    fighter=Fighter(hp=5, agility=40, strength=33, ammo=300),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=95),
+    level=Level(xp_given=60),
     item_drop_chance = 0.0
     )
 
@@ -318,9 +318,9 @@ error_clone01 = Actor(
     color=(255, 255, 255), 
     name="Failed Clone", 
     ai_class=HostileEnemy,equipment=Equipment(weapon=dagger, armor=chain_mail),
-    fighter=Fighter(hp=25, agility=10, strength=10, ammo=0),
+    fighter=Fighter(hp=25, agility=10, strength=12, ammo=0),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=70),
+    level=Level(xp_given=65),
     item_drop_chance = 0.32
     )
 error_clone02 = Actor(
@@ -328,9 +328,9 @@ error_clone02 = Actor(
     color=(255, 255, 255), 
     name="Failed Clone", 
     ai_class=HostileEnemy,equipment=Equipment(weapon=sword, armor=leather_armor), 
-    fighter=Fighter(hp=50, agility=12, strength=11, ammo=0),
+    fighter=Fighter(hp=50, agility=12, strength=12, ammo=0),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=75),
+    level=Level(xp_given=70),
     item_drop_chance = 0.32
     )
 human_kimera = Actor(
@@ -338,9 +338,9 @@ human_kimera = Actor(
     color=(255, 255, 255),
     name="human kimera",
     ai_class=HostileEnemy,equipment=Equipment(weapon=sword, armor=leather_armor),
-    fighter=Fighter(hp=60, agility=15, strength=10, ammo=0),
+    fighter=Fighter(hp=60, agility=15, strength=11, ammo=0),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=80),
+    level=Level(xp_given=75),
     item_drop_chance= 0.3
     )
 material_kimera = Actor(
@@ -348,7 +348,7 @@ material_kimera = Actor(
     color=(255, 255, 255),
     name="material kimera",
     ai_class=HostileEnemy,equipment=Equipment(weapon=dagger),
-    fighter=Fighter(hp=30, agility=25, strength=14, ammo=0),
+    fighter=Fighter(hp=30, agility=25, strength=15, ammo=0),
     inventory=Inventory(capacity=0),
     level=Level(xp_given=80),
     item_drop_chance=0.1
@@ -368,9 +368,9 @@ combat_droid_v2 = Actor(
     color=(255, 255, 255), 
     name="Combat Droid V2", 
     ai_class=HostileRangedEnemy,equipment=Equipment(weapon=rifle_laser), 
-    fighter=Fighter(hp=45, agility=6, strength=32, ammo=100),
+    fighter=Fighter(hp=45, agility=5, strength=32, ammo=100),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=95),
+    level=Level(xp_given=90),
     item_drop_chance = 0.3
     )
 item_box2 = Actor(

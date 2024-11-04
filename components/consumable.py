@@ -140,4 +140,5 @@ class AmmoConsumable(Consumable):
 
         self.engine.message_log.add_message(f"You open the {self.parent.name}, and got {self.amount} Ammo!",colors.health_recovered,)
         self.consume()
+        audiobrain.ammo_box.play()
     
