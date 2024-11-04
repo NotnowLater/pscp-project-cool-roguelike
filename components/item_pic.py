@@ -311,5 +311,30 @@ XXXXX---------xxxxNNNNNN     N----AAAxxxx]
               A-AA    A+AAAAA         
               Aa         AAAAA        
                           AAAAA       
+""",
+"""Galactic Scythe""":"""
+         AA              
+      x   AOA            
+     xxxAAAA             
+    Xx-xA                
+  xXXxx-x                
+ xXxO   X                
+ Xx    xx                
+ Xx   xxxx               
+xX   Xx xxX              
+XX  X   XXx              
+X  X      xx             
+X xx       xx            
+X x         xx           
+Xx           xx          
+Xv            xx         
+vv             xx        
+v               xx       
+v                xxx     
+                  xxx    
+                   xxQ   
+                    QQQ  
+                     QQQQ
+                       QQ
 """
 }

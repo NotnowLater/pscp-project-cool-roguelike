@@ -29,10 +29,11 @@ max_items_for_floor_by_floor = [
     (6, 7),
     (7, 8), 
     (8, 10), 
-    (10, 11),
-    (11, 12),
-    (15, 13),
-    (17, 14),
+    (9, 11), 
+    (10, 12),
+    (11, 13),
+    (15, 14),
+    (17, 15),
 ]
 
 #(Floor, Max Monsters)
@@ -85,7 +86,9 @@ special_room_type_chance: Dict[int, List[Tuple[int, int]]] = {
     8: [(17, 0),(19,0),(20,0)],
     9: [(33, 2)],
     10: [(23,0),(24,0),(25,0),(26,0),(27,0),(28,0),(29,0),(30,0),(31,0),(32,0),(33,0),(34,0),(35,0),(36,0),(37,0),(38,0),(39,0),(40,0),(41,0),
-         (41,2),(43,2),(44,1),(45,2),(46,2),(47,1),(48,1),(49,1),(50,2),(51,2),(52,1),(53,1),(54,2),(55,2),(56,3)]
+         (41,2),(43,2),(44,1),(45,2),(46,2),(47,1),(48,1),(49,1),(50,2),(51,2),(52,1),(53,1),(54,2),(55,2),(56,3)],
+    11: [(57,1),(58,1)],
+    12: [(59,1),(60,1),(49,0)]
 }
 
 #(Type, [Min_x ,Max_x, Min_y, Max_y, [(Entity,(pos_x,pos_y))]]])
@@ -315,6 +318,35 @@ special_room_attribute: Dict = {
                      (entity_factory.beam_turret,(6,5)), (entity_factory.beam_turret,(4,6)),
                      (entity_factory.beam_turret,(5,6)), (entity_factory.beam_turret,(6,6)),(entity_factory.bandage2,(5,8))
                      ],[(tile_types.wall2,(5,5))]),
+    57: (10,10,10,10,[(entity_factory.flash_grenade,(4,5)),(entity_factory.flash_grenade,(6,5)),
+                     (entity_factory.explosive_grenade,(5,5)),(entity_factory.beam_turret,(2,5)),
+                     (entity_factory.pulse_turret,(8,5))],
+                     [(tile_types.wall2,(2,2)),(tile_types.wall2,(8,2)),(tile_types.wall2,(2,8)),(tile_types.wall2,(8,8))]),
+    58: (10,10,10,10,[(entity_factory.explosive_grenade,(4,5)),(entity_factory.explosive_grenade,(6,5)),
+                     (entity_factory.bandage,(5,5)),(entity_factory.beam_turret,(2,5)),(entity_factory.ammo20,(5,6)),
+                     (entity_factory.flash_grenade,(4,6)),(entity_factory.flash_grenade,(6,6)),
+                     (entity_factory.beam_turret,(8,5)),(entity_factory.beam_turret,(2,2)),(entity_factory.beam_turret,(8,2)),
+                     (entity_factory.beam_turret,(2,8)),(entity_factory.beam_turret,(8,8)),
+                     (entity_factory.beam_turret,(5,2)),(entity_factory.beam_turret,(5,8))],
+                     []),
+    59: (10,10,10,10,[(entity_factory.table,(3,3)),(entity_factory.table,(4,3)),
+                     (entity_factory.table,(5,3)),(entity_factory.table,(6,3)),(entity_factory.table,(7,3)),
+                     (entity_factory.table,(3,4)),(entity_factory.table,(3,5)),
+                     (entity_factory.table,(3,6)),(entity_factory.table,(3,7)),(entity_factory.table,(4,7)),
+                     (entity_factory.table,(5,7)),(entity_factory.table,(6,7)),
+                     (entity_factory.table,(7,7)),(entity_factory.table,(7,6)),
+                     (entity_factory.table,(7,5)),(entity_factory.table,(7,4)),
+                     (entity_factory.security_scythe,(5,5)),(entity_factory.ammo20,(6,5)),
+                     (entity_factory.bandage,(6,4)),(entity_factory.explosive_grenade,(6,6))],
+                     []),
+    60: (10,10,10,10,[(entity_factory.material_kimera,(2,3)),(entity_factory.material_kimera,(3,3)),
+                      (entity_factory.material_kimera,(4,3)),(entity_factory.material_kimera,(5,3)),
+                      (entity_factory.material_kimera,(6,3)),(entity_factory.material_kimera,(7,3)),
+                      (entity_factory.ammo20,(3,5)),(entity_factory.bandage,(7,5)),
+                      (entity_factory.flash_grenade,(3,7)),(entity_factory.item_box2,(7,7)),
+                     ],[(tile_types.wall2,(4,4)),(tile_types.wall2,(5,4)),(tile_types.wall2,(6,4)),
+                        (tile_types.wall2,(4,5)),(tile_types.wall2,(6,5)),(tile_types.wall2,(4,6)),
+                        (tile_types.wall2,(5,6)),(tile_types.wall2,(6,6))]),
 }
 
 #(Type, Item in Box)
@@ -337,7 +369,8 @@ item_chance: Dict[int, List[Tuple[Entity, int]]] = {
     3: [(entity_factory.ammo20, 23)],
     4: [(entity_factory.explosive_grenade, 6)],
     5: [(entity_factory.ammo20, 24)],
-    7: [(entity_factory.ammo20, 35)],
+    7: [(entity_factory.ammo20, 36)],
+    8: [(entity_factory.flash_grenade, 12)],
     11: [(entity_factory.ammo20, 19),(entity_factory.bandage2, 1)],
     14: [(entity_factory.bandage2, 3)],
 }
