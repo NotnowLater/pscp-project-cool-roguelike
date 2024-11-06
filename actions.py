@@ -141,6 +141,9 @@ class RangedAttackAction(Action):
         # Ammo Check
         if self.entity.fighter.ammo <= 0:
             raise exceptions.Impossible("You don't have any ammo to shoot.")
+        # Reduce the ammo after shooting.
+        self.entity.fighter.ammo -= self.entity.fighter.ranged_attack_shot
+        self.entity.fighter.ammo = max(0, self.entity.fighter.ammo)
         # Attack hit check
         if not util.hit_check(target_fighter.dv, self.entity.fighter.ranged_tohit):
             self.engine.message_log.add_message(f"{self.entity.name.capitalize()} Shoots at the {target_fighter.parent.name} but missed.", fg=colors.enemy_atk)
@@ -152,7 +155,6 @@ class RangedAttackAction(Action):
             temp = util.roll_dice(self.entity.fighter.ranged_attack_die, self.entity.fighter.ranged_attack_roll, self.entity.fighter.ranged_attack_base)
             temp = max(temp, 0)
             dmg += temp
-            self.entity.fighter.ammo -= 1
         # limit damage to 0
         dmg = max(dmg-self.target.equipment.def_bonus, 0)
         
