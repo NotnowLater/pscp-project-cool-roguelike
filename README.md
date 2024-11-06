@@ -21,3 +21,29 @@ Run the main.py
 ```
 python ./main.py
 ```
+
+# Game Key Controls
+**Movement**
+Kp - 7 : Move Northwest<br/>
+Kp - 8, Up : Move North<br/>
+Kp - 9 : Move Northeast<br/>
+Kp - 6, Right : Move East<br/>
+Kp - 3 : Move Southeast<br/>
+Kp - 2, Down : Move South<br/>
+Kp - 1 : Move Southwest<br/>
+Kp - 4, Left : Move West<br/>
+**Inventory**
+i : Open Inventory to use Items.<br/>
+d : Open Inventory to drop ItemS.<br/>
+**Gameplay**
+Enter : Use/Drop/Select/Confirm.<br/>
+f : Ranged Attack.<br/>
+c : Show character informations.<br/>
+m : show messages log.<br/>
+l : Look Mode.<br/>
+h : Auto Heal.<br/>
+w : Auto Select Target in Range Attack Select.<br/>
+>, Shift + . : Ascend Stair/Activate Self Destruct Button.<br/>
+Esc : Save and Exit.
+
+
