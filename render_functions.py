@@ -4,12 +4,16 @@ from __future__ import annotations
 
 from typing import Tuple,TYPE_CHECKING
 
+import textwrap
+
 import colors
 
 if TYPE_CHECKING:
     from tcod.console import Console
     from engine import Engine
     from game_map import GameMap
+
+wrapper = textwrap.TextWrapper(width=34, max_lines=3, placeholder="...")
 
 def render_progress_bars(
         console : Console,
@@ -65,5 +69,8 @@ def render_names_at_mouse_location(console: Console, x: int, y: int, engine: Eng
     mouse_x, mouse_y = engine.mouse_location
 
     names_at_mouse_location = get_names_at_location(x=mouse_x, y=mouse_y, game_map=engine.game_map)
-
-    console.print(x=x, y=y, string=names_at_mouse_location)
+    # names_at_mouse_location = textwrap.wrap(names_at_mouse_location, width=34, max_lines=3, placeholder="...")
+    offset = 0
+    for i in wrapper.wrap(names_at_mouse_location):
+        console.print(x=x, y=y + offset, string=i, fg=colors.impossible)
+        offset += 1
