@@ -22,7 +22,7 @@ Run the main.py
 python ./main.py
 ```
 
-# Game Key Controls
+# Controls
 |**Key**|**Description**|
 |---|---|
 |---|**Movement**|
