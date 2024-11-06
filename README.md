@@ -23,8 +23,9 @@ python ./main.py
 ```
 
 # Game Key Controls
-|Key|Description|
+|**Key**|**Description**|
 |---|---|
+|---|**Movement**|
 |Kp - 7|Move Northwest|
 |Kp - 8, Up|Move North|
 |Kp - 9|Move Northeast|
@@ -33,8 +34,10 @@ python ./main.py
 |Kp - 2, Down|Move South|
 |Kp - 1|Move Southwest|
 |Kp - 4, Left|Move West|
+|---|**Inventory**|
 |i|Open Inventory to use Items|
 |d|Open Inventory to drop Items.|
+|---|**Gameplay**|
 |Enter|Use/Drop/Select/Confirm.|
 |f|Ranged Attack.|
 |c|Show character informations.|
