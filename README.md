@@ -23,27 +23,24 @@ python ./main.py
 ```
 
 # Game Key Controls
-**Movement**<br/>
-Kp - 7 : Move Northwest<br/>
-Kp - 8, Up : Move North<br/>
-Kp - 9 : Move Northeast<br/>
-Kp - 6, Right : Move East<br/>
-Kp - 3 : Move Southeast<br/>
-Kp - 2, Down : Move South<br/>
-Kp - 1 : Move Southwest<br/>
-Kp - 4, Left : Move West<br/>
-**Inventory**<br/>
-i : Open Inventory to use Items.<br/>
-d : Open Inventory to drop ItemS.<br/>
-**Gameplay**<br/>
-Enter : Use/Drop/Select/Confirm.<br/>
-f : Ranged Attack.<br/>
-c : Show character informations.<br/>
-m : show messages log.<br/>
-l : Look Mode.<br/>
-h : Auto Heal.<br/>
-w : Auto Select Target in Range Attack Select.<br/>
-Shift + . : Ascend Stair/Activate Self Destruct Button.<br/>
-Esc : Save and Exit.<br/>
-
-
+|Key|Description|
+|---|---|
+|Kp - 7|Move Northwest|
+|Kp - 8, Up|Move North|
+|Kp - 9|Move Northeast|
+|Kp - 6, Right|Move East|
+|Kp - 3|Move Southeast|
+|Kp - 2, Down|Move South|
+|Kp - 1|Move Southwest|
+|Kp - 4, Left|Move West|
+|i|Open Inventory to use Items|
+|d|Open Inventory to drop Items.|
+|Enter|Use/Drop/Select/Confirm.|
+|f|Ranged Attack.|
+|c|Show character informations.|
+|m|show messages log.|
+|l|Look Mode.|
+|h| Auto Heal If Have Healing Item|
+|W|Auto Select Target in Range Attack Select.|
+|Shift + .|Ascend Stair/Activate Self Destruct Button.|
+|Esc|Save and Exit.|
