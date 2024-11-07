@@ -39,6 +39,7 @@ python ./main.py
 |d|Open Inventory to drop Items.|
 |---|**Gameplay**|
 |Enter|Use/Drop/Select/Confirm.|
+|g|Get/Pickup Item from the ground.|
 |f|Ranged Attack.|
 |c|Show character informations.|
 |m|show messages log.|
