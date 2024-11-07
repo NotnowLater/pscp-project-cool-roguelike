@@ -21,6 +21,7 @@ Run the main.py
 ```
 python ./main.py
 ```
+Or get the release binary from the [release page](https://github.com/NotnowLater/pscp-project-cool-roguelike/releases).
 
 # Controls
 |**Key**|**Description**|
