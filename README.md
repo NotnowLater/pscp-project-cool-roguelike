@@ -49,3 +49,11 @@ Or get the release binary from the [release page](https://github.com/NotnowLater
 |W|Auto Select Target in Range Attack Select.|
 |Shift + .|Ascend Stair/Activate Self Destruct Button.|
 |Esc|Save and Exit.|
+
+# About
+This project was made for PSCP, KMITL
+The contributors student informations:
+67070074 - นายธรรศ ทัพสุริย์ 67070074
+Minwa2 - นายพชร วงศ์ภักดี 67070105
+NotnowLater - นายพุทธิกานต์ ไกรนรา 67070123
+67070132 - นายภาวัต จันทร์เนตร 67070132
