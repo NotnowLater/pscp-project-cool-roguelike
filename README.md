@@ -51,9 +51,9 @@ Or get the release binary from the [release page](https://github.com/NotnowLater
 |Esc|Save and Exit.|
 
 # About<br/>
-This project was made for PSCP, KMITL<br/>
-The contributors student informations:<br/>
-67070074 - นายธรรศ ทัพสุริย์ 67070074<br/>
-Minwa2 - นายพชร วงศ์ภักดี 67070105<br/>
-NotnowLater - นายพุทธิกานต์ ไกรนรา 67070123<br/>
-67070132 - นายภาวัต จันทร์เนตร 67070132<br/>
+## This project was made for PSCP, KMITL<br/>
+**The contributors student informations:**<br/>
+**67070074** - นายธรรศ ทัพสุริย์ 67070074<br/>
+**Minwa2** - นายพชร วงศ์ภักดี 67070105<br/>
+**NotnowLater** - นายพุทธิกานต์ ไกรนรา 67070123<br/>
+**67070132** - นายภาวัต จันทร์เนตร 67070132<br/>
